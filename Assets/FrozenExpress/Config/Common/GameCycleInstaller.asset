@@ -10,5 +10,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f08cf115950debe4dbbeff9a6f4d5235, type: 3}
-  m_Name: GameCycleInstaller - new (12)
+  m_Name: GameCycleInstaller
   m_EditorClassIdentifier: 
