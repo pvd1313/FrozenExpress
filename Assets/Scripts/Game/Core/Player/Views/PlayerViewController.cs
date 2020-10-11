@@ -1,9 +1,13 @@
 ﻿using UnityEngine;
 
-namespace FrozenExpress.Game
+namespace FrozenExpress.Game.Core.Player
 {
-    public class PlayerViewController : MonoBehaviour
+    public class PlayerViewController : MonoBehaviour, IPlayerView
     {
+        public Vector3 CameraPosition => _cameraTransform.position;
+
+        public Quaternion CameraRotation => _cameraTransform.rotation;
+
         [SerializeField] private Transform _cameraTransform;
         [SerializeField] private Transform _bodyTransform;
         [SerializeField] private float _movementSpeed = 5;
