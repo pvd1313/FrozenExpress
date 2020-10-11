@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace FrozenExpress.Game.Player
+namespace FrozenExpress.Game
 {
     public class PlayerViewController : MonoBehaviour
     {
@@ -26,7 +26,7 @@ namespace FrozenExpress.Game.Player
             var motion = _bodyTransform.rotation * (forwardMotion + sideMotion).normalized * _movementSpeed * Time.deltaTime;
 
             var castPoint = _bodyTransform.position;
-            castPoint.y += _characterController.center.y - _characterController.height / 2 + _characterController.radius;
+            castPoint.y += _characterController.center.y - _characterController.height / 2 + _characterController.radius / 2;
             var colliderCount = Physics.OverlapSphereNonAlloc(castPoint, _characterController.radius, _colliderBuffer);
             var grounded = colliderCount > 1;
 
