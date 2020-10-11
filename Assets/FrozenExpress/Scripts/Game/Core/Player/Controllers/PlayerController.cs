@@ -40,17 +40,16 @@ namespace FrozenExpress.Game.Core.Player
 
         public void Update(FrameUpdateData frameData)
         {
-            _rotation.x += Input.GetAxis("Mouse Y") * _playerConfig.CameraSensitivity;
+            _rotation.x -= Input.GetAxis("Mouse Y") * _playerConfig.CameraSensitivity;
             _rotation.x = Mathf.Clamp(_rotation.x, -90, 90);
             _rotation.y += Input.GetAxis("Mouse X") * _playerConfig.CameraSensitivity;
-            _rotation.y = Mathf.Repeat(0, 360);
+            _rotation.y = Mathf.Repeat(_rotation.y, 360);
 
-            _playerView.Rotation = Quaternion.Euler(0, _rotation.y, 0);
-            CameraRotation = Quaternion.Euler(_rotation.x, 0, 0);
+            CameraRotation = Quaternion.Euler(_rotation.x, _rotation.y, 0);
 
             var forward = Vector3.forward * Input.GetAxis("Vertical");
             var right = Vector3.right * Input.GetAxis("Horizontal");
-            var motion = (forward + right).normalized * _playerConfig.MovementSpeed;
+            var motion = Quaternion.Euler(0, _rotation.y, 0) * (forward + right).normalized * _playerConfig.MovementSpeed;
             _playerView.Move(motion * frameData.DeltaTime);
 
             var castPoint = _playerView.Position;
