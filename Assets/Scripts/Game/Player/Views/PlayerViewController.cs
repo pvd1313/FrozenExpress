@@ -1,9 +1,8 @@
-﻿using Boo.Lang;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace FrozenExpress.Game
+namespace FrozenExpress.Game.Player
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerViewController : MonoBehaviour
     {
         [SerializeField] private Transform _cameraTransform;
         [SerializeField] private Transform _bodyTransform;
@@ -27,7 +26,7 @@ namespace FrozenExpress.Game
             var motion = _bodyTransform.rotation * (forwardMotion + sideMotion).normalized * _movementSpeed * Time.deltaTime;
 
             var castPoint = _bodyTransform.position;
-            castPoint.y += _characterController.center.y - _characterController.height / 2 + _characterController.radius / 2;
+            castPoint.y += _characterController.center.y - _characterController.height / 2 + _characterController.radius;
             var colliderCount = Physics.OverlapSphereNonAlloc(castPoint, _characterController.radius, _colliderBuffer);
             var grounded = colliderCount > 1;
 
