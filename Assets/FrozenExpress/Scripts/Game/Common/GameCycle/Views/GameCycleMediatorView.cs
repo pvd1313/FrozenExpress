@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace FrozenExpress.Game.Common.GameCycle
 {
-    public class UpdateMediatorView : MonoBehaviour
+    public class GameCycleMediatorView : MonoBehaviour
     {
         public event Action OnUpdate;
         public event Action OnLateUpdate;

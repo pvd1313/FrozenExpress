@@ -6,7 +6,7 @@ namespace FrozenExpress.Game.Common.GameCycle
     {
         public override void InstallBindings()
         {
-            Container.Bind<UpdateMediatorView>().FromNew();
+            Container.Bind<GameCycleMediatorView>().FromNewComponentOnRoot().AsSingle();
 
             Container.BindInterfacesTo<InitializationMediator>().AsSingle();
             Container.BindInterfacesTo<TerminationMediator>().AsSingle();
