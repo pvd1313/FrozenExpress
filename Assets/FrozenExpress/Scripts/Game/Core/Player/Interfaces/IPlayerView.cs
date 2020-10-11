@@ -4,7 +4,16 @@ namespace FrozenExpress.Game.Core.Player
 {
     public interface IPlayerView
     {
-        Vector3 CameraPosition { get; }
-        Quaternion CameraRotation { get; }
+        Vector3 Position { get; set; }
+
+        Quaternion Rotation { get; set; }
+
+        float Radius { get; set; }
+
+        float Height { get; set; }
+
+        float SkinWidth { get; }
+
+        void Move(Vector3 motion);
     }
 }
