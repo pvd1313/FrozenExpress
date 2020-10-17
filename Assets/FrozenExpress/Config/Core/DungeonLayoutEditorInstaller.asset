@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee659e35e2998ea41884998c418e03ba, type: 3}
+  m_Name: DungeonLayoutEditorInstaller
+  m_EditorClassIdentifier: 
+  _dungeonLayoutEditorCameraViewPrefab: {fileID: 8808470448058667696, guid: a52a885965e01bd4baf137e562a8deb1,
+    type: 3}
+  _dungenLayoutEditorCameraControllerConfig:
+    _sensitivity: 5
+  _dungeonLayoutEditorModelViewPrefab: {fileID: 567015019591086456, guid: e6bb0990565f3d4439ae3a6832342807,
+    type: 3}
