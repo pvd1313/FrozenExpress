@@ -85,7 +85,7 @@ namespace FrozenExpress.Editor.ScriptableObjectCreation
 
             try
             {
-                var asset = Activator.CreateInstance(type) as UnityEngine.Object;
+                var asset = ScriptableObject.CreateInstance(type);
                 AssetDatabase.CreateAsset(asset, path);
                 return asset;
             }
