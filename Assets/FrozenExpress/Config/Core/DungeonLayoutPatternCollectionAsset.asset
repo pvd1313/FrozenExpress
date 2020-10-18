@@ -58,10 +58,3 @@ MonoBehaviour:
       _mustExist: 1
     - _offset: {x: 1, y: 0, z: 0}
       _mustExist: 1
-  - _mesh: {fileID: 3633865748600368068, guid: b96022982a67f0940807ebec19e4aa9f, type: 3}
-    _trigger: 1
-    _flip: 0
-    _rotation: 14
-    _cellExistConditions:
-    - _offset: {x: 0, y: 1, z: 0}
-      _mustExist: 0
