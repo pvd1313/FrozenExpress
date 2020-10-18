@@ -13,17 +13,24 @@ MonoBehaviour:
   m_Name: DungeonLayoutPatternCollectionAsset
   m_EditorClassIdentifier: 
   _patterns:
-  - _trigger: 1
-    _cellExistConditions: []
+  - _mesh: {fileID: -629719859055844128, guid: 95fbec67a4246d84eb39fcbf2215231e, type: 3}
+    _trigger: 1
+    _flip: 5
     _rotation: 1
-    _mesh: {fileID: -629719859055844128, guid: 95fbec67a4246d84eb39fcbf2215231e, type: 3}
-  - _trigger: 1
+    _cellExistConditions:
+    - _offset: {x: 0, y: -1, z: 0}
+      _mustExist: 0
+  - _mesh: {fileID: 8733429697405204941, guid: 2d7e9527365af38499c3126c890f0d50, type: 3}
+    _trigger: 1
+    _flip: 1
+    _rotation: -1
     _cellExistConditions:
     - _offset: {x: 0, y: 0, z: 1}
       _mustExist: 0
+  - _mesh: {fileID: 1129247566542154258, guid: 587c050c9398de842bec4717ad862926, type: 3}
+    _trigger: 1
+    _flip: 1
     _rotation: -1
-    _mesh: {fileID: 8733429697405204941, guid: 2d7e9527365af38499c3126c890f0d50, type: 3}
-  - _trigger: 1
     _cellExistConditions:
     - _offset: {x: 0, y: 0, z: 1}
       _mustExist: 0
@@ -31,23 +38,30 @@ MonoBehaviour:
       _mustExist: 0
     - _offset: {x: -1, y: 0, z: 0}
       _mustExist: 1
+  - _mesh: {fileID: 527982050842733842, guid: cd5934e408d8b684dbf6a9a31c9d393e, type: 3}
+    _trigger: 1
+    _flip: 1
     _rotation: -1
-    _mesh: {fileID: 1129247566542154258, guid: 587c050c9398de842bec4717ad862926, type: 3}
-  - _trigger: 1
     _cellExistConditions:
     - _offset: {x: 0, y: 0, z: 1}
       _mustExist: 0
     - _offset: {x: 1, y: 0, z: 0}
       _mustExist: 0
+  - _mesh: {fileID: 7758205013865117209, guid: 62fdd0814fde1ac4fbe3d8e318dbd8a4, type: 3}
+    _trigger: 1
+    _flip: 1
     _rotation: -1
-    _mesh: {fileID: 527982050842733842, guid: cd5934e408d8b684dbf6a9a31c9d393e, type: 3}
-  - _trigger: 1
     _cellExistConditions:
-    - _offset: {x: -1, y: 0, z: 1}
+    - _offset: {x: 1, y: 0, z: 1}
       _mustExist: 0
     - _offset: {x: 0, y: 0, z: 1}
       _mustExist: 1
-    - _offset: {x: -1, y: 0, z: 0}
+    - _offset: {x: 1, y: 0, z: 0}
       _mustExist: 1
-    _rotation: -1
-    _mesh: {fileID: 7758205013865117209, guid: 62fdd0814fde1ac4fbe3d8e318dbd8a4, type: 3}
+  - _mesh: {fileID: 3633865748600368068, guid: b96022982a67f0940807ebec19e4aa9f, type: 3}
+    _trigger: 1
+    _flip: 0
+    _rotation: 14
+    _cellExistConditions:
+    - _offset: {x: 0, y: 1, z: 0}
+      _mustExist: 0

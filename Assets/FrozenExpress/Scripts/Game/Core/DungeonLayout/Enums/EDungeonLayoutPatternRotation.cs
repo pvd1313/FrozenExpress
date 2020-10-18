@@ -1,14 +1,12 @@
-﻿using System;
-
-namespace FrozenExpress.Game.Core.DungeonLayout
+﻿namespace FrozenExpress.Game.Core.DungeonLayout
 {
-    [Flags]
+    [System.Flags]
     public enum EDungeonLayoutPatternRotation
     {
         None = 0,
         Identity = 1,
-        Up90 = 2,
-        Up180 = 4,
-        Up270 = 8,
+        YAxis90 = 2,
+        YAxis180 = 4,
+        YAxis270 = 8,
     }
 }

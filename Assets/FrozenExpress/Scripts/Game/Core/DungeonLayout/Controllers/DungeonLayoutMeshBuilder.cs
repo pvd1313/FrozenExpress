@@ -30,7 +30,7 @@ namespace FrozenExpress.Game.Core.DungeonLayout
                 _combineInstances.Add(new CombineInstance()
                 {
                     mesh = entity.Mesh,
-                    transform = Matrix4x4.TRS(position, entity.Rotation, Vector3.one)
+                    transform = Matrix4x4.TRS(position, entity.Rotation, entity.Scale)
                 });
             }
             

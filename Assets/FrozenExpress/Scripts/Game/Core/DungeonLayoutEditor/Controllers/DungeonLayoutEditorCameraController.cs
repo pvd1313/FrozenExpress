@@ -59,6 +59,14 @@ namespace FrozenExpress.Game.Core.DungeonLayoutEditor
             {
                 MoveCursor(-viewRight);
             }
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                MoveCursor(Vector3Int.up);
+            }
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                MoveCursor(Vector3Int.down);
+            }
 
             _cameraView.Position = _dungeonLayoutTransform.TransformPosition(_dungeonModel.CursorPosition);
 
