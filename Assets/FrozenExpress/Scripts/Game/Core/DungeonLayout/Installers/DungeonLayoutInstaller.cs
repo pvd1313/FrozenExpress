@@ -5,14 +5,15 @@ namespace FrozenExpress.Game.Core.DungeonLayout
 {
     public class DungeonLayoutInstaller : ScriptableObjectInstaller
     {
-        [SerializeField] private DungeonLayoutPatternCollectionAsset _dungeonLayoutPatternCollection;
+        [SerializeField] private DungeonPatternDatabase _patternDatabase;
         [SerializeField] private Vector3 _cellSize;
 
         public override void InstallBindings()
         {
-            Container.BindInterfacesTo<DungeonLayoutPatternMaster>().AsSingle().WithArguments(_dungeonLayoutPatternCollection.Patterns);
-            Container.BindInterfacesTo<DungeonLayoutMeshBuilder>().AsSingle();
-            Container.BindInterfacesTo<DungeonLayoutTransform>().AsSingle().WithArguments(_cellSize);
+            Container.BindInterfacesTo<DungeonPatternController>().AsSingle().WithArguments(_patternDatabase.Patterns);
+            Container.BindInterfacesTo<DungeonPatternTransformController>().AsSingle();
+            Container.BindInterfacesTo<DungeonMeshBuilder>().AsSingle();
+            Container.BindInterfacesTo<DungeonTransform>().AsSingle().WithArguments(_cellSize);
         }
     }
 }

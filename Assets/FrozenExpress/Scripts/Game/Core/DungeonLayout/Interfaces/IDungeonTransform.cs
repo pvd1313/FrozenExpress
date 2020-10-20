@@ -2,7 +2,7 @@
 
 namespace FrozenExpress.Game.Core.DungeonLayout
 {
-    public interface IDungeonLayoutTransform
+    public interface IDungeonTransform
     {
         Vector3 TransformPosition(Vector3Int position);
     }

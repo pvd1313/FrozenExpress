@@ -11,14 +11,14 @@ namespace FrozenExpress.Game.Core.DungeonLayoutEditor
         private readonly IDungeonLayoutEditorCameraView _cameraView;
         private readonly DungeonLayoutEditorCameraControllerConfig _config;
         private readonly IDungeonLayoutEditorModel _dungeonModel;
-        private readonly IDungeonLayoutTransform _dungeonLayoutTransform;
+        private readonly IDungeonTransform _dungeonLayoutTransform;
 
         private Vector2 _cameraRotation;
 
         public DungeonLayoutEditorCameraController(IDungeonLayoutEditorCameraView cameraView,
                                                    DungeonLayoutEditorCameraControllerConfig config,
                                                    IDungeonLayoutEditorModel dungeonModel,
-                                                   IDungeonLayoutTransform dungeonLayoutTransform)
+                                                   IDungeonTransform dungeonLayoutTransform)
         {
             _cameraView = cameraView;
             _config = config;

@@ -3,23 +3,23 @@ using UnityEngine;
 
 namespace FrozenExpress.Game.Core.DungeonLayout
 {
-    public class DungeonLayoutMeshBuilder : IDungeonLayoutMeshBuilder
+    public class DungeonMeshBuilder : IDungeonMeshBuilder
     {
-        private readonly IDungeonLayoutPatternMaster _patternMaster;
-        private readonly IDungeonLayoutTransform _layoutTransform;
+        private readonly IDungeonPatternController _patternMaster;
+        private readonly IDungeonTransform _layoutTransform;
         private readonly List<CombineInstance> _combineInstances;
-        private readonly DungeonLayoutMap _dungeonLayoutMap;
+        private readonly DungeonMap _dungeonLayoutMap;
 
-        public DungeonLayoutMeshBuilder(IDungeonLayoutPatternMaster patternMaster,
-                                        IDungeonLayoutTransform layoutTransform)
+        public DungeonMeshBuilder(IDungeonPatternController patternMaster,
+                                        IDungeonTransform layoutTransform)
         {
             _patternMaster = patternMaster;
             _layoutTransform = layoutTransform;
             _combineInstances = new List<CombineInstance>();
-            _dungeonLayoutMap = new DungeonLayoutMap();
+            _dungeonLayoutMap = new DungeonMap();
         }
 
-        public void BuildMesh(DungeonLayoutData dungeonLayout, Mesh result)
+        public void BuildMesh(DungeonLayout dungeonLayout, Mesh result)
         {
             _dungeonLayoutMap.Initialize(dungeonLayout);
 

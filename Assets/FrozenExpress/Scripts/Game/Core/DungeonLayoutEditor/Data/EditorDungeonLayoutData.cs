@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace FrozenExpress.Game.Core.DungeonLayoutEditor
 {
-    public class EditorDungeonLayoutData : DungeonLayoutData
+    public class EditorDungeonLayoutData : DungeonLayout.DungeonLayout
     {
         public EditorDungeonLayoutData()
         {

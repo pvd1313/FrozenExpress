@@ -11,7 +11,7 @@ namespace FrozenExpress.Game.Core.DungeonLayoutEditor
         public EFrameUpdateOrder UpdateOrder => EFrameUpdateOrder.Late;
 
         private readonly IDungeonLayoutEditorModelView _view;
-        private readonly IDungeonLayoutMeshBuilder _dungeonBuilder;
+        private readonly IDungeonMeshBuilder _dungeonBuilder;
         private readonly IDungeonLayoutEditorModel _dungeonModel;
         
         private Mesh _dungeonMesh;
@@ -20,7 +20,7 @@ namespace FrozenExpress.Game.Core.DungeonLayoutEditor
 
         public DungeonLayoutEditorModelDrawingController(IDungeonLayoutEditorModel dungeonModel,
                                                          IDungeonLayoutEditorModelView view,
-                                                         IDungeonLayoutMeshBuilder dungeonBuilder)
+                                                         IDungeonMeshBuilder dungeonBuilder)
         {
             _dungeonModel = dungeonModel;
             _view = view;

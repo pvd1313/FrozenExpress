@@ -2,11 +2,11 @@
 
 namespace FrozenExpress.Game.Core.DungeonLayout
 {
-    public class DungeonLayoutTransform : IDungeonLayoutTransform
+    public class DungeonTransform : IDungeonTransform
     {
         private readonly Vector3 _cellSize;
 
-        public DungeonLayoutTransform(Vector3 cellSize)
+        public DungeonTransform(Vector3 cellSize)
         {
             _cellSize = cellSize;
         }
