@@ -6,6 +6,7 @@ using UnityEngine;
 using System.Reflection;
 
 using OneLine.Settings;
+using System.Collections;
 
 namespace OneLine {
     // Optimization: ommit drawing properties that lie outside window.
@@ -29,8 +30,10 @@ Please create an issue on https://github.com/slavniyteo/one-line/ and we will re
 
         private Type inspectorWindowType;
         private MethodInfo getWindowPositionInfo;
-        private FieldInfo scrollPositionInfo;
+        private MethodInfo scrollPositionInfo;
+
         private object window;
+        private object scrollView;
 
         public InspectorUtil() {
             enabled = false;
@@ -49,18 +52,21 @@ Please create an issue on https://github.com/slavniyteo/one-line/ and we will re
         private void Initialize(){
             inspectorWindowType = Type.GetType(INSPECTOR_WINDOW_ASSEMBLY_QUALIFIED_NAME);
             window = inspectorWindowType
-                        .GetField("s_CurrentInspectorWindow", ACCESS_LEVEL | BindingFlags.Static)
+                        .GetField("m_AllInspectors", ACCESS_LEVEL | BindingFlags.Static)
                         .GetValue(null);
 
-            scrollPositionInfo = inspectorWindowType.GetField("m_ScrollPosition", 
-                                                              ACCESS_LEVEL | BindingFlags.Instance);
-            getWindowPositionInfo = inspectorWindowType.GetProperty("position", typeof(Rect))
-                                                        .GetGetMethod();
+            window = (window as IList)[0];
+
+            scrollView = inspectorWindowType.GetField("m_ScrollView", ACCESS_LEVEL | BindingFlags.Instance).GetValue(window);
+
+            scrollPositionInfo = scrollView.GetType().GetProperty("scrollOffset", typeof(Vector2)).GetGetMethod();
+            
+            getWindowPositionInfo = inspectorWindowType.GetProperty("position", typeof(Rect)).GetGetMethod();
             
             var test = ScrollPosition;
         }
 
-        private Vector2 ScrollPosition { get { return (Vector2) scrollPositionInfo.GetValue(window); } }
+        private Vector2 ScrollPosition { get { return (Vector2) scrollPositionInfo.Invoke(scrollView, null); } }
 
         private Rect WindowPosition { get { return (Rect) getWindowPositionInfo.Invoke(window, null); } }
 
