@@ -69,7 +69,7 @@ namespace OneLine {
                 while (field == null && (type = type.BaseType) != null);
 
                 if (field == null) {
-                    NotifyMisspelledPropertyPath(lastType, property.propertyPath, path[i]);
+                    // NotifyMisspelledPropertyPath(lastType, property.propertyPath, path[i]);
                     return null;
                 }
 
