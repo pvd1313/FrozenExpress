@@ -39,7 +39,7 @@ namespace FrozenExpress.Game.Core.DungeonLayout
 
                 case EPatternMatrixTransform.RotateY270:
                     temp = direction.x;
-                    direction.x = -direction.x;
+                    direction.x = -direction.z;
                     direction.z = temp;
                     break;
             }
