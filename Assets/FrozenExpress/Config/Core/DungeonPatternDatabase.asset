@@ -17,7 +17,7 @@ MonoBehaviour:
     _mesh: {fileID: -629719859055844128, guid: 95fbec67a4246d84eb39fcbf2215231e, type: 3}
     _trigger: 1
     _matrixSequences:
-    - _sequence: 00000000
+    - _sequence: 0000000000000000
     - _sequence: 02000000
     _conditions:
     - _direction: {x: 0, y: -1, z: 0}
