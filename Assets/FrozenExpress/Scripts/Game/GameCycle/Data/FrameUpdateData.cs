@@ -1,4 +1,4 @@
-﻿namespace FrozenExpress.Game.GameCycle
+﻿namespace FrozenExpress.Game
 {
     public struct FrameUpdateData
     {

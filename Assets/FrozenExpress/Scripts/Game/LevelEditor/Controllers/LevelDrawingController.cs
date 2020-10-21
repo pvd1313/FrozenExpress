@@ -1,8 +1,7 @@
-﻿using FrozenExpress.Game.GameCycle;
-using FrozenExpress.Game.DungeonLayout;
+﻿using FrozenExpress.Game.DungeonLayout;
 using UnityEngine;
 
-namespace FrozenExpress.LevelEditor
+namespace FrozenExpress.Game.LevelEditor
 {
     public class LevelDrawingController : IInitializable, ITerminatable, IFrameUpdatable
     {

@@ -4,7 +4,7 @@ using UnityEngine;
 namespace FrozenExpress.Game.DungeonLayout
 {
     [System.Serializable]
-    public class DungeonLayout
+    public class DungeonLayoutData
     {
         public IReadOnlyList<Vector3Int> Cells => _cells;
 

@@ -3,15 +3,15 @@ using Zenject;
 
 namespace FrozenExpress.Game.Cinematics
 {
-    public class CinematicsInstaller : ScriptableObjectInstaller
+    public class CinematicsInstaller : AModuleInstaller
     {
         [SerializeField] private CameraView _cameraViewPrefab;
 
         public override void InstallBindings()
         {
-            Container.BindInterfacesTo<CameraView>().FromComponentsInNewPrefab(_cameraViewPrefab).AsSingle();
+            Spawn(_cameraViewPrefab);
 
-            Container.BindInterfacesTo<CameraController>().AsSingle();
+            Install<CameraController>();
         }
     }
 }

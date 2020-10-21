@@ -1,8 +1,6 @@
-﻿using Zenject;
-
-namespace FrozenExpress.Game.Logging
+﻿namespace FrozenExpress.Game.Logging
 {
-    public class LoggingInstaller : ScriptableObjectInstaller
+    public class LoggingInstaller : Zenject.ScriptableObjectInstaller
     {
         public override void InstallBindings()
         {

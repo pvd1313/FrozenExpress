@@ -20,7 +20,7 @@ namespace FrozenExpress.Game.DungeonLayout
             _dungeonLayoutMap = new DungeonMap();
         }
 
-        public void BuildMesh(DungeonLayout dungeonLayout, Mesh result)
+        public void BuildMesh(DungeonLayoutData dungeonLayout, Mesh result)
         {
             _dungeonLayoutMap.Initialize(dungeonLayout);
             _meshBuilder.Clear();

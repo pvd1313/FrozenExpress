@@ -14,7 +14,7 @@ namespace FrozenExpress.Game.DungeonLayout
             _cells = new HashSet<Vector3Int>();
         }
 
-        public void Initialize(DungeonLayout dungeonLayout)
+        public void Initialize(DungeonLayoutData dungeonLayout)
         {
             _cells.Clear();
 

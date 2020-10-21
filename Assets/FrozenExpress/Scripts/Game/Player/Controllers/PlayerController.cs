@@ -15,7 +15,6 @@ namespace FrozenExpress.Game.Player
 
         private readonly IPlayerViewFactory _playerViewFactory;
         private readonly PlayerConfig _playerConfig;
-        private readonly IPlayerSpawnPointView _playerSpawnPointView;
         private readonly Collider[] _colliderBuffer;
 
         private Vector2 _rotation;
@@ -23,19 +22,17 @@ namespace FrozenExpress.Game.Player
         private float _velocityY;
 
         public PlayerController(IPlayerViewFactory playerViewFactory,
-                                PlayerConfig playerConfig,
-                                IPlayerSpawnPointView playerSpawnPointView)
+                                PlayerConfig playerConfig)
         {
             _playerViewFactory = playerViewFactory;
             _playerConfig = playerConfig;
-            _playerSpawnPointView = playerSpawnPointView;
             _colliderBuffer = new Collider[4];
         }
 
         public void Initialize()
         {
             _playerView = _playerViewFactory.CreatePlayer();
-            _playerView.Position = _playerSpawnPointView.Position;
+            _playerView.Position = Vector3.zero;
         }
 
         public void Update(FrameUpdateData frameData)

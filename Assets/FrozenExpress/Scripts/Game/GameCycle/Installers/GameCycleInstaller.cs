@@ -1,8 +1,6 @@
-﻿using Zenject;
-
-namespace FrozenExpress.Game.GameCycle
+﻿namespace FrozenExpress.Game.GameCycle
 {
-    public class GameCycleInstaller : ScriptableObjectInstaller
+    public class GameCycleInstaller : Zenject.ScriptableObjectInstaller
     {
         public override void InstallBindings()
         {

@@ -1,10 +1,9 @@
-﻿using FrozenExpress.Game.DungeonLayout;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
+using FrozenExpress.Game.DungeonLayout;
 
-namespace FrozenExpress.LevelEditor
+namespace FrozenExpress.Game.LevelEditor
 {
-    public class EditorDungeonLayout : DungeonLayout
+    public class EditorDungeonLayout : DungeonLayoutData
     {
         public EditorDungeonLayout()
         {
