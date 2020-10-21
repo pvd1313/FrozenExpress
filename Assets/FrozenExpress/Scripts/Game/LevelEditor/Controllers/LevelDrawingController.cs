@@ -1,4 +1,4 @@
-﻿using FrozenExpress.Game.DungeonLayout;
+﻿using FrozenExpress.Game.Dungeon;
 using UnityEngine;
 
 namespace FrozenExpress.Game.LevelEditor
