@@ -14,6 +14,7 @@ namespace FrozenExpress.Game.Core.DungeonLayout
             Container.BindInterfacesTo<DungeonPatternTransformController>().AsSingle();
             Container.BindInterfacesTo<DungeonMeshBuilder>().AsSingle();
             Container.BindInterfacesTo<DungeonTransform>().AsSingle().WithArguments(_cellSize);
+            Container.BindInterfacesTo<DungeonPatternExpressionParser>().AsSingle();
         }
     }
 }
