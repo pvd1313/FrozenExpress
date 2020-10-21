@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee659e35e2998ea41884998c418e03ba, type: 3}
-  m_Name: DungeonLayoutEditorInstaller
+  m_Name: LevelEditorInstaller
   m_EditorClassIdentifier: 
   _dungeonLayoutEditorCameraViewPrefab: {fileID: 8808470448058667696, guid: a52a885965e01bd4baf137e562a8deb1,
     type: 3}
@@ -20,24 +20,3 @@ MonoBehaviour:
     _diffuseMaterial: {fileID: 2100000, guid: 6162d14663af25f4cb7ef8d5aaf540d4, type: 2}
     _debugMaterial: {fileID: 2100000, guid: 5a85add839bd044418399de8792ee75c, type: 2}
     _drawDiffuse: 0
-  _meshVertexColors:
-  - _color:
-      serializedVersion: 2
-      rgba: 4291019715
-    _mesh: {fileID: 5887462539075223656, guid: eb58a81957b148543a0909bea47c4a27, type: 3}
-  - _color:
-      serializedVersion: 2
-      rgba: 4287664272
-    _mesh: {fileID: 8733429697405204941, guid: 2d7e9527365af38499c3126c890f0d50, type: 3}
-  - _color:
-      serializedVersion: 2
-      rgba: 4284034922
-    _mesh: {fileID: 1129247566542154258, guid: 587c050c9398de842bec4717ad862926, type: 3}
-  - _color:
-      serializedVersion: 2
-      rgba: 4285388287
-    _mesh: {fileID: 527982050842733842, guid: cd5934e408d8b684dbf6a9a31c9d393e, type: 3}
-  - _color:
-      serializedVersion: 2
-      rgba: 4284807794
-    _mesh: {fileID: 7758205013865117209, guid: 62fdd0814fde1ac4fbe3d8e318dbd8a4, type: 3}

@@ -4,6 +4,6 @@ namespace FrozenExpress.Game.DungeonLayout
 {
     public interface IDungeonPatternController
     {
-        IEnumerable<DungeonEntity> IterateEntities(IDungeonMap layoutMap);
+        IEnumerable<MeshTransform> IterateEntities(IDungeonMap layoutMap);
     }
 }

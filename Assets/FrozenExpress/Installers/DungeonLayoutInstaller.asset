@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _patternDatabase: {fileID: 11400000, guid: 3ee39ed67b923e74f80f477774161cda, type: 2}
   _cellSize: {x: 5, y: 4, z: 5}
+  _entityDatabase: {fileID: 11400000, guid: 6f00deb8c07d6884fbe356649bfed3ab, type: 2}

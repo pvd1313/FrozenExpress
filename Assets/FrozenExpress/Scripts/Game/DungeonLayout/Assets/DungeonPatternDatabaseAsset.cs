@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace FrozenExpress.Game.DungeonLayout
 {
-    public class DungeonPatternDatabase : ScriptableObject
+    public class DungeonPatternDatabaseAsset : ScriptableObject
     {
         public IReadOnlyList<Pattern> Patterns => _patterns;
 

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _patterns:
   - _name: Floor
-    _mesh: {fileID: 5887462539075223656, guid: eb58a81957b148543a0909bea47c4a27, type: 3}
+    _entityId: floor
     _trigger: 1
     _matrixSequences:
     - _sequence: 00000000
@@ -25,7 +25,7 @@ MonoBehaviour:
       - _variable: A
         _direction: {x: 0, y: -1, z: 0}
   - _name: Wall
-    _mesh: {fileID: 8733429697405204941, guid: 2d7e9527365af38499c3126c890f0d50, type: 3}
+    _entityId: wall
     _trigger: 1
     _matrixSequences:
     - _sequence: 00000000
@@ -38,7 +38,7 @@ MonoBehaviour:
       - _variable: A
         _direction: {x: 0, y: 0, z: 1}
   - _name: Wall Pillar Inner
-    _mesh: {fileID: 527982050842733842, guid: cd5934e408d8b684dbf6a9a31c9d393e, type: 3}
+    _entityId: pillar_inner
     _trigger: 1
     _matrixSequences:
     - _sequence: 00000000
@@ -53,7 +53,7 @@ MonoBehaviour:
       - _variable: B
         _direction: {x: 1, y: 0, z: 0}
   - _name: Wall Pillar Line
-    _mesh: {fileID: 1129247566542154258, guid: 587c050c9398de842bec4717ad862926, type: 3}
+    _entityId: pillar_line
     _trigger: 1
     _matrixSequences:
     - _sequence: 00000000
@@ -70,7 +70,7 @@ MonoBehaviour:
       - _variable: C
         _direction: {x: -1, y: 0, z: 0}
   - _name: Wall Pillar Outer
-    _mesh: {fileID: 7758205013865117209, guid: 62fdd0814fde1ac4fbe3d8e318dbd8a4, type: 3}
+    _entityId: pillar_outer
     _trigger: 1
     _matrixSequences:
     - _sequence: 00000000

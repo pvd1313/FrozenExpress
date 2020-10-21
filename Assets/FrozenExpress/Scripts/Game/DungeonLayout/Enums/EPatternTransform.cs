@@ -1,6 +1,6 @@
 ﻿namespace FrozenExpress.Game.DungeonLayout
 {
-    public enum EPatternMatrixTransform
+    public enum EPatternTransform
     {
         Identity = 0,
         MirrorX = 1,

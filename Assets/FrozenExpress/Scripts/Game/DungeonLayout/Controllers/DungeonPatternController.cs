@@ -1,5 +1,4 @@
-﻿using B83.LogicExpressionParser;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -13,14 +12,17 @@ namespace FrozenExpress.Game.DungeonLayout
         private readonly IReadOnlyList<Pattern> _patterns;
         private readonly IDungeonPatternTransformController _transformer;
         private readonly IDungeonPatternExpressionParser _expressionParser;
+        private readonly IDungeonEntityDatabase _entityDatabase;
 
         private readonly List<Pattern> _patternBuffer;
         private readonly List<Vector3Int> _cellBuffer;
 
         public DungeonPatternController(IReadOnlyList<Pattern> patterns,
                                         IDungeonPatternTransformController transformer,
-                                        IDungeonPatternExpressionParser expressionParser)
+                                        IDungeonPatternExpressionParser expressionParser,
+                                        IDungeonEntityDatabase entityDatabase)
         {
+            _entityDatabase = entityDatabase;
             _patterns = patterns;
             _transformer = transformer;
             _expressionParser = expressionParser;
@@ -28,7 +30,9 @@ namespace FrozenExpress.Game.DungeonLayout
             _cellBuffer = new List<Vector3Int>();
         }
 
-        public IEnumerable<DungeonEntity> IterateEntities(IDungeonMap map)
+        public IDungeonEntityDatabase EntityDatabase { get; }
+
+        public IEnumerable<MeshTransform> IterateEntities(IDungeonMap map)
         {
             _patternBuffer.Clear();
             _patternBuffer.AddRange(_patterns.Where(p => p.Trigger == EPatternTrigger.Cell));
@@ -40,8 +44,9 @@ namespace FrozenExpress.Game.DungeonLayout
             {
                 var pattern = _patternBuffer[i];
                 var expression = _expressionParser.CompileExpression(pattern);
+                var entity = _entityDatabase.GetEntity(pattern.EntityId);
 
-                if (expression == null)
+                if (expression == null || entity == null)
                 {
                     continue;
                 }
@@ -83,13 +88,14 @@ namespace FrozenExpress.Game.DungeonLayout
                             rotation = _transformer.TransformRotation(rotation, matrixSequence[q]);
                         }
 
-                        yield return new DungeonEntity()
-                        {
-                            Mesh = pattern.Mesh,
-                            Position = cell,
-                            Rotation = rotation,
-                            Scale = scale
-                        };
+                        MeshTransform result;
+                        result.Mesh = entity.Mesh;
+                        result.Position = cell;
+                        result.Rotation = rotation;
+                        result.Scale = scale;
+                        result.VertexColor = entity.DebugVertexColor;
+
+                        yield return result;
                     }
                 }
             }

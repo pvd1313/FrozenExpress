@@ -6,8 +6,8 @@ namespace FrozenExpress.Game.DungeonLayout
     [System.Serializable]
     public class PatternMatrixSequence
     {
-        public IList<EPatternMatrixTransform> Sequence => _sequence;
+        public IList<EPatternTransform> Sequence => _sequence;
 
-        [SerializeField] private List<EPatternMatrixTransform> _sequence;
+        [SerializeField] private List<EPatternTransform> _sequence;
     }
 }

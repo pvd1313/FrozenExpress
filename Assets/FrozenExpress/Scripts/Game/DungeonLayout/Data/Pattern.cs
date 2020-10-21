@@ -8,13 +8,13 @@ namespace FrozenExpress.Game.DungeonLayout
     public class Pattern
     {
         public string Name => _name;
+        public string EntityId => _entityId;
         public EPatternTrigger Trigger => _trigger;
-        public Mesh Mesh => _mesh;
         public IReadOnlyList<PatternMatrixSequence> MatrixSequences => _matrixSequences;
         public PatternConditionExpression Condition => _condition;
 
         [SerializeField] private string _name;
-        [SerializeField] private Mesh _mesh;
+        [SerializeField] private string _entityId;
         [SerializeField] private EPatternTrigger _trigger;
         [SerializeField] [OneLine] private List<PatternMatrixSequence> _matrixSequences;
         [SerializeField] private PatternConditionExpression _condition;
