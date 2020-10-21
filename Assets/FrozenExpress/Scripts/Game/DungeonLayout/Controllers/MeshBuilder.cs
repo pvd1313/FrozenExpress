@@ -5,7 +5,7 @@ namespace FrozenExpress.Game.DungeonLayout
 {
     public class MeshBuilder : IMeshBuilder
     {
-        private readonly List<Color> _colors;
+        private readonly List<Color32> _colors;
         private readonly List<Vector3> _vertices;
         private readonly List<int> _triangles;
         private readonly List<Vector3> _normals;
@@ -20,7 +20,7 @@ namespace FrozenExpress.Game.DungeonLayout
         {
             _vertices = new List<Vector3>();
             _triangles = new List<int>();
-            _colors = new List<Color>();
+            _colors = new List<Color32>();
             _normals = new List<Vector3>();
             _tangents = new List<Vector4>();
 
@@ -30,7 +30,7 @@ namespace FrozenExpress.Game.DungeonLayout
             _tangentBuffer = new List<Vector4>();
         }
 
-        public void AddMesh(Mesh mesh, Matrix4x4 matrix, Color color)
+        public void AddMesh(Mesh mesh, Matrix4x4 matrix, Color32 color)
         {
             mesh.GetVertices(_vertexBuffer);
 

@@ -10,55 +10,52 @@ namespace FrozenExpress.Game.DungeonLayoutEditor
 
         public EFrameUpdateOrder UpdateOrder => EFrameUpdateOrder.Late;
 
-        private readonly IDungeonLayoutEditorModelView _view;
-        private readonly IDungeonMeshBuilder _dungeonBuilder;
+        private readonly IDungeonMeshBuilder _meshBuilder;
+        private readonly DungeonEditorDrawingConfig _config;
         private readonly IDungeonLayoutEditorModel _dungeonModel;
         
-        private Mesh _dungeonMesh;
+        private Mesh _mesh;
         private bool _isViewDirty;
-        private EditorDungeonLayoutData _layoutData;
+        private EditorDungeonLayoutData _layout;
 
         public DungeonLayoutEditorModelDrawingController(IDungeonLayoutEditorModel dungeonModel,
-                                                         IDungeonLayoutEditorModelView view,
-                                                         IDungeonMeshBuilder dungeonBuilder)
+                                                         IDungeonMeshBuilder dungeonBuilder,
+                                                         DungeonEditorDrawingConfig config)
         {
             _dungeonModel = dungeonModel;
-            _view = view;
-            _dungeonBuilder = dungeonBuilder;
+            _meshBuilder = dungeonBuilder;
+            _config = config;
 
-            _dungeonModel.OnLayoutChanged += SetViewDirty;
+            _dungeonModel.OnLayoutChanged += SetMeshDirty;
         }
 
         public void Initialize()
         {
-            _dungeonMesh = new Mesh();
-            _layoutData = new EditorDungeonLayoutData();
-
-            _view.SetMesh(_dungeonMesh);
+            _mesh = new Mesh();
+            _layout = new EditorDungeonLayoutData();
         }
 
         public void Update(FrameUpdateData frameData)
         {
-            if (!_isViewDirty)
+            if (_isViewDirty)
             {
-                return;
+                _isViewDirty = false;
+                _layout.Initialize(_dungeonModel);
+                _meshBuilder.BuildMesh(_layout, _mesh);
             }
 
-            _isViewDirty = false;
-
-            _layoutData.Initialize(_dungeonModel);
-
-            _dungeonBuilder.BuildMesh(_layoutData, _dungeonMesh);
+            var material = _config.DrawDiffuse ? _config.DiffuseMaterial : _config.DebugMaterial;
+            Graphics.DrawMesh(_mesh, Matrix4x4.identity, material, 1);
         }
 
-        private void SetViewDirty()
+        private void SetMeshDirty()
         {
             _isViewDirty = true;
         }
 
         public void Terminate()
         {
-            _dungeonModel.OnLayoutChanged -= SetViewDirty;
+            _dungeonModel.OnLayoutChanged -= SetMeshDirty;
         }
     }
 }
