@@ -10,6 +10,7 @@ namespace FrozenExpress.Game.DungeonLayout
 
         public override void InstallBindings()
         {
+            Container.BindInterfacesTo<MeshBuilder>().AsTransient();
             Container.BindInterfacesTo<DungeonPatternController>().AsSingle().WithArguments(_patternDatabase.Patterns);
             Container.BindInterfacesTo<DungeonPatternTransformController>().AsSingle();
             Container.BindInterfacesTo<DungeonMeshBuilder>().AsSingle();

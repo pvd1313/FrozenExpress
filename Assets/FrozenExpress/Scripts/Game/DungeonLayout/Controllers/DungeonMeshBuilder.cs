@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace FrozenExpress.Game.DungeonLayout
 {
@@ -7,34 +6,32 @@ namespace FrozenExpress.Game.DungeonLayout
     {
         private readonly IDungeonPatternController _patternMaster;
         private readonly IDungeonTransform _layoutTransform;
-        private readonly List<CombineInstance> _combineInstances;
+        private readonly IMeshBuilder _meshBuilder;
         private readonly DungeonMap _dungeonLayoutMap;
 
         public DungeonMeshBuilder(IDungeonPatternController patternMaster,
-                                        IDungeonTransform layoutTransform)
+                                  IDungeonTransform layoutTransform,
+                                  IMeshBuilder meshBuilder)
         {
             _patternMaster = patternMaster;
             _layoutTransform = layoutTransform;
-            _combineInstances = new List<CombineInstance>();
+            _meshBuilder = meshBuilder;
             _dungeonLayoutMap = new DungeonMap();
         }
 
         public void BuildMesh(DungeonLayout dungeonLayout, Mesh result)
         {
             _dungeonLayoutMap.Initialize(dungeonLayout);
-
-            _combineInstances.Clear();
+            _meshBuilder.Clear();
+            
             foreach (var entity in _patternMaster.IterateEntities(_dungeonLayoutMap))
             {
                 var position = _layoutTransform.TransformPosition(entity.Position);
-                _combineInstances.Add(new CombineInstance()
-                {
-                    mesh = entity.Mesh,
-                    transform = Matrix4x4.TRS(position, entity.Rotation, entity.Scale)
-                });
+                var transform = Matrix4x4.TRS(position, entity.Rotation, entity.Scale);
+                _meshBuilder.AddMesh(entity.Mesh, transform, Color.white);
             }
-            
-            result.CombineMeshes(_combineInstances.ToArray());
+
+            _meshBuilder.Apply(result);
         }
     }
 }
