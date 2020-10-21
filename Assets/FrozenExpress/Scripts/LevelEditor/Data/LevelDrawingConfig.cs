@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
-namespace FrozenExpress.Game.DungeonLayoutEditor
+namespace FrozenExpress.LevelEditor
 {
     [System.Serializable]
-    public class DungeonEditorDrawingConfig
+    public class LevelDrawingConfig
     {
         public Material DiffuseMaterial => _diffuseMaterial;
         public Material DebugMaterial => _debugMaterial;

@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace FrozenExpress.Game.DungeonLayoutEditor
+namespace FrozenExpress.LevelEditor
 {
-    public class EditorDungeonMeshVertexColorProvider : IDungeonMeshVertexColorProvider
+    public class LevelEditorMeshColorProvider : IDungeonMeshVertexColorProvider
     {
-        private readonly List<DungeonMeshVertexColor> _vertexColors;
+        private readonly List<MeshVertexColor> _vertexColors;
         private readonly Color32 _colorWhite;
 
-        public EditorDungeonMeshVertexColorProvider(List<DungeonMeshVertexColor> vertexColors)
+        public LevelEditorMeshColorProvider(List<MeshVertexColor> vertexColors)
         {
             _vertexColors = vertexColors;
             _colorWhite = new Color32(1, 1, 1, 1);

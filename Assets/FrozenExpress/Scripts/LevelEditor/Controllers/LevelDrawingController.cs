@@ -2,25 +2,25 @@
 using FrozenExpress.Game.DungeonLayout;
 using UnityEngine;
 
-namespace FrozenExpress.Game.DungeonLayoutEditor
+namespace FrozenExpress.LevelEditor
 {
-    public class DungeonLayoutEditorModelDrawingController : IInitializable, ITerminatable, IFrameUpdatable
+    public class LevelDrawingController : IInitializable, ITerminatable, IFrameUpdatable
     {
         public EInitializationOrder InitializationOrder => EInitializationOrder.Common;
 
         public EFrameUpdateOrder UpdateOrder => EFrameUpdateOrder.Late;
 
         private readonly IDungeonMeshBuilder _meshBuilder;
-        private readonly DungeonEditorDrawingConfig _config;
-        private readonly IDungeonLayoutEditorModel _dungeonModel;
+        private readonly LevelDrawingConfig _config;
+        private readonly ILevelEditorModel _dungeonModel;
         
         private Mesh _mesh;
         private bool _isViewDirty;
-        private EditorDungeonLayoutData _layout;
+        private EditorDungeonLayout _layout;
 
-        public DungeonLayoutEditorModelDrawingController(IDungeonLayoutEditorModel dungeonModel,
+        public LevelDrawingController(ILevelEditorModel dungeonModel,
                                                          IDungeonMeshBuilder dungeonBuilder,
-                                                         DungeonEditorDrawingConfig config)
+                                                         LevelDrawingConfig config)
         {
             _dungeonModel = dungeonModel;
             _meshBuilder = dungeonBuilder;
@@ -32,7 +32,7 @@ namespace FrozenExpress.Game.DungeonLayoutEditor
         public void Initialize()
         {
             _mesh = new Mesh();
-            _layout = new EditorDungeonLayoutData();
+            _layout = new EditorDungeonLayout();
         }
 
         public void Update(FrameUpdateData frameData)

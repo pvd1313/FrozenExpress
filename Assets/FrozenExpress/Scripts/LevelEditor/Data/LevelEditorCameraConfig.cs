@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
-namespace FrozenExpress.Game.DungeonLayoutEditor
+namespace FrozenExpress.LevelEditor
 {
     [System.Serializable]
-    public class DungeonLayoutEditorCameraControllerConfig
+    public class LevelEditorCameraConfig
     {
         public float Sensitivity => _sensitivity;
 

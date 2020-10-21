@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace FrozenExpress.Game.DungeonLayoutEditor
+namespace FrozenExpress.LevelEditor
 {
-    public interface IDungeonLayoutEditorModel
+    public interface ILevelEditorModel
     {
         event Action OnLayoutChanged;
 

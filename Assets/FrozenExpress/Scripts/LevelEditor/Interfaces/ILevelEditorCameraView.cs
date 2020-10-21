@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace FrozenExpress.Game.DungeonLayoutEditor
+namespace FrozenExpress.LevelEditor
 {
-    public interface IDungeonLayoutEditorCameraView
+    public interface ILevelEditorCameraView
     {
         Quaternion Rotation { get; set; }
         Vector3 Position { get; set; }

@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace FrozenExpress.Game.DungeonLayoutEditor
+namespace FrozenExpress.LevelEditor
 {
-    public class DungeonLayoutEditorCameraView : MonoBehaviour, IDungeonLayoutEditorCameraView
+    public class DungeonLayoutEditorCameraView : MonoBehaviour, ILevelEditorCameraView
     {
         public Quaternion Rotation
         {

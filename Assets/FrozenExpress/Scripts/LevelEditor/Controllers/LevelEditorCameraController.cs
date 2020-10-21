@@ -2,22 +2,22 @@
 using FrozenExpress.Game.DungeonLayout;
 using UnityEngine;
 
-namespace FrozenExpress.Game.DungeonLayoutEditor
+namespace FrozenExpress.LevelEditor
 {
-    public class DungeonLayoutEditorCameraController : IFrameUpdatable
+    public class LevelEditorCameraController : IFrameUpdatable
     {
         public EFrameUpdateOrder UpdateOrder => EFrameUpdateOrder.Early;
 
-        private readonly IDungeonLayoutEditorCameraView _cameraView;
-        private readonly DungeonLayoutEditorCameraControllerConfig _config;
-        private readonly IDungeonLayoutEditorModel _dungeonModel;
+        private readonly ILevelEditorCameraView _cameraView;
+        private readonly LevelEditorCameraConfig _config;
+        private readonly ILevelEditorModel _dungeonModel;
         private readonly IDungeonTransform _dungeonLayoutTransform;
 
         private Vector2 _cameraRotation;
 
-        public DungeonLayoutEditorCameraController(IDungeonLayoutEditorCameraView cameraView,
-                                                   DungeonLayoutEditorCameraControllerConfig config,
-                                                   IDungeonLayoutEditorModel dungeonModel,
+        public LevelEditorCameraController(ILevelEditorCameraView cameraView,
+                                                   LevelEditorCameraConfig config,
+                                                   ILevelEditorModel dungeonModel,
                                                    IDungeonTransform dungeonLayoutTransform)
         {
             _cameraView = cameraView;

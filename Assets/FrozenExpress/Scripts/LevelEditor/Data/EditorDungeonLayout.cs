@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace FrozenExpress.Game.DungeonLayoutEditor
+namespace FrozenExpress.LevelEditor
 {
-    public class EditorDungeonLayoutData : DungeonLayout.DungeonLayout
+    public class EditorDungeonLayout : DungeonLayout
     {
-        public EditorDungeonLayoutData()
+        public EditorDungeonLayout()
         {
             _cells = new List<UnityEngine.Vector3Int>();
         }
 
-        public void Initialize(IDungeonLayoutEditorModel dungeonmodel)
+        public void Initialize(ILevelEditorModel dungeonmodel)
         {
             _cells.Clear();
             _cells.AddRange(dungeonmodel.Cells);

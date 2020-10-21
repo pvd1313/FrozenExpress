@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace FrozenExpress.Game.DungeonLayoutEditor
+namespace FrozenExpress.LevelEditor
 {
-    public class DungeonLayoutEditorModel : IDungeonLayoutEditorModel
+    public class LevelEditorModel : ILevelEditorModel
     {
         public event Action OnLayoutChanged;
 
@@ -14,7 +14,7 @@ namespace FrozenExpress.Game.DungeonLayoutEditor
 
         private readonly HashSet<Vector3Int> _cells;
 
-        public DungeonLayoutEditorModel()
+        public LevelEditorModel()
         {
             _cells = new HashSet<Vector3Int>();
         }

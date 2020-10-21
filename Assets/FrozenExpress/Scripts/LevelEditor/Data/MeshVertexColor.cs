@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
-namespace FrozenExpress.Game.DungeonLayoutEditor
+namespace FrozenExpress.LevelEditor
 {
     [System.Serializable]
-    public class DungeonMeshVertexColor
+    public class MeshVertexColor
     {
         public Color32 Color => _color;
         public Mesh Mesh => _mesh;
