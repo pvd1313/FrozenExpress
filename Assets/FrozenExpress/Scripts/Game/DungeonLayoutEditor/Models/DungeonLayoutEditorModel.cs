@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace FrozenExpress.Game.Core.DungeonLayoutEditor
+namespace FrozenExpress.Game.DungeonLayoutEditor
 {
     public class DungeonLayoutEditorModel : IDungeonLayoutEditorModel
     {

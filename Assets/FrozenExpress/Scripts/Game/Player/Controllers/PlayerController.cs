@@ -1,7 +1,7 @@
-﻿using FrozenExpress.Game.Common.GameCycle;
+﻿using FrozenExpress.Game.GameCycle;
 using UnityEngine;
 
-namespace FrozenExpress.Game.Core.Player
+namespace FrozenExpress.Game.Player
 {
     public class PlayerController : IPlayerController, IInitializable, IFrameUpdatable
     {

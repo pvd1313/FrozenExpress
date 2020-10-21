@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace FrozenExpress.Game.Core.DungeonLayout
+namespace FrozenExpress.Game.DungeonLayout
 {
     public class DungeonMap : IDungeonMap
     {

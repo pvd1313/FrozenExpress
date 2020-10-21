@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace FrozenExpress.Game.Common.GameCycle
+namespace FrozenExpress.Game.GameCycle
 {
     public class TerminationMediator : IDisposable
     {

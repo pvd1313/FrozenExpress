@@ -1,7 +1,7 @@
-﻿using FrozenExpress.Game.Common.GameCycle;
-using FrozenExpress.Game.Core.Player;
+﻿using FrozenExpress.Game.GameCycle;
+using FrozenExpress.Game.Player;
 
-namespace FrozenExpress.Game.Core.Cinematics
+namespace FrozenExpress.Game.Cinematics
 {
     public class CameraController : IFrameUpdatable
     {

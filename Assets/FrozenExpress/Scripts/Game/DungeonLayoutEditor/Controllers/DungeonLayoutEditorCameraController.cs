@@ -1,8 +1,8 @@
-﻿using FrozenExpress.Game.Common.GameCycle;
-using FrozenExpress.Game.Core.DungeonLayout;
+﻿using FrozenExpress.Game.GameCycle;
+using FrozenExpress.Game.DungeonLayout;
 using UnityEngine;
 
-namespace FrozenExpress.Game.Core.DungeonLayoutEditor
+namespace FrozenExpress.Game.DungeonLayoutEditor
 {
     public class DungeonLayoutEditorCameraController : IFrameUpdatable
     {

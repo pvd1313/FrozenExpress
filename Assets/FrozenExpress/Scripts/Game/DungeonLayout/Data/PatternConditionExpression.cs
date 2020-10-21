@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace FrozenExpress.Game.Core.DungeonLayout
+namespace FrozenExpress.Game.DungeonLayout
 {
     [System.Serializable]
     public class PatternConditionExpression

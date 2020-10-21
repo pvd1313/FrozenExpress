@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Zenject;
 
-namespace FrozenExpress.Game.Core.DungeonLayoutEditor
+namespace FrozenExpress.Game.DungeonLayoutEditor
 {
     public class DungeonLayoutEditorInstaller : ScriptableObjectInstaller
     {

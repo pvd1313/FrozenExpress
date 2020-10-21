@@ -1,4 +1,4 @@
-﻿namespace FrozenExpress.Game.Common.GameCycle
+﻿namespace FrozenExpress.Game.GameCycle
 {
     public enum EFrameUpdateOrder
     {

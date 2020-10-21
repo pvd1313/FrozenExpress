@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Zenject;
 
-namespace FrozenExpress.Game.Core.Cinematics
+namespace FrozenExpress.Game.Cinematics
 {
     public class CinematicsInstaller : ScriptableObjectInstaller
     {

@@ -1,8 +1,8 @@
-﻿using FrozenExpress.Game.Core.DungeonLayout;
+﻿using FrozenExpress.Game.DungeonLayout;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace FrozenExpress.Game.Core.DungeonLayoutEditor
+namespace FrozenExpress.Game.DungeonLayoutEditor
 {
     public class EditorDungeonLayoutData : DungeonLayout.DungeonLayout
     {

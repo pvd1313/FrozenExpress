@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace FrozenExpress.Game.Core.Player
+namespace FrozenExpress.Game.Player
 {
     public class PlayerSpawnPointView : MonoBehaviour, IPlayerSpawnPointView
     {

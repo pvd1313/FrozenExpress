@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace FrozenExpress.Game.Core.DungeonLayoutEditor
+namespace FrozenExpress.Game.DungeonLayoutEditor
 {
     [System.Serializable]
     public class DungeonLayoutEditorCameraControllerConfig

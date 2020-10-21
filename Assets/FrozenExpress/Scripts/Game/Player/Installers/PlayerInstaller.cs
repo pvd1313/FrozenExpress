@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Zenject;
 
-namespace FrozenExpress.Game.Core.Player
+namespace FrozenExpress.Game.Player
 {
     public class PlayerInstaller : ScriptableObjectInstaller
     {

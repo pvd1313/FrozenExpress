@@ -1,6 +1,6 @@
 ﻿using B83.LogicExpressionParser;
 
-namespace FrozenExpress.Game.Core.DungeonLayout
+namespace FrozenExpress.Game.DungeonLayout
 {
     public interface IDungeonPatternExpressionParser
     {

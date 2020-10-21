@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace FrozenExpress.Game.Common.GameCycle
+namespace FrozenExpress.Game.GameCycle
 {
     public class FrameUpdateMediator : ITerminatable
     {

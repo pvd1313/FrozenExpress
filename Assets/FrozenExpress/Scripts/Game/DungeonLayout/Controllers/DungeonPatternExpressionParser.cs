@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-namespace FrozenExpress.Game.Core.DungeonLayout
+namespace FrozenExpress.Game.DungeonLayout
 {
     public class DungeonPatternExpressionParser : IDungeonPatternExpressionParser
     {

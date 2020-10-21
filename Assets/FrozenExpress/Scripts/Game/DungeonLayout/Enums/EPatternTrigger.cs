@@ -1,4 +1,4 @@
-﻿namespace FrozenExpress.Game.Core.DungeonLayout
+﻿namespace FrozenExpress.Game.DungeonLayout
 {
     public enum EPatternTrigger
     {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace FrozenExpress.Game.Core.Cinematics
+namespace FrozenExpress.Game.Cinematics
 {
     public interface ICameraView
     {

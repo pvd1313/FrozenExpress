@@ -1,4 +1,4 @@
-﻿namespace FrozenExpress.Game.Core.Player
+﻿namespace FrozenExpress.Game.Player
 {
     public interface IPlayerViewFactory
     {
