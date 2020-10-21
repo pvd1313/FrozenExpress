@@ -27,7 +27,7 @@ namespace FrozenExpress.Game.Dungeon
             }
             catch (Exception e)
             {
-                _log?.Exception(e, $"Failed to parse expression '{pattern.Condition.Expression}' in pattern '{pattern.Name}'");
+                _log?.Exception(e, $"Failed to parse '{pattern.Condition.Expression}' in '{pattern.Name}'");
                 return null;
             }
 
@@ -39,7 +39,7 @@ namespace FrozenExpress.Game.Dungeon
                 .Where(v => v.Count() > 1);
             foreach (var name in duplicatedConditionNames)
             {
-                _log?.Error($"Condition variable '{name.Key}' is duplicated");
+                _log?.Error($"Duplicated variable '{name.Key}' in '{pattern.Name}'");
                 expression = null;
             }
 
@@ -47,14 +47,7 @@ namespace FrozenExpress.Game.Dungeon
             var missingNames = variables.Keys.Except(conditions.Select(c => c.Variable));
             foreach (var name in missingNames)
             {
-                _log?.Error($"Variable mistmatch '{name}' in pattern '{pattern.Name}'");
-                expression = null;
-            }
-
-            var overNames = conditions.Select(c => c.Variable).Except(variables.Keys);
-            foreach (var name in overNames)
-            {
-                _log?.Error($"Variable mistmatch '{name}' in pattern '{pattern.Name}'");
+                _log?.Error($"Missing condition '{name}' in '{pattern.Name}'");
                 expression = null;
             }
 

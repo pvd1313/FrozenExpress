@@ -16,6 +16,7 @@ namespace FrozenExpress.Game.Dungeon
 
         private readonly List<Pattern> _patternBuffer;
         private readonly List<Vector3Int> _cellBuffer;
+        private readonly List<PatternCondition> _conditionBuffer;
 
         public DungeonPatternController(IReadOnlyList<Pattern> patterns,
                                         IDungeonPatternTransformController transformer,
@@ -28,6 +29,7 @@ namespace FrozenExpress.Game.Dungeon
             _expressionParser = expressionParser;
             _patternBuffer = new List<Pattern>();
             _cellBuffer = new List<Vector3Int>();
+            _conditionBuffer = new List<PatternCondition>();
         }
 
         public IDungeonEntityDatabase EntityDatabase { get; }
@@ -51,8 +53,11 @@ namespace FrozenExpress.Game.Dungeon
                     continue;
                 }
 
-                var conditions = pattern.Condition.Conditions;
                 var variables = expression.Context.variables;
+
+                _conditionBuffer.Clear();
+                var conditionsInsideExpression = pattern.Condition.Conditions.Where(c => variables.ContainsKey(c.Variable));
+                _conditionBuffer.AddRange(conditionsInsideExpression);
 
                 for (var j = 0; j < _cellBuffer.Count; j++)
                 {
@@ -62,9 +67,9 @@ namespace FrozenExpress.Game.Dungeon
                     {
                         var matrixSequence = pattern.MatrixSequences[k].Sequence;
                         
-                        for (var p = 0; p < conditions.Count; p++)
+                        for (var p = 0; p < _conditionBuffer.Count; p++)
                         {
-                            var condition = conditions[p];
+                            var condition = _conditionBuffer[p];
                             var direction = condition.Direction;
                             for (var q = 0; q < matrixSequence.Count; q++)
                             {
