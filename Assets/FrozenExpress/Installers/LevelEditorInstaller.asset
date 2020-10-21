@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee659e35e2998ea41884998c418e03ba, type: 3}
   m_Name: LevelEditorInstaller
   m_EditorClassIdentifier: 
-  _dungeonLayoutEditorCameraViewPrefab: {fileID: 8808470448058667696, guid: a52a885965e01bd4baf137e562a8deb1,
+  _cameraPrefab: {fileID: 8808470448058667696, guid: a52a885965e01bd4baf137e562a8deb1,
     type: 3}
-  _dungenLayoutEditorCameraControllerConfig:
+  _cameraConfig:
     _sensitivity: 5
   _drawingConfig:
     _diffuseMaterial: {fileID: 2100000, guid: 6162d14663af25f4cb7ef8d5aaf540d4, type: 2}

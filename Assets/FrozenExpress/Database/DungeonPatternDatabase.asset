@@ -86,3 +86,62 @@ MonoBehaviour:
         _direction: {x: 0, y: 0, z: 1}
       - _variable: C
         _direction: {x: 1, y: 0, z: 0}
+  - _name: Floor Corner 0
+    _entityId: floor_corner_0
+    _trigger: 1
+    _matrixSequences:
+    - _sequence: 00000000
+    - _sequence: 04000000
+    - _sequence: 05000000
+    - _sequence: 06000000
+    - _sequence: 02000000
+    - _sequence: 0200000004000000
+    - _sequence: 0200000005000000
+    - _sequence: 0200000006000000
+    _condition:
+      _expression: '!A'
+      _conditions:
+      - _variable: A
+        _direction: {x: 0, y: -1, z: 0}
+  - _name: Floor Corner 1
+    _entityId: floor_corner_1
+    _trigger: 1
+    _matrixSequences:
+    - _sequence: 00000000
+    - _sequence: 04000000
+    - _sequence: 05000000
+    - _sequence: 06000000
+    _condition:
+      _expression: (!A && (!B || !C || !D)) || (A && !E && !F)
+      _conditions:
+      - _variable: A
+        _direction: {x: 0, y: -1, z: 0}
+      - _variable: B
+        _direction: {x: 0, y: -1, z: 1}
+      - _variable: C
+        _direction: {x: 1, y: -1, z: 0}
+      - _variable: D
+        _direction: {x: 1, y: -1, z: 1}
+      - _variable: E
+        _direction: {x: 0, y: -1, z: 1}
+      - _variable: F
+        _direction: {x: 1, y: -1, z: 0}
+      - _variable: G
+        _direction: {x: 0, y: -1, z: 0}
+  - _name: Floor Corner 2
+    _entityId: floor_corner_2
+    _trigger: 1
+    _matrixSequences:
+    - _sequence: 00000000
+    - _sequence: 04000000
+    - _sequence: 05000000
+    - _sequence: 06000000
+    _condition:
+      _expression: '(!A && (!B || !C)) '
+      _conditions:
+      - _variable: A
+        _direction: {x: 1, y: 0, z: 1}
+      - _variable: B
+        _direction: {x: 1, y: -1, z: 0}
+      - _variable: C
+        _direction: {x: 0, y: -1, z: 1}
