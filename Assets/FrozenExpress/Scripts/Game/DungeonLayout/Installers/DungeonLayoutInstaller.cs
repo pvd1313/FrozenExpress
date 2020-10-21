@@ -1,5 +1,4 @@
-﻿using FrozenExpress.Game.DungeonLayout;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
 namespace FrozenExpress.Game.DungeonLayout

@@ -2,6 +2,7 @@
 {
     public enum EInitializationOrder
     {
-        Common = 1,
+        Database = 1,
+        Common = 2,
     }
 }

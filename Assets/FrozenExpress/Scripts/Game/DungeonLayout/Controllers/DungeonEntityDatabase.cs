@@ -1,19 +1,25 @@
-﻿using System.Collections.Generic;
+﻿using FrozenExpress.Game.GameCycle;
+using System.Collections.Generic;
 
 namespace FrozenExpress.Game.DungeonLayout
 {
     public class DungeonEntityDatabase : IDungeonEntityDatabase
     {
+        public EInitializationOrder InitializationOrder => EInitializationOrder.Database;
+
         private readonly DungeonEntityDatabaseAsset _asset;
         private readonly Dictionary<string, DungeonEntityConfig> _cash;
+        private readonly ALogger _log;
 
         private int _cashVersion;
 
-        public DungeonEntityDatabase(DungeonEntityDatabaseAsset asset)
+        public DungeonEntityDatabase(DungeonEntityDatabaseAsset asset,
+                                     ALogFactory logFactory)
         {
             _cash = new Dictionary<string, DungeonEntityConfig>();
             _asset = asset;
             _cashVersion = -1;
+            _log = logFactory.Create(this);
         }
 
         public DungeonEntityConfig GetEntity(string id)
@@ -22,7 +28,7 @@ namespace FrozenExpress.Game.DungeonLayout
 
             if (!_cash.TryGetValue(id, out var item))
             {
-                LogError($"Entity '{id}' was not found");
+                _log?.Error($"'{id}' was not found");
                 return null;
             }
 
@@ -45,17 +51,12 @@ namespace FrozenExpress.Game.DungeonLayout
                 var item = items[i];
                 if (_cash.ContainsKey(item.Id))
                 {
-                    LogError($"Duplicated item id '{item.Id}' at index {i}");
+                    _log?.Error($"Duplicated item id '{item.Id}' at index {i}");
                     continue;
                 }
 
                 _cash[item.Id] = item;
             }
-        }
-
-        private void LogError(string message)
-        {
-            UnityEngine.Debug.LogError($"{GetType().Name} :: {message}");
         }
     }
 }
