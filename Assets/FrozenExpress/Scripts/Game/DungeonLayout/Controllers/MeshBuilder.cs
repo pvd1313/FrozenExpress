@@ -45,10 +45,22 @@ namespace FrozenExpress.Game.DungeonLayout
             }
 
             mesh.GetTriangles(_triangleBuffer, 0);
-             
-            for (var i = 0; i < _triangleBuffer.Count; i++)
+
+            var det = matrix.determinant;
+
+            if (det > 0)
             {
-                _triangles.Add(vertexFirst + _triangleBuffer[i]);
+                for (var i = 0; i < _triangleBuffer.Count; i++)
+                {
+                    _triangles.Add(vertexFirst + _triangleBuffer[i]);
+                }
+            }
+            else
+            {
+                for (var i = _triangleBuffer.Count - 1; i >= 0; i--)
+                {
+                    _triangles.Add(vertexFirst + _triangleBuffer[i]);
+                }
             }
 
             mesh.GetNormals(_normalBuffer);
@@ -61,7 +73,7 @@ namespace FrozenExpress.Game.DungeonLayout
             mesh.GetTangents(_tangentBuffer);
             for (var i = 0; i < _tangentBuffer.Count; i++)
             {
-                var tangent = matrix.MultiplyPoint(_tangentBuffer[i]);
+                var tangent = matrix.MultiplyVector(_tangentBuffer[i]);
                 _tangents.Add(tangent);
             }
         }
