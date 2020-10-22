@@ -5,45 +5,11 @@ using UnityEngine;
 
 namespace FrozenExpress.Scripts.Editor.AssetFactory
 {
-    public partial class ScriptableObjectFactory : EditorWindow
+    public static class ScriptableObjectFactory
     {
         private const int MaxAssetNameGenerationIterations = 1024;
-
-        private string _outputPath;
-        private TypeScannerWindow _scannerWindow;
-
-        [MenuItem("Assets/Create Scriptable Object...")]
-        private static void InvokeWindow()
-        {
-            GetWindow(typeof(ScriptableObjectFactory), true);
-        }
-
-        private void OnEnable()
-        {
-            _outputPath = AssetDatabase.GetAssetPath(Selection.activeObject);
-            _scannerWindow = new TypeScannerWindow(typeof(ScriptableObject));
-        }
-
-        private void OnGUI()
-        {
-            EditorGUILayout.TextField("Output folder:", _outputPath);
-
-            if (!_scannerWindow.OnGUI(out var selectedType))
-            {
-                return;
-            }
-
-            var asset = CreateAsset(_outputPath, selectedType.Type);
-            if (asset == null)
-            {
-                return;
-            }
-
-            Selection.activeObject = asset;
-            Close();
-        }
-
-        private UnityEngine.Object CreateAsset(string directory, Type type)
+        
+        public static UnityEngine.Object CreateAsset(string directory, Type type)
         {
             var path = Path.Combine(directory, type.Name + ".asset");
 
@@ -76,7 +42,7 @@ namespace FrozenExpress.Scripts.Editor.AssetFactory
 
             return null;
         }
-
+        
         private static bool CheckAssetExists(string path)
         {
             return !string.IsNullOrEmpty(AssetDatabase.AssetPathToGUID(path));
