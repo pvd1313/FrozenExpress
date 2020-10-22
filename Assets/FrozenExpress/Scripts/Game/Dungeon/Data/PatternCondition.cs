@@ -1,7 +1,6 @@
-﻿using OneLine;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace FrozenExpress.Game.Dungeon
+namespace FrozenExpress.Scripts.Game.Dungeon.Data
 {
     [System.Serializable]
     public class PatternCondition

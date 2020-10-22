@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using FrozenExpress.Scripts.Game.LevelEditor.Interfaces;
+using UnityEngine;
 
-namespace FrozenExpress.Game.LevelEditor
+namespace FrozenExpress.Scripts.Game.LevelEditor.Views
 {
     public class DungeonLayoutEditorCameraView : MonoBehaviour, ILevelEditorCameraView
     {

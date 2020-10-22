@@ -1,9 +1,11 @@
-﻿using B83.LogicExpressionParser;
-using System;
+﻿using System;
 using System.Linq;
-using UnityEngine;
+using B83.LogicExpressionParser;
+using FrozenExpress.Scripts.Game.Dungeon.Data;
+using FrozenExpress.Scripts.Game.Dungeon.Interfaces;
+using FrozenExpress.Scripts.Game.Logging.Controllers;
 
-namespace FrozenExpress.Game.Dungeon
+namespace FrozenExpress.Scripts.Game.Dungeon.Controllers
 {
     public class DungeonPatternExpressionParser : IDungeonPatternExpressionParser
     {

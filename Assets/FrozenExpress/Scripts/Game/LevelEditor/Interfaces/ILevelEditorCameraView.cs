@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace FrozenExpress.Game.LevelEditor
+namespace FrozenExpress.Scripts.Game.LevelEditor.Interfaces
 {
     public interface ILevelEditorCameraView
     {

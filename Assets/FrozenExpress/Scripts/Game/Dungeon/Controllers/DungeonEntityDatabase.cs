@@ -1,7 +1,11 @@
-﻿using FrozenExpress.Game.GameCycle;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using FrozenExpress.Scripts.Game.Dungeon.Assets;
+using FrozenExpress.Scripts.Game.Dungeon.Data;
+using FrozenExpress.Scripts.Game.Dungeon.Interfaces;
+using FrozenExpress.Scripts.Game.GameCycle.Enums;
+using FrozenExpress.Scripts.Game.Logging.Controllers;
 
-namespace FrozenExpress.Game.Dungeon
+namespace FrozenExpress.Scripts.Game.Dungeon.Controllers
 {
     public class DungeonEntityDatabase : IDungeonEntityDatabase
     {

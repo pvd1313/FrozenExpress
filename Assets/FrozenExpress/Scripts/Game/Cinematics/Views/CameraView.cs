@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using FrozenExpress.Scripts.Game.Cinematics.Interfaces;
+using UnityEngine;
 
-namespace FrozenExpress.Game.Cinematics
+namespace FrozenExpress.Scripts.Game.Cinematics.Views
 {
     public class CameraView : MonoBehaviour, ICameraView
     {

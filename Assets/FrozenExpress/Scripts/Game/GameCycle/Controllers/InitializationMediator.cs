@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using FrozenExpress.Scripts.Game.GameCycle.Interfaces;
 
-namespace FrozenExpress.Game.GameCycle
+namespace FrozenExpress.Scripts.Game.GameCycle.Controllers
 {
     public class InitializationMediator : Zenject.IInitializable
     {

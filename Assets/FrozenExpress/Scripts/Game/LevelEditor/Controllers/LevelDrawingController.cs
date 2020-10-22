@@ -1,7 +1,12 @@
-﻿using FrozenExpress.Game.Dungeon;
+﻿using FrozenExpress.Scripts.Game.Dungeon.Interfaces;
+using FrozenExpress.Scripts.Game.GameCycle.Data;
+using FrozenExpress.Scripts.Game.GameCycle.Enums;
+using FrozenExpress.Scripts.Game.GameCycle.Interfaces;
+using FrozenExpress.Scripts.Game.LevelEditor.Data;
+using FrozenExpress.Scripts.Game.LevelEditor.Interfaces;
 using UnityEngine;
 
-namespace FrozenExpress.Game.LevelEditor
+namespace FrozenExpress.Scripts.Game.LevelEditor.Controllers
 {
     public class LevelDrawingController : IInitializable, ITerminatable, IFrameUpdatable
     {

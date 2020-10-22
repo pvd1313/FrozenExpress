@@ -1,8 +1,7 @@
 ﻿using System;
-
 using Debug = UnityEngine.Debug;
 
-namespace FrozenExpress.Game.Logging
+namespace FrozenExpress.Scripts.Game.Logging.Controllers
 {
     public class UnityLogger : ALogger
     {

@@ -1,6 +1,7 @@
 ﻿using B83.LogicExpressionParser;
+using FrozenExpress.Scripts.Game.Dungeon.Data;
 
-namespace FrozenExpress.Game.Dungeon
+namespace FrozenExpress.Scripts.Game.Dungeon.Interfaces
 {
     public interface IDungeonPatternExpressionParser
     {

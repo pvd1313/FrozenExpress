@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace FrozenExpress.Game
+namespace FrozenExpress.Scripts.Game.Logging.Controllers
 {
     public abstract class ALogger
     {

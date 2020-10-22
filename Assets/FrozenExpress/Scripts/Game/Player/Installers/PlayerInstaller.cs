@@ -1,6 +1,10 @@
-﻿using UnityEngine;
+﻿using FrozenExpress.Scripts.Game.DiFramework.Installers;
+using FrozenExpress.Scripts.Game.Player.Controllers;
+using FrozenExpress.Scripts.Game.Player.Data;
+using FrozenExpress.Scripts.Game.Player.Views;
+using UnityEngine;
 
-namespace FrozenExpress.Game.Player
+namespace FrozenExpress.Scripts.Game.Player.Installers
 {
     public class PlayerInstaller : AModuleInstaller
     {

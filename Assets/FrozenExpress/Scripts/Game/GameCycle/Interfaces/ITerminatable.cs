@@ -1,4 +1,4 @@
-﻿namespace FrozenExpress.Game
+﻿namespace FrozenExpress.Scripts.Game.GameCycle.Interfaces
 {
     public interface ITerminatable
     {

@@ -2,7 +2,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace FrozenExpress.DiFramework
+namespace FrozenExpress.Scripts.Game.DiFramework.Installers
 {
     public class ModuleGroupInstaller : Zenject.ScriptableObjectInstaller
     {

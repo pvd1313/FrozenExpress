@@ -1,4 +1,7 @@
-﻿namespace FrozenExpress.Game.GameCycle
+﻿using FrozenExpress.Scripts.Game.GameCycle.Controllers;
+using FrozenExpress.Scripts.Game.GameCycle.Views;
+
+namespace FrozenExpress.Scripts.Game.GameCycle.Installers
 {
     public class GameCycleInstaller : Zenject.ScriptableObjectInstaller
     {

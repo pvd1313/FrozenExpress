@@ -1,4 +1,6 @@
-﻿namespace FrozenExpress.Game.Logging
+﻿using FrozenExpress.Scripts.Game.Logging.Controllers;
+
+namespace FrozenExpress.Scripts.Game.Logging.Installers
 {
     public class LoggingInstaller : Zenject.ScriptableObjectInstaller
     {

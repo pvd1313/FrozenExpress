@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using FrozenExpress.Scripts.Game.Dungeon.Data;
+using UnityEngine;
 
-namespace FrozenExpress.Game.Dungeon
+namespace FrozenExpress.Scripts.Game.Dungeon.Interfaces
 {
     public interface IDungeonMeshBuilder
     {

@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using FrozenExpress.Scripts.Game.Dungeon.Data;
+using FrozenExpress.Scripts.Game.Dungeon.Interfaces;
 using UnityEngine;
 
-namespace FrozenExpress.Game.Dungeon
+namespace FrozenExpress.Scripts.Game.Dungeon.Controllers
 {
     public class DungeonMap : IDungeonMap
     {

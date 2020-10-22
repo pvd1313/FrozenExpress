@@ -1,6 +1,11 @@
-﻿using UnityEngine;
+﻿using FrozenExpress.Scripts.Game.DiFramework.Installers;
+using FrozenExpress.Scripts.Game.LevelEditor.Controllers;
+using FrozenExpress.Scripts.Game.LevelEditor.Data;
+using FrozenExpress.Scripts.Game.LevelEditor.Models;
+using FrozenExpress.Scripts.Game.LevelEditor.Views;
+using UnityEngine;
 
-namespace FrozenExpress.Game.LevelEditor
+namespace FrozenExpress.Scripts.Game.LevelEditor.Installers
 {
     public class LevelEditorInstaller : AModuleInstaller
     {

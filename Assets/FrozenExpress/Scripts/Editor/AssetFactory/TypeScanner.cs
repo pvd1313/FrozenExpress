@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace FrozenExpress.Editor.ScriptableObjectCreation
+namespace FrozenExpress.Scripts.Editor.AssetFactory
 {
     public static class TypeScanner
     {

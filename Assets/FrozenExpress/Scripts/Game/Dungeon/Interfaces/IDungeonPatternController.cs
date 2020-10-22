@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using FrozenExpress.Scripts.Game.Dungeon.Data;
 
-namespace FrozenExpress.Game.Dungeon
+namespace FrozenExpress.Scripts.Game.Dungeon.Interfaces
 {
     public interface IDungeonPatternController
     {

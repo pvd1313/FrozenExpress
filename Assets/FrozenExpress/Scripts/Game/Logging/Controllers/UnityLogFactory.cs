@@ -1,4 +1,4 @@
-﻿namespace FrozenExpress.Game.Logging
+﻿namespace FrozenExpress.Scripts.Game.Logging.Controllers
 {
     public class UnityLogFactory : ALogFactory
     {

@@ -1,8 +1,9 @@
-﻿using OneLine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using FrozenExpress.Scripts.Game.Dungeon.Enums;
+using OneLine;
 using UnityEngine;
 
-namespace FrozenExpress.Game.Dungeon
+namespace FrozenExpress.Scripts.Game.Dungeon.Data
 {
     [System.Serializable]
     public class Pattern

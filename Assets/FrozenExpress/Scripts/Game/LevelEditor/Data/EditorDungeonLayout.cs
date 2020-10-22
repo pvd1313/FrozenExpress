@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
-using FrozenExpress.Game.Dungeon;
+using FrozenExpress.Scripts.Game.Dungeon.Data;
+using FrozenExpress.Scripts.Game.LevelEditor.Interfaces;
 
-namespace FrozenExpress.Game.LevelEditor
+namespace FrozenExpress.Scripts.Game.LevelEditor.Data
 {
     public class EditorDungeonLayout : DungeonLayout
     {

@@ -1,7 +1,11 @@
-﻿using FrozenExpress.Game.GameCycle;
+﻿using FrozenExpress.Scripts.Game.GameCycle.Data;
+using FrozenExpress.Scripts.Game.GameCycle.Enums;
+using FrozenExpress.Scripts.Game.GameCycle.Interfaces;
+using FrozenExpress.Scripts.Game.Player.Data;
+using FrozenExpress.Scripts.Game.Player.Interfaces;
 using UnityEngine;
 
-namespace FrozenExpress.Game.Player
+namespace FrozenExpress.Scripts.Game.Player.Controllers
 {
     public class PlayerController : IPlayerController, IInitializable, IFrameUpdatable
     {

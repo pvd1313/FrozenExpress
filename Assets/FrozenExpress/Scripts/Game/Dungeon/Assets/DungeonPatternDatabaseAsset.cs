@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
+using FrozenExpress.Scripts.Game.Dungeon.Data;
 using UnityEngine;
 
-namespace FrozenExpress.Game.Dungeon
+namespace FrozenExpress.Scripts.Game.Dungeon.Assets
 {
     public class DungeonPatternDatabaseAsset : ScriptableObject
     {

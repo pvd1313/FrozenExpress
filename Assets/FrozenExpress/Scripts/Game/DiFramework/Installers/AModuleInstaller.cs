@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace FrozenExpress
+namespace FrozenExpress.Scripts.Game.DiFramework.Installers
 {
     public abstract class AModuleInstaller : Zenject.ScriptableObjectInstaller
     {
