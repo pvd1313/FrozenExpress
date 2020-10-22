@@ -1,66 +1,46 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
 
 namespace FrozenExpress.Editor.ScriptableObjectCreation
 {
-    public partial class ScriptableObjectCreationWindow : EditorWindow
+    public partial class ScriptableObjectFactory : EditorWindow
     {
-        private const int MaxAssetNameGenerationIterations = 1000;
+        private const int MaxAssetNameGenerationIterations = 1024;
 
         private string _outputPath;
-        private string _filter;
-        private bool _filterForceFocusedOnStart;
-        private List<TypeInfo> _filteredAssets;
-        private Vector2 _scrollPos;
+        private TypeScannerWindow _scannerWindow;
 
         [MenuItem("Assets/Create Scriptable Object...")]
         private static void InvokeWindow()
         {
-            GetWindow(typeof(ScriptableObjectCreationWindow), true);
+            GetWindow(typeof(ScriptableObjectFactory), true);
         }
 
         private void OnEnable()
         {
             _outputPath = AssetDatabase.GetAssetPath(Selection.activeObject);
-            _filteredAssets = new List<TypeInfo>();
-            _filter = string.Empty;
+            _scannerWindow = new TypeScannerWindow(typeof(ScriptableObject));
         }
 
         private void OnGUI()
         {
             EditorGUILayout.TextField("Output folder:", _outputPath);
 
-            GUI.SetNextControlName(nameof(_filter));
-            _filter = EditorGUILayout.TextField("Search: ", _filter);
-            TypeScanner.SearchTypes(typeof(ScriptableObject), _filter, _filteredAssets);
-
-            _scrollPos = EditorGUILayout.BeginScrollView(_scrollPos);
-            foreach (var item in _filteredAssets)
+            if (!_scannerWindow.OnGUI(out var selectedType))
             {
-                GUILayout.BeginHorizontal();
-                if (GUILayout.Button("+", GUILayout.Width(20)))
-                {
-                    var asset = CreateAsset(_outputPath, item.Type);
-                    if (asset != null)
-                    {
-                        Selection.activeObject = asset;
-                        Close();
-                    }
-                }
-
-                EditorGUILayout.LabelField(item.NameShort);
-                GUILayout.EndHorizontal();
+                return;
             }
-            EditorGUILayout.EndScrollView();
 
-            if (!_filterForceFocusedOnStart)
+            var asset = CreateAsset(_outputPath, selectedType.Type);
+            if (asset == null)
             {
-                _filterForceFocusedOnStart = true;
-                GUI.FocusControl(nameof(_filter));
+                return;
             }
+
+            Selection.activeObject = asset;
+            Close();
         }
 
         private UnityEngine.Object CreateAsset(string directory, Type type)
@@ -97,7 +77,7 @@ namespace FrozenExpress.Editor.ScriptableObjectCreation
             return null;
         }
 
-        private bool CheckAssetExists(string path)
+        private static bool CheckAssetExists(string path)
         {
             return !string.IsNullOrEmpty(AssetDatabase.AssetPathToGUID(path));
         }
