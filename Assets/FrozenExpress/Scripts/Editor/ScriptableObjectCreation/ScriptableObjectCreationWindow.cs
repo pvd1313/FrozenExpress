@@ -13,7 +13,7 @@ namespace FrozenExpress.Editor.ScriptableObjectCreation
         private string _outputPath;
         private string _filter;
         private bool _filterForceFocusedOnStart;
-        private List<TypeData> _filteredAssets;
+        private List<TypeInfo> _filteredAssets;
         private Vector2 _scrollPos;
 
         [MenuItem("Assets/Create Scriptable Object...")]
@@ -25,7 +25,7 @@ namespace FrozenExpress.Editor.ScriptableObjectCreation
         private void OnEnable()
         {
             _outputPath = AssetDatabase.GetAssetPath(Selection.activeObject);
-            _filteredAssets = new List<TypeData>();
+            _filteredAssets = new List<TypeInfo>();
             _filter = string.Empty;
         }
 
@@ -35,7 +35,7 @@ namespace FrozenExpress.Editor.ScriptableObjectCreation
 
             GUI.SetNextControlName(nameof(_filter));
             _filter = EditorGUILayout.TextField("Search: ", _filter);
-            TypeScanner.SearchAssets(_filter, _filteredAssets);
+            TypeScanner.SearchTypes(typeof(ScriptableObject), _filter, _filteredAssets);
 
             _scrollPos = EditorGUILayout.BeginScrollView(_scrollPos);
             foreach (var item in _filteredAssets)
