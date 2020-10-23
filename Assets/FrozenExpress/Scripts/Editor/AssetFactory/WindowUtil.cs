@@ -9,18 +9,17 @@ namespace FrozenExpress.Scripts.Editor.AssetFactory
         public const int WindowWidth = 200;
         private const int WindowHeight = 300;
         
-        private static HashSet<EditorWindow> _nonInitializedWindows;
+        private static readonly HashSet<EditorWindow> NonInitializedWindows;
 
         static WindowUtil()
         {
-            _nonInitializedWindows = new HashSet<EditorWindow>();
+            NonInitializedWindows = new HashSet<EditorWindow>();
         }
         
-        public static void OpenToolWindow<T>(string title) where T : EditorWindow
+        public static void OpenToolWindow<T>() where T : EditorWindow
         {
             var window = ScriptableObject.CreateInstance<T>();
-            _nonInitializedWindows.Add(window);
-            window.titleContent = new GUIContent(title);
+            NonInitializedWindows.Add(window);
             window.ShowPopup();
         }
 
@@ -35,7 +34,7 @@ namespace FrozenExpress.Scripts.Editor.AssetFactory
                 return;
             }
 
-            if (_nonInitializedWindows.Remove(window))
+            if (NonInitializedWindows.Remove(window))
             {
                 var mPos = currentEvent.mousePosition;
                 window.position = new Rect(mPos.x - widthHalf, mPos.y - heightHalf, WindowWidth, WindowHeight);

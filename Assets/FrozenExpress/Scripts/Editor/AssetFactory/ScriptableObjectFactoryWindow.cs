@@ -3,16 +3,15 @@ using UnityEngine;
 
 namespace FrozenExpress.Scripts.Editor.AssetFactory
 {
-    public partial class ScriptableObjectFactoryWindow : EditorWindow
+    public class ScriptableObjectFactoryWindow : EditorWindow
     {
         private string _outputPath;
         private TypeScannerWindow _scannerWindow;
-        private bool _initializedPosition;
 
-        [MenuItem("Assets/Create ScriptableObject...")]
+        [MenuItem("Assets/Create asset...")]
         private static void InvokeWindow()
         {
-            WindowUtil.OpenToolWindow<ScriptableObjectFactoryWindow>("Create scriptable object");
+            WindowUtil.OpenToolWindow<ScriptableObjectFactoryWindow>();
         }
 
         private void OnEnable()
