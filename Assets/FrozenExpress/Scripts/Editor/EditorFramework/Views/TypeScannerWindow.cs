@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using FrozenExpress.Scripts.Editor.EditorFramework.Data;
+using FrozenExpress.Scripts.Editor.EditorFramework.Tools;
+using FrozenExpress.Scripts.Editor.GUIStyles;
 using UnityEditor;
 using UnityEngine;
-using Zenject;
 
-namespace FrozenExpress.Scripts.Editor.AssetFactory
+namespace FrozenExpress.Scripts.Editor.EditorFramework.Views
 {
     public class TypeScannerWindow
     {
         private const string FilterFocusControlName = "FilterFocusControlName";
         
+        private readonly SelectableListView<TypeInfo> _listView;
         private readonly Type _targetType;
         private readonly List<TypeInfo> _filteredTypes;
-        private readonly GUIContent _searchIcon;
 
         private bool _focusedOnce;
         private string _filter;
@@ -22,34 +24,26 @@ namespace FrozenExpress.Scripts.Editor.AssetFactory
         {
             _targetType = targetType;
             _filteredTypes = new List<TypeInfo>();
+            _listView = new SelectableListView<TypeInfo>(t => t.NameShort);
             _filter = string.Empty;
-            _searchIcon = EditorGUIUtility.IconContent("d_Search Icon");
         }
 
         public bool OnGUI(out TypeInfo selectedType)
         {
-            selectedType = default(TypeInfo);
+            selectedType = default;
 
-            var searchTextStyle = new GUIStyle("SearchTextField");
+            var searchTextStyle = new GUIStyle(GUIStylesConfig.SearchField);
             GUI.SetNextControlName(FilterFocusControlName);
             _filter = EditorGUILayout.TextField(_filter, searchTextStyle);
 
             TypeScanner.SearchTypes(_targetType, _filter, _filteredTypes);
 
-            var selectedAny = false;
-            _scrollPos = EditorGUILayout.BeginScrollView(_scrollPos, GUILayout.ExpandWidth(false));
+            var selectedIndex = _listView.OnGUI(-1, _filteredTypes);
+            if (selectedIndex >= 0)
             {
-                var buttonStyle = GUI.skin.textField;
-                foreach (var type in _filteredTypes)
-                {
-                    if (GUILayout.Button(type.NameShort, buttonStyle, GUILayout.Width(WindowUtil.WindowWidth - 19)))
-                    {
-                        selectedAny = true;
-                        selectedType = type;
-                    }
-                }
-            } 
-            EditorGUILayout.EndScrollView();
+                selectedType = _filteredTypes[selectedIndex];
+                return true;
+            }
 
             if (!_focusedOnce)
             {
@@ -57,7 +51,7 @@ namespace FrozenExpress.Scripts.Editor.AssetFactory
                 GUI.FocusControl(FilterFocusControlName);
             }
             
-            return selectedAny;
+            return false;
         }
     }
 }

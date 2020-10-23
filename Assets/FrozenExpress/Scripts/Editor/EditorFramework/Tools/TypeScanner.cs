@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using FrozenExpress.Scripts.Editor.EditorFramework.Data;
 using UnityEngine;
 
-namespace FrozenExpress.Scripts.Editor.AssetFactory
+namespace FrozenExpress.Scripts.Editor.EditorFramework.Tools
 {
     public static class TypeScanner
     {

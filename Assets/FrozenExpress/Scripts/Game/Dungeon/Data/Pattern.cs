@@ -14,6 +14,11 @@ namespace FrozenExpress.Scripts.Game.Dungeon.Data
         public IReadOnlyList<PatternMatrixSequence> MatrixSequences => _matrixSequences;
         public PatternConditionExpression Condition => _condition;
 
+        public override string ToString()
+        {
+            return Name;
+        }
+
         [SerializeField] private string _name;
         [SerializeField] private string _entityId;
         [SerializeField] private EPatternTrigger _trigger;

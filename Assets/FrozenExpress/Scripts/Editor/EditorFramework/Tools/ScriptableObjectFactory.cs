@@ -3,7 +3,7 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-namespace FrozenExpress.Scripts.Editor.AssetFactory
+namespace FrozenExpress.Scripts.Editor.EditorFramework.Tools
 {
     public static class ScriptableObjectFactory
     {

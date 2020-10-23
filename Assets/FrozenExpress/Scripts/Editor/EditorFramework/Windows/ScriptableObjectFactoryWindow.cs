@@ -1,7 +1,9 @@
-﻿using UnityEditor;
+﻿using FrozenExpress.Scripts.Editor.EditorFramework.Tools;
+using FrozenExpress.Scripts.Editor.EditorFramework.Views;
+using UnityEditor;
 using UnityEngine;
 
-namespace FrozenExpress.Scripts.Editor.AssetFactory
+namespace FrozenExpress.Scripts.Editor.EditorFramework.Windows
 {
     public class ScriptableObjectFactoryWindow : EditorWindow
     {
