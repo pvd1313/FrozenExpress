@@ -7,8 +7,10 @@ namespace FrozenExpress.Scripts.Editor.EditorFramework.Windows
 {
     public class ScriptableObjectFactoryWindow : EditorWindow
     {
+        private readonly TypeScannerWindow _scannerWindow;
+        private readonly RepaintEventsView _repaintEvents;
+        
         private string _outputPath;
-        private TypeScannerWindow _scannerWindow;
 
         [MenuItem("Assets/Create asset...")]
         private static void InvokeWindow()
@@ -16,14 +18,21 @@ namespace FrozenExpress.Scripts.Editor.EditorFramework.Windows
             WindowUtil.OpenToolWindow<ScriptableObjectFactoryWindow>();
         }
 
+        public ScriptableObjectFactoryWindow()
+        {
+            _scannerWindow = new TypeScannerWindow(typeof(ScriptableObject));
+            _repaintEvents = new RepaintEventsView(this);
+        }
+
         private void OnEnable()
         {
             _outputPath = AssetDatabase.GetAssetPath(Selection.activeObject);
-            _scannerWindow = new TypeScannerWindow(typeof(ScriptableObject));
         }
 
         private void OnGUI()
         {
+            _repaintEvents.OnGUI();
+            
             WindowUtil.InitializeWindowPosition(this);
 
             if (!_scannerWindow.OnGUI(out var selectedType))

@@ -8,20 +8,25 @@ namespace FrozenExpress.Scripts.Editor.EditorFramework.Windows
 {
     public class DatabaseWindow : EditorWindow
     {
+        private readonly List<object> _items;
+        private readonly SelectableListView<object> _listView;
+        private readonly RepaintEventsView _repaintEvents;
+
         private ScriptableObject _database;
         private Vector2 _scrollPosition;
-        private List<object> _items;
         private int _selectedIndex;
-        private SelectableListView<object> _listView;
 
-        private void OnEnable()
+        public DatabaseWindow()
         {
             _items = new List<object>();
             _listView = new SelectableListView<object>(o => o.ToString(), GUILayout.Height(300));
+            _repaintEvents = new RepaintEventsView(this);
         }
 
-        private void OnGUI()
+        protected void OnGUI()
         {
+            _repaintEvents.OnGUI();
+            
             _database = EditorGUILayout.ObjectField("Database", _database, 
                 typeof(ScriptableObject), false) as ScriptableObject;
 

@@ -2,6 +2,7 @@
 using System.Linq;
 using FrozenExpress.Scripts.Editor.EditorFramework.Tools;
 using FrozenExpress.Scripts.Editor.EditorFramework.Views;
+using ICSharpCode.NRefactory.Ast;
 using UnityEditor;
 using UnityEngine;
 
@@ -11,13 +12,16 @@ namespace FrozenExpress.Scripts.Editor.EditorFramework.Windows
     {
         private static readonly List<GUIStyle> Buffer = new List<GUIStyle>();
         
+        private readonly SelectableListView<GUIStyle> _listView;
+        private readonly RepaintEventsView _repaintEvents;
+        
         private List<GUIStyle> _knownStyles;
         private int _selectedIndex;
-        private SelectableListView<GUIStyle> _listView;
 
         public GUIStyleScannerWindow()
         {
             _listView = new SelectableListView<GUIStyle>(s => s.name, GUILayout.Height(300));
+            _repaintEvents = new RepaintEventsView(this);
         }
         
         private void OnEnable()
@@ -27,6 +31,8 @@ namespace FrozenExpress.Scripts.Editor.EditorFramework.Windows
 
         private void OnGUI()
         {
+            _repaintEvents.OnGUI();
+            
             if (_knownStyles == null)
             {
                 _knownStyles = Buffer.Where(s => !string.IsNullOrWhiteSpace(s.name)).ToList();

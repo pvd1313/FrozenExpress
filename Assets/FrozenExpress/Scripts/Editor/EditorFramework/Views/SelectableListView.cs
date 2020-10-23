@@ -26,6 +26,22 @@ namespace FrozenExpress.Scripts.Editor.EditorFramework.Views
         public int OnGUI(int selectedIndex, List<T> items)
         {
             Initialize();
+
+            var curEvent = Event.current;
+            if (curEvent != null && curEvent.type == EventType.KeyDown)
+            {
+                if (curEvent.keyCode == KeyCode.UpArrow && selectedIndex > 0)
+                {
+                    selectedIndex--;
+                }
+
+                if (curEvent.keyCode == KeyCode.DownArrow)
+                {
+                    selectedIndex++;
+                }
+            }
+
+            selectedIndex = Mathf.Min(selectedIndex, items.Count - 1);
             
             _scrollPos = EditorGUILayout.BeginScrollView(_scrollPos, _scrollViewLayoutOptions);
             {
@@ -41,7 +57,7 @@ namespace FrozenExpress.Scripts.Editor.EditorFramework.Views
 
             EditorGUILayout.EndScrollView();
 
-            return Mathf.Min(selectedIndex, items.Count - 1);;
+            return selectedIndex;
         }
 
         private void Initialize()

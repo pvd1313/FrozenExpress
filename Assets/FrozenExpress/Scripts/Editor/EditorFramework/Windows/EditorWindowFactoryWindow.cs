@@ -6,7 +6,8 @@ namespace FrozenExpress.Scripts.Editor.EditorFramework.Windows
 {
     public class EditorWindowFactoryWindow : EditorWindow
     {
-        private TypeScannerWindow _scannerWindow;
+        private readonly TypeScannerWindow _scannerWindow;
+        private readonly RepaintEventsView _repaintEvents;
 
         [MenuItem("Window/Open...", priority = -1)]
         private static void OpenWindow()
@@ -14,13 +15,16 @@ namespace FrozenExpress.Scripts.Editor.EditorFramework.Windows
             WindowUtil.OpenToolWindow<EditorWindowFactoryWindow>();
         }
 
-        private void OnEnable()
+        public EditorWindowFactoryWindow()
         {
             _scannerWindow = new TypeScannerWindow(typeof(EditorWindow));
+            _repaintEvents = new RepaintEventsView(this);
         }
 
         private void OnGUI()
         {
+            _repaintEvents.OnGUI();
+            
             WindowUtil.InitializeWindowPosition(this);
 
             if (!_scannerWindow.OnGUI(out var selectedType))
