@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using FrozenExpress.Scripts.Editor.EditorFramework.Data;
 using FrozenExpress.Scripts.Editor.EditorFramework.Interfaces;
 using FrozenExpress.Scripts.Editor.EditorFramework.Tools;
 using FrozenExpress.Scripts.Editor.EditorFramework.Views;
@@ -15,21 +16,25 @@ namespace FrozenExpress.Scripts.Editor.EditorFramework.Windows
     public class ScriptableObjectDatabaseWindow : EditorWindow
     {
         private readonly List<SerializedProperty> _items;
-        private readonly SelectableListView<SerializedProperty> _listView;
+        private readonly SelectableListView<SerializedProperty> _itemListView;
+        private readonly TabListView<IDatabaseTab> _tabListView;
         private readonly RepaintEventsView _repaintEvents;
         private readonly List<IDatabaseTab> _tabs;
         private readonly List<Type> _tabTypeBuffer;
         
         private ScriptableObject _database;
         private SerializedObject _databaseSerialized;
-        private int _selectedIndex;
+        private int _selectedItemIndex;
+        private int _selectedTabIndex;
+        private Vector2 _itemRawScrollPos;
 
         public ScriptableObjectDatabaseWindow()
         {
             _tabTypeBuffer = new List<Type>();
             _tabs = new List<IDatabaseTab>();
             _items = new List<SerializedProperty>();
-            _listView = new SelectableListView<SerializedProperty>(GetPropertyName, GUILayout.Height(300));
+            _itemListView = new SelectableListView<SerializedProperty>(GetPropertyName, GUILayout.Height(200));
+            _tabListView = new TabListView<IDatabaseTab>(GetTabName);
             _repaintEvents = new RepaintEventsView(this);
         }
 
@@ -72,19 +77,24 @@ namespace FrozenExpress.Scripts.Editor.EditorFramework.Windows
                 _items.Add(listProperty.GetArrayElementAtIndex(i));
             }
 
-            _selectedIndex = _listView.OnGUI(_selectedIndex, _items);
-            if (_selectedIndex < 0)
+            _selectedItemIndex = _itemListView.OnGUI(_selectedItemIndex, _items);
+            if (_selectedItemIndex < 0)
             {
                 return;    
             }
+            
+            var separatorStyle = new GUIStyle(GUIStylesConfig.HorizontalSeparator);
+            EditorGUILayout.LabelField("", separatorStyle);
 
-            var selectedItem = listProperty.GetArrayElementAtIndex(_selectedIndex);
+            var selectedItem = listProperty.GetArrayElementAtIndex(_selectedItemIndex);
             
             var wasExpanded = selectedItem.isExpanded;
             selectedItem.isExpanded = true;
             
             UnityEditor.EditorGUI.BeginChangeCheck();
+            _itemRawScrollPos = EditorGUILayout.BeginScrollView(_itemRawScrollPos, GUILayout.Height(300));
             EditorGUILayout.PropertyField(selectedItem);
+            EditorGUILayout.EndScrollView();
             var anyChanges = UnityEditor.EditorGUI.EndChangeCheck();
             
             if (anyChanges)
@@ -94,16 +104,29 @@ namespace FrozenExpress.Scripts.Editor.EditorFramework.Windows
 
             selectedItem.isExpanded = wasExpanded;
 
-            if (_tabs.Count > 0)
+            EditorGUILayout.LabelField("", separatorStyle);
+
+            EditorGUILayout.BeginHorizontal(GUILayout.Height(30));
+            _selectedTabIndex = _tabListView.OnGUI(_selectedTabIndex, _tabs);
+            EditorGUILayout.EndHorizontal();
+
+            if (_selectedTabIndex <= 0)
             {
-                var list = (IList) databaseInfo.ListField.GetValue(_database);
-                _tabs[0].OnGUI(list[_selectedIndex]);
+                return;
             }
+
+            var list = (IList) databaseInfo.ListField.GetValue(_database);
+            _tabs[_selectedTabIndex].OnGadgetGUI(list[_selectedItemIndex]);
         }
 
         private static string GetPropertyName(SerializedProperty property)
         {
             return property.displayName;
+        }
+
+        private static string GetTabName(IDatabaseTab tab)
+        {
+            return tab.GetType().Name;
         }
     }
 }

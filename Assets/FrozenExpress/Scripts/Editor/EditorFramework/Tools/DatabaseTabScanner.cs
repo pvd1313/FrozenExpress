@@ -13,6 +13,8 @@ namespace FrozenExpress.Scripts.Editor.EditorFramework.Tools
 
         static DatabaseTabScanner()
         {
+            var g = 3;
+            
             var tabEditorType = typeof(IDatabaseTab);
             
             var tabs = AppDomain.CurrentDomain.GetAssemblies()
@@ -29,7 +31,7 @@ namespace FrozenExpress.Scripts.Editor.EditorFramework.Tools
                     var tabInstance = (IDatabaseTab) Activator.CreateInstance(tabType);
                     var targetType = tabInstance.TargetType;
                     
-                    if (!Cash.TryGetValue(tabType, out var tabList))
+                    if (!Cash.TryGetValue(targetType, out var tabList))
                     {
                         tabList = new List<Type>();
                         Cash[targetType] = tabList;

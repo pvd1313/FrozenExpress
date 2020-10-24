@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using FrozenExpress.Scripts.Editor.GUIStyles;
+using FrozenExpress.Scripts.Editor.EditorFramework.Data;
 using UnityEditor;
 using UnityEngine;
 
@@ -68,8 +68,8 @@ namespace FrozenExpress.Scripts.Editor.EditorFramework.Views
             }
 
             _initialized = true;
-            _itemStyle = new GUIStyle( GUIStylesConfig.ListItem);
-            _selectedItemStyle = new GUIStyle(GUIStylesConfig.SelectedListItem);
+            _itemStyle = new GUIStyle( GUIStylesConfig.ListItemNormal);
+            _selectedItemStyle = new GUIStyle(GUIStylesConfig.ListItemSelected);
         }
     }
 }

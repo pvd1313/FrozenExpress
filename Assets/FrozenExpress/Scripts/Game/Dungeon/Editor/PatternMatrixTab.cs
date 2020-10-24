@@ -5,15 +5,15 @@ using UnityEditor;
 
 namespace FrozenExpress.Scripts.Game.Dungeon.Editor
 {
-    public class PatternDatabaseTab : IDatabaseTab
+    public class PatternMatrixTab : IDatabaseTab
     {
         public Type TargetType => typeof(Pattern);
-        
-        public void OnGUI(object data)
+
+        public void OnGadgetGUI(object data)
         {
             if (data is Pattern pattern)
             {
-                EditorGUILayout.TextField("Hello, from tab!");
+                EditorGUILayout.TextField("Name?.lol)))", pattern.Name);
             }
         }
     }
