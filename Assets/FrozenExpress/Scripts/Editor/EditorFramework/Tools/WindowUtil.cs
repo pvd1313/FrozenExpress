@@ -6,7 +6,7 @@ namespace FrozenExpress.Scripts.Editor.EditorFramework.Tools
 {
     public static class WindowUtil
     {
-        public const int WindowWidth = 200;
+        private const int WindowWidth = 200;
         private const int WindowHeight = 300;
         
         private static readonly HashSet<EditorWindow> NonInitializedWindows;

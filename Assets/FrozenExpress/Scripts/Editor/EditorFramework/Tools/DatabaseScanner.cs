@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using FrozenExpress.Scripts.Editor.EditorFramework.Data;
-using FrozenExpress.Scripts.Game.Dungeon.Data;
-using ModestTree;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -49,9 +47,7 @@ namespace FrozenExpress.Scripts.Editor.EditorFramework.Tools
             
             DatabaseTypeInfo result;
             result.IsDatabase = false;
-            result.ListItemType = null;
             result.ListName = null;
-            result.ListField = null;
 
             var databaseSerialized = new SerializedObject(database);
 
@@ -90,8 +86,6 @@ namespace FrozenExpress.Scripts.Editor.EditorFramework.Tools
             
             result.IsDatabase = true;
             result.ListName = property.name;
-            result.ListItemType = genericArguments[0];
-            result.ListField = serializableFields[0].field;
 
             return result;
         }
