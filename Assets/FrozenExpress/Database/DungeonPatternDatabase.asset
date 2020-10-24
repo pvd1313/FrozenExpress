@@ -111,23 +111,23 @@ MonoBehaviour:
     - _sequence: 04000000
     - _sequence: 05000000
     - _sequence: 06000000
+    - _sequence: 02000000
+    - _sequence: 0200000004000000
+    - _sequence: 0200000005000000
+    - _sequence: 0200000006000000
     _condition:
-      _expression: (!A && (!B || !C || !D)) || (A && !E && !F)
+      _expression: (!d && (!df || !dr || !dfr)) || (d && !df && !dr)
       _conditions:
-      - _variable: A
+      - _variable: d
         _direction: {x: 0, y: -1, z: 0}
-      - _variable: B
+      - _variable: df
         _direction: {x: 0, y: -1, z: 1}
-      - _variable: C
+      - _variable: dr
         _direction: {x: 1, y: -1, z: 0}
-      - _variable: D
+      - _variable: dfr
         _direction: {x: 1, y: -1, z: 1}
-      - _variable: E
-        _direction: {x: 0, y: -1, z: 1}
-      - _variable: F
-        _direction: {x: 1, y: -1, z: 0}
-      - _variable: G
-        _direction: {x: 0, y: -1, z: 0}
+      - _variable: f
+        _direction: {x: 0, y: 0, z: 1}
   - _name: Floor Corner 2
     _entityId: floor_corner_2
     _trigger: 1
@@ -136,12 +136,22 @@ MonoBehaviour:
     - _sequence: 04000000
     - _sequence: 05000000
     - _sequence: 06000000
+    - _sequence: 02000000
+    - _sequence: 0200000004000000
+    - _sequence: 0200000005000000
+    - _sequence: 0200000006000000
     _condition:
-      _expression: '(!A && (!B || !C)) '
+      _expression: (!fr && r && f ((!dfr && (!dr || !df)) || (!dr && !df)))
       _conditions:
-      - _variable: A
+      - _variable: fr
         _direction: {x: 1, y: 0, z: 1}
-      - _variable: B
+      - _variable: dr
         _direction: {x: 1, y: -1, z: 0}
-      - _variable: C
+      - _variable: df
         _direction: {x: 0, y: -1, z: 1}
+      - _variable: dfr
+        _direction: {x: 1, y: -1, z: 1}
+      - _variable: r
+        _direction: {x: 1, y: 0, z: 0}
+      - _variable: f
+        _direction: {x: 0, y: 0, z: 1}
