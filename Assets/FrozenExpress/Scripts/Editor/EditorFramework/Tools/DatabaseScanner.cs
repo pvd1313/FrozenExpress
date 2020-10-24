@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using FrozenExpress.Scripts.Editor.EditorFramework.Data;
-using JetBrains.Annotations;
+using FrozenExpress.Scripts.Game.Dungeon.Data;
+using ModestTree;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -14,14 +14,10 @@ namespace FrozenExpress.Scripts.Editor.EditorFramework.Tools
     public static class DatabaseScanner
     {
         private static readonly Dictionary<Type, DatabaseTypeInfo> Cash;
-        private static readonly Type ListType;
-        private static readonly List<string> PropertyNameBuffer;
 
         static DatabaseScanner()
         {
             Cash = new Dictionary<Type, DatabaseTypeInfo>();
-            ListType = typeof(IList);
-            PropertyNameBuffer = new List<string>();
         }
 
         public static DatabaseTypeInfo GetInfo(Object database)
@@ -30,50 +26,79 @@ namespace FrozenExpress.Scripts.Editor.EditorFramework.Tools
             {
                 throw new ArgumentNullException(nameof(database));
             }
-
+            
             var databaseType = database.GetType();
+            
             if (Cash.TryGetValue(databaseType, out var result))
             {
                 return result;
             }
 
-            var databaseSerialized = new SerializedObject(database);
-
-            var fields = databaseType.GetFields(BindingFlags.Instance | BindingFlags.NonPublic);
-            PropertyNameBuffer.Clear();
-            foreach (var field in fields)
-            {
-                var fieldType = field.FieldType;
-                if (!ListType.IsAssignableFrom(fieldType))
-                {
-                    continue;
-                }
-
-                var property = databaseSerialized.FindProperty(field.Name);
-                if (property == null)
-                {
-                    continue;
-                }
-                
-                PropertyNameBuffer.Add(field.Name);
-            }
-            
-            result.Type = databaseType;
-            result.SerializedPropertyName = null;
-            result.ItemListField = null;
-            
-            if (PropertyNameBuffer.Count > 1)
-            {
-                Debug.LogWarning($"{nameof(DatabaseScanner)} :: Type '{databaseType}' has more than one serialized list. Ambiguous match.");
-            }
-            else if (PropertyNameBuffer.Count == 1)
-            {
-                result.SerializedPropertyName = PropertyNameBuffer[0];
-            }
+            result = Scan(database);
 
             Cash[databaseType] = result;
 
             return result;
+        }
+
+        private static DatabaseTypeInfo Scan(Object database)
+        {
+            const BindingFlags flags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public;
+
+            var databaseType = database.GetType();
+            
+            DatabaseTypeInfo result;
+            result.IsDatabase = false;
+            result.ListItemType = null;
+            result.ListName = null;
+            result.ListField = null;
+
+            var databaseSerialized = new SerializedObject(database);
+
+            var serializableFieldsQuery = from field in databaseType.GetFields(flags)
+                let prop = databaseSerialized.FindProperty(field.Name)
+                where prop != null
+                select (field, prop);
+            
+            var serializableFields = serializableFieldsQuery.ToList();
+
+            if (serializableFields.Count == 0)
+            {
+                LogWarning($"Type '{databaseType}' has no serialized fields.");
+                return result;
+            }
+
+            if (serializableFields.Count > 1)
+            {
+                LogWarning($"Type '{databaseType}' has more than one serialized field.");
+                return result;
+            }
+            
+            var property = serializableFields[0].prop;
+            if (!property.isArray)
+            {
+                LogWarning($"Field '{databaseType}.{property.name}' is not list.");
+                return result;
+            }
+            
+            var genericArguments = serializableFields[0].field.FieldType.GetGenericArguments();
+            if (genericArguments.Length == 0)
+            {
+                LogWarning($"Field '{databaseType}.{property.name}' is not generic");
+                return result;
+            }
+            
+            result.IsDatabase = true;
+            result.ListName = property.name;
+            result.ListItemType = genericArguments[0];
+            result.ListField = serializableFields[0].field;
+
+            return result;
+        }
+
+        private static void LogWarning(string message)
+        {
+            Debug.LogWarning($"{nameof(DatabaseScanner)} :: {message}");
         }
     }
 }

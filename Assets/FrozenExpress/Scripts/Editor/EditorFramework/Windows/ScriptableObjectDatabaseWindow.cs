@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using FrozenExpress.Scripts.Editor.EditorFramework.Interfaces;
 using FrozenExpress.Scripts.Editor.EditorFramework.Tools;
 using FrozenExpress.Scripts.Editor.EditorFramework.Views;
 using UnityEditor;
@@ -15,14 +17,17 @@ namespace FrozenExpress.Scripts.Editor.EditorFramework.Windows
         private readonly List<SerializedProperty> _items;
         private readonly SelectableListView<SerializedProperty> _listView;
         private readonly RepaintEventsView _repaintEvents;
+        private readonly List<IDatabaseTab> _tabs;
+        private readonly List<Type> _tabTypeBuffer;
         
         private ScriptableObject _database;
         private SerializedObject _databaseSerialized;
-        private Vector2 _scrollPosition;
         private int _selectedIndex;
 
         public ScriptableObjectDatabaseWindow()
         {
+            _tabTypeBuffer = new List<Type>();
+            _tabs = new List<IDatabaseTab>();
             _items = new List<SerializedProperty>();
             _listView = new SelectableListView<SerializedProperty>(GetPropertyName, GUILayout.Height(300));
             _repaintEvents = new RepaintEventsView(this);
@@ -41,18 +46,25 @@ namespace FrozenExpress.Scripts.Editor.EditorFramework.Windows
             }
 
             var databaseInfo = DatabaseScanner.GetInfo(_database);
-            if (string.IsNullOrWhiteSpace(databaseInfo.SerializedPropertyName))
+            if (!databaseInfo.IsDatabase)
             {
-                EditorGUILayout.HelpBox("Selected asset is not valid database.", MessageType.Error);
+                EditorGUILayout.HelpBox("Selected asset is not database", MessageType.Error);
                 return;
             }
 
             if (_databaseSerialized == null || _databaseSerialized.targetObject != _database)
             {
                 _databaseSerialized = new SerializedObject(_database);
+                DatabaseTabScanner.GetTabs(databaseInfo.ListItemType, _tabTypeBuffer);
+
+                var tabsQuery = from tabType in _tabTypeBuffer
+                    select (IDatabaseTab) Activator.CreateInstance(tabType);
+                
+                _tabs.Clear();
+                _tabs.AddRange(tabsQuery);
             }
 
-            var listProperty = _databaseSerialized.FindProperty(databaseInfo.SerializedPropertyName);
+            var listProperty = _databaseSerialized.FindProperty(databaseInfo.ListName);
             var listSize = listProperty.arraySize;
             _items.Clear();
             for (var i = 0; i < listSize; i++)
@@ -81,6 +93,12 @@ namespace FrozenExpress.Scripts.Editor.EditorFramework.Windows
             }
 
             selectedItem.isExpanded = wasExpanded;
+
+            if (_tabs.Count > 0)
+            {
+                var list = (IList) databaseInfo.ListField.GetValue(_database);
+                _tabs[0].OnGUI(list[_selectedIndex]);
+            }
         }
 
         private static string GetPropertyName(SerializedProperty property)
