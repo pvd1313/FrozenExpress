@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using UnityEditor;
 
 namespace FrozenExpress.Scripts.Editor.EditorFramework.Data
 {
@@ -7,5 +8,6 @@ namespace FrozenExpress.Scripts.Editor.EditorFramework.Data
     {
         public Type Type;
         public FieldInfo ItemListField;
+        public string SerializedPropertyName;
     }
 }

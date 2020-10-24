@@ -11,6 +11,6 @@ namespace FrozenExpress.Scripts.Game.Dungeon.Data
         public string Expression => _expression;
 
         [SerializeField] string _expression;
-        [SerializeField] [OneLineWithHeader] List<PatternCondition> _conditions;
+        [SerializeField] [OneLine] List<PatternCondition> _conditions;
     }
 }
