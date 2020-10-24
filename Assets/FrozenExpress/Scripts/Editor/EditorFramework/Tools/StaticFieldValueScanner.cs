@@ -18,10 +18,10 @@ namespace FrozenExpress.Scripts.Editor.EditorFramework.Tools
         {
             const BindingFlags flags = BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public;
             
-            var assemblyTypes = GetAssemblyTypes(assembly);
             var targetType = typeof(T);
 
             var query = GetAssemblyTypes(assembly)
+                .Where(t => !t.IsGenericType)
                 .SelectMany(a => a.GetFields(flags))
                 .Where(f => f.FieldType == targetType)
                 .Select(f => f.GetValue(null) as T)
