@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEditor;
+using UnityEngine;
 
 namespace FrozenExpress.Scripts.Editor.EditorFramework.Interfaces
 {
@@ -7,6 +8,7 @@ namespace FrozenExpress.Scripts.Editor.EditorFramework.Interfaces
     {
         Type TargetType { get; }
         
-        void OnGadgetGUI(object data);
+        void OnGUI(object data);
+        void OnRender(Camera camera);
     }
 }

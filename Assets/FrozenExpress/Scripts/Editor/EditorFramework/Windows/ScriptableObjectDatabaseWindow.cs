@@ -8,8 +8,6 @@ using FrozenExpress.Scripts.Editor.EditorFramework.Tools;
 using FrozenExpress.Scripts.Editor.EditorFramework.Views;
 using UnityEditor;
 using UnityEngine;
-using EditorGUI = UnityEditor.Experimental.Networking.PlayerConnection.EditorGUI;
-using Object = UnityEngine.Object;
 
 namespace FrozenExpress.Scripts.Editor.EditorFramework.Windows
 {
@@ -38,7 +36,46 @@ namespace FrozenExpress.Scripts.Editor.EditorFramework.Windows
             _repaintEvents = new RepaintEventsView(this);
         }
 
-        protected void OnGUI()
+        private void OnEnable()
+        {
+            Camera.onPreCull -= CameraDraw;
+            Camera.onPreCull += CameraDraw;
+        }
+
+        private void OnDisable()
+        {
+            Camera.onPreCull -= CameraDraw;
+        }
+
+        private void CameraDraw(Camera camera)
+        {
+            if (camera.name != "SceneCamera")
+            {
+                return;
+            }
+            
+            if (_database == null)
+            {
+                return;
+            }
+
+            var databaseInfo = DatabaseScanner.GetInfo(_database);
+            if (!databaseInfo.IsDatabase)
+            {
+                return;
+            }
+
+            if (_selectedItemIndex < 0 || _selectedTabIndex < 0)
+            {
+                return;
+            }
+
+            var tab = _tabs[_selectedTabIndex];
+            
+            tab.OnRender(camera);
+        }
+
+        private void OnGUI()
         {
             _repaintEvents.OnGUI();
             
@@ -110,13 +147,13 @@ namespace FrozenExpress.Scripts.Editor.EditorFramework.Windows
             _selectedTabIndex = _tabListView.OnGUI(_selectedTabIndex, _tabs);
             EditorGUILayout.EndHorizontal();
 
-            if (_selectedTabIndex <= 0)
+            if (_selectedTabIndex < 0)
             {
                 return;
             }
 
             var list = (IList) databaseInfo.ListField.GetValue(_database);
-            _tabs[_selectedTabIndex].OnGadgetGUI(list[_selectedItemIndex]);
+            _tabs[_selectedTabIndex].OnGUI(list[_selectedItemIndex]);
         }
 
         private static string GetPropertyName(SerializedProperty property)

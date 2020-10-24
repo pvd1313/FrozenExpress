@@ -13,8 +13,6 @@ namespace FrozenExpress.Scripts.Editor.EditorFramework.Tools
 
         static DatabaseTabScanner()
         {
-            var g = 3;
-            
             var tabEditorType = typeof(IDatabaseTab);
             
             var tabs = AppDomain.CurrentDomain.GetAssemblies()

@@ -23,11 +23,6 @@ namespace FrozenExpress.Scripts.Editor.EditorFramework.Windows
             _listView = new SelectableListView<GUIStyle>(s => s.name, GUILayout.Height(300));
             _repaintEvents = new RepaintEventsView(this);
         }
-        
-        private void OnEnable()
-        {
-            StaticFieldValueScanner.Scan(typeof(EditorWindow).Assembly, Buffer);
-        }
 
         private void OnGUI()
         {
@@ -35,6 +30,7 @@ namespace FrozenExpress.Scripts.Editor.EditorFramework.Windows
             
             if (_knownStyles == null)
             {
+                StaticFieldValueScanner.Scan(typeof(EditorWindow).Assembly, Buffer);
                 _knownStyles = Buffer.Where(s => !string.IsNullOrWhiteSpace(s.name)).ToList();
             }
 
