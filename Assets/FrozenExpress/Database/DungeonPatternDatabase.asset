@@ -20,10 +20,13 @@ MonoBehaviour:
     - _sequence: 00000000
     - _sequence: 02000000
     _condition:
-      _expression: '!D'
+      _expression: C && !D
       _conditions:
       - _variable: D
         _direction: {x: 0, y: -1, z: 0}
+        _layer: 1
+      - _variable: C
+        _direction: {x: 0, y: 0, z: 0}
         _layer: 1
   - _name: Wall
     _entityId: wall
@@ -34,10 +37,13 @@ MonoBehaviour:
     - _sequence: 05000000
     - _sequence: 06000000
     _condition:
-      _expression: '!F'
+      _expression: C && !F
       _conditions:
       - _variable: F
         _direction: {x: 0, y: 0, z: 1}
+        _layer: 1
+      - _variable: C
+        _direction: {x: 0, y: 0, z: 0}
         _layer: 1
   - _name: Wall Pillar Inner
     _entityId: pillar_inner
@@ -48,13 +54,16 @@ MonoBehaviour:
     - _sequence: 05000000
     - _sequence: 06000000
     _condition:
-      _expression: '!F && !R'
+      _expression: C && !F && !R
       _conditions:
       - _variable: F
         _direction: {x: 0, y: 0, z: 1}
         _layer: 1
       - _variable: R
         _direction: {x: 1, y: 0, z: 0}
+        _layer: 1
+      - _variable: C
+        _direction: {x: 0, y: 0, z: 0}
         _layer: 1
   - _name: Wall Pillar Line
     _entityId: pillar_line
@@ -65,7 +74,7 @@ MonoBehaviour:
     - _sequence: 05000000
     - _sequence: 06000000
     _condition:
-      _expression: '!F && !FL && L'
+      _expression: C && !F && !FL && L
       _conditions:
       - _variable: F
         _direction: {x: 0, y: 0, z: 1}
@@ -76,6 +85,9 @@ MonoBehaviour:
       - _variable: L
         _direction: {x: -1, y: 0, z: 0}
         _layer: 1
+      - _variable: C
+        _direction: {x: 0, y: 0, z: 0}
+        _layer: 1
   - _name: Wall Pillar Outer
     _entityId: pillar_outer
     _trigger: 1
@@ -85,7 +97,7 @@ MonoBehaviour:
     - _sequence: 05000000
     - _sequence: 06000000
     _condition:
-      _expression: '!FR && F && R'
+      _expression: C && !FR && F && R
       _conditions:
       - _variable: FR
         _direction: {x: 1, y: 0, z: 1}
@@ -95,6 +107,9 @@ MonoBehaviour:
         _layer: 1
       - _variable: R
         _direction: {x: 1, y: 0, z: 0}
+        _layer: 1
+      - _variable: C
+        _direction: {x: 0, y: 0, z: 0}
         _layer: 1
   - _name: Floor Corner 0
     _entityId: floor_corner_0
@@ -109,10 +124,13 @@ MonoBehaviour:
     - _sequence: 0200000005000000
     - _sequence: 0200000006000000
     _condition:
-      _expression: '!D'
+      _expression: C && !D
       _conditions:
       - _variable: D
         _direction: {x: 0, y: -1, z: 0}
+        _layer: 1
+      - _variable: C
+        _direction: {x: 0, y: 0, z: 0}
         _layer: 1
   - _name: Floor Corner 1
     _entityId: floor_corner_1
@@ -127,7 +145,8 @@ MonoBehaviour:
     - _sequence: 0200000005000000
     - _sequence: 0200000006000000
     _condition:
-      _expression: (F || R) && ((!D && (!DF || !DR || !DFR)) || (D && !DF && !DR))
+      _expression: C && (F || R) && ((!D && (!DF || !DR || !DFR)) || (D && !DF &&
+        !DR))
       _conditions:
       - _variable: D
         _direction: {x: 0, y: -1, z: 0}
@@ -147,6 +166,9 @@ MonoBehaviour:
       - _variable: R
         _direction: {x: 1, y: 0, z: 0}
         _layer: 1
+      - _variable: C
+        _direction: {x: 0, y: 0, z: 0}
+        _layer: 1
   - _name: Floor Corner 2
     _entityId: floor_corner_2
     _trigger: 1
@@ -160,8 +182,8 @@ MonoBehaviour:
     - _sequence: 0200000005000000
     - _sequence: 0200000006000000
     _condition:
-      _expression: '!FR && R && F && ((!DFR && (!D || !DF || !DR)) || (DFR && !DF
-        && !DR))'
+      _expression: C && !FR && R && F && ((!DFR && (!D || !DF || !DR)) || (DFR &&
+        !DF && !DR))
       _conditions:
       - _variable: FR
         _direction: {x: 1, y: 0, z: 1}
@@ -183,4 +205,7 @@ MonoBehaviour:
         _layer: 1
       - _variable: D
         _direction: {x: 0, y: -1, z: 0}
+        _layer: 1
+      - _variable: C
+        _direction: {x: 0, y: 0, z: 0}
         _layer: 1
