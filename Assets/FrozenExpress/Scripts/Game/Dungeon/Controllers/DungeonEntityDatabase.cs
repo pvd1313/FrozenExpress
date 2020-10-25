@@ -3,11 +3,12 @@ using FrozenExpress.Scripts.Game.Dungeon.Assets;
 using FrozenExpress.Scripts.Game.Dungeon.Data;
 using FrozenExpress.Scripts.Game.Dungeon.Interfaces;
 using FrozenExpress.Scripts.Game.GameCycle.Enums;
+using FrozenExpress.Scripts.Game.GameCycle.Interfaces;
 using FrozenExpress.Scripts.Game.Logging.Controllers;
 
 namespace FrozenExpress.Scripts.Game.Dungeon.Controllers
 {
-    public class DungeonEntityDatabase : IDungeonEntityDatabase
+    public class DungeonEntityDatabase : IDungeonEntityDatabase, IInitializable, ITerminatable
     {
         public EInitializationOrder InitializationOrder => EInitializationOrder.Database;
 
@@ -15,21 +16,23 @@ namespace FrozenExpress.Scripts.Game.Dungeon.Controllers
         private readonly Dictionary<string, DungeonEntityConfig> _cash;
         private readonly ALogger _log;
 
-        private int _cashVersion;
-
         public DungeonEntityDatabase(DungeonEntityDatabaseAsset asset,
                                      ALogFactory logFactory)
         {
             _cash = new Dictionary<string, DungeonEntityConfig>();
             _asset = asset;
-            _cashVersion = -1;
             _log = logFactory.Create(this);
+
+            _asset.OnModified += CashDatabase;
+        }
+        
+        public void Initialize()
+        {
+            CashDatabase();
         }
 
         public DungeonEntityConfig GetEntity(string id)
         {
-            CashDatabase();
-
             if (!_cash.TryGetValue(id, out var item))
             {
                 _log?.Error($"'{id}' was not found");
@@ -41,12 +44,6 @@ namespace FrozenExpress.Scripts.Game.Dungeon.Controllers
 
         private void CashDatabase()
         {
-            if (_cashVersion == _asset.RuntimeSerializedVersion)
-            {
-                return;
-            }
-
-            _cashVersion = _asset.RuntimeSerializedVersion;
             _cash.Clear();
 
             var items = _asset.Entities;
@@ -61,6 +58,11 @@ namespace FrozenExpress.Scripts.Game.Dungeon.Controllers
 
                 _cash[item.Id] = item;
             }
+        }
+
+        public void Terminate()
+        {
+            _asset.OnModified -= CashDatabase;
         }
     }
 }
