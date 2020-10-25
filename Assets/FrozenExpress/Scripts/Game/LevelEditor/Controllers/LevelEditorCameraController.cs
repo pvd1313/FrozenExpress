@@ -74,12 +74,33 @@ namespace FrozenExpress.Scripts.Game.LevelEditor.Controllers
 
             _cameraView.Position = _dungeonLayoutTransform.TransformPosition(_dungeonModel.CursorPosition);
 
-            if (Input.GetKeyDown(KeyCode.E))
+            if (CheckNumpadKeyDown(out var keyValue))
             {
                 var position = _dungeonModel.CursorPosition;
-                var layer = _dungeonModel.GetCellLayer(position) ^ 1;
-                _dungeonModel.SetCellLayer(position, layer);
+                if (keyValue == 0)
+                {
+                    _dungeonModel.SetCellLayer(position, 0);
+                    return;
+                }
+                
+                var mapLayer = _dungeonModel.GetCellLayer(position);
+                _dungeonModel.SetCellLayer(position, mapLayer ^ (1 << (keyValue - 1)));
             }
+        }
+
+        private bool CheckNumpadKeyDown(out int keyValue)
+        {
+            keyValue = 0;
+            for (var key = KeyCode.Keypad0; key <= KeyCode.Keypad9; key++)
+            {
+                if (Input.GetKeyDown(key))
+                {
+                    keyValue = key - KeyCode.Keypad0;
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private void MoveCursor(Vector3Int delta)
