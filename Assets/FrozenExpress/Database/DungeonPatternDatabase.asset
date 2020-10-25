@@ -20,10 +20,11 @@ MonoBehaviour:
     - _sequence: 00000000
     - _sequence: 02000000
     _condition:
-      _expression: '!A'
+      _expression: '!D'
       _conditions:
-      - _variable: A
+      - _variable: D
         _direction: {x: 0, y: -1, z: 0}
+        _layer: 1
   - _name: Wall
     _entityId: wall
     _trigger: 1
@@ -33,10 +34,11 @@ MonoBehaviour:
     - _sequence: 05000000
     - _sequence: 06000000
     _condition:
-      _expression: '!A'
+      _expression: '!F'
       _conditions:
-      - _variable: A
+      - _variable: F
         _direction: {x: 0, y: 0, z: 1}
+        _layer: 1
   - _name: Wall Pillar Inner
     _entityId: pillar_inner
     _trigger: 1
@@ -46,12 +48,14 @@ MonoBehaviour:
     - _sequence: 05000000
     - _sequence: 06000000
     _condition:
-      _expression: '!A && !B'
+      _expression: '!F && !R'
       _conditions:
-      - _variable: A
+      - _variable: F
         _direction: {x: 0, y: 0, z: 1}
-      - _variable: B
+        _layer: 1
+      - _variable: R
         _direction: {x: 1, y: 0, z: 0}
+        _layer: 1
   - _name: Wall Pillar Line
     _entityId: pillar_line
     _trigger: 1
@@ -61,14 +65,17 @@ MonoBehaviour:
     - _sequence: 05000000
     - _sequence: 06000000
     _condition:
-      _expression: '!A && !B && C'
+      _expression: '!F && !FL && L'
       _conditions:
-      - _variable: A
+      - _variable: F
         _direction: {x: 0, y: 0, z: 1}
-      - _variable: B
+        _layer: 1
+      - _variable: FL
         _direction: {x: -1, y: 0, z: 1}
-      - _variable: C
+        _layer: 1
+      - _variable: L
         _direction: {x: -1, y: 0, z: 0}
+        _layer: 1
   - _name: Wall Pillar Outer
     _entityId: pillar_outer
     _trigger: 1
@@ -78,14 +85,17 @@ MonoBehaviour:
     - _sequence: 05000000
     - _sequence: 06000000
     _condition:
-      _expression: '!A && B && C'
+      _expression: '!FR && F && R'
       _conditions:
-      - _variable: A
+      - _variable: FR
         _direction: {x: 1, y: 0, z: 1}
-      - _variable: B
+        _layer: 1
+      - _variable: F
         _direction: {x: 0, y: 0, z: 1}
-      - _variable: C
+        _layer: 1
+      - _variable: R
         _direction: {x: 1, y: 0, z: 0}
+        _layer: 1
   - _name: Floor Corner 0
     _entityId: floor_corner_0
     _trigger: 1
@@ -99,10 +109,11 @@ MonoBehaviour:
     - _sequence: 0200000005000000
     - _sequence: 0200000006000000
     _condition:
-      _expression: '!A'
+      _expression: '!D'
       _conditions:
-      - _variable: A
+      - _variable: D
         _direction: {x: 0, y: -1, z: 0}
+        _layer: 1
   - _name: Floor Corner 1
     _entityId: floor_corner_1
     _trigger: 1
@@ -116,18 +127,26 @@ MonoBehaviour:
     - _sequence: 0200000005000000
     - _sequence: 0200000006000000
     _condition:
-      _expression: (!d && (!df || !dr || !dfr)) || (d && !df && !dr)
+      _expression: (F || R) && ((!D && (!DF || !DR || !DFR)) || (D && !DF && !DR))
       _conditions:
-      - _variable: d
+      - _variable: D
         _direction: {x: 0, y: -1, z: 0}
-      - _variable: df
+        _layer: 1
+      - _variable: DF
         _direction: {x: 0, y: -1, z: 1}
-      - _variable: dr
+        _layer: 1
+      - _variable: DR
         _direction: {x: 1, y: -1, z: 0}
-      - _variable: dfr
+        _layer: 1
+      - _variable: DFR
         _direction: {x: 1, y: -1, z: 1}
-      - _variable: f
+        _layer: 1
+      - _variable: F
         _direction: {x: 0, y: 0, z: 1}
+        _layer: 1
+      - _variable: R
+        _direction: {x: 1, y: 0, z: 0}
+        _layer: 1
   - _name: Floor Corner 2
     _entityId: floor_corner_2
     _trigger: 1
@@ -141,17 +160,27 @@ MonoBehaviour:
     - _sequence: 0200000005000000
     - _sequence: 0200000006000000
     _condition:
-      _expression: (!fr && r && f ((!dfr && (!dr || !df)) || (!dr && !df)))
+      _expression: '!FR && R && F && ((!DFR && (!D || !DF || !DR)) || (DFR && !DF
+        && !DR))'
       _conditions:
-      - _variable: fr
+      - _variable: FR
         _direction: {x: 1, y: 0, z: 1}
-      - _variable: dr
+        _layer: 1
+      - _variable: DR
         _direction: {x: 1, y: -1, z: 0}
-      - _variable: df
+        _layer: 1
+      - _variable: DF
         _direction: {x: 0, y: -1, z: 1}
-      - _variable: dfr
+        _layer: 1
+      - _variable: DFR
         _direction: {x: 1, y: -1, z: 1}
-      - _variable: r
+        _layer: 1
+      - _variable: R
         _direction: {x: 1, y: 0, z: 0}
-      - _variable: f
+        _layer: 1
+      - _variable: F
         _direction: {x: 0, y: 0, z: 1}
+        _layer: 1
+      - _variable: D
+        _direction: {x: 0, y: -1, z: 0}
+        _layer: 1
