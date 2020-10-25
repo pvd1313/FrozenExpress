@@ -35,8 +35,6 @@ namespace FrozenExpress.Scripts.Game.Dungeon.Controllers
             _conditionBuffer = new List<PatternCondition>();
         }
 
-        public IDungeonEntityDatabase EntityDatabase { get; }
-
         public IEnumerable<MeshTransform> IterateEntities(IDungeonMap map)
         {
             _patternBuffer.Clear();
