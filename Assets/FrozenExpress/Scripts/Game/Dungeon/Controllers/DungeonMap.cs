@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using FrozenExpress.Scripts.Game.Dungeon.Data;
 using FrozenExpress.Scripts.Game.Dungeon.Interfaces;
 using UnityEngine;
 
@@ -7,28 +6,29 @@ namespace FrozenExpress.Scripts.Game.Dungeon.Controllers
 {
     public class DungeonMap : IDungeonMap
     {
-        public IEnumerable<Vector3Int> Cells => _cells;
+        public IEnumerable<Vector3Int> Cells => _cells.Keys;
 
-        private readonly HashSet<Vector3Int> _cells;
+        private readonly Dictionary<Vector3Int, int> _cells;
 
         public DungeonMap()
         {
-            _cells = new HashSet<Vector3Int>();
+            _cells = new Dictionary<Vector3Int, int>();
         }
 
-        public void Initialize(DungeonLayout dungeonLayout)
+        public void Initialize(IReadOnlyDictionary<Vector3Int, int> dungeonLayout)
         {
             _cells.Clear();
 
-            foreach (var item in dungeonLayout.Cells)
+            foreach (var item in dungeonLayout)
             {
-                _cells.Add(item);
+                _cells[item.Key] = item.Value;
             }
         }
-
-        public bool CheckCellExists(Vector3Int position)
+        
+        public int GetCellLayer(Vector3Int position)
         {
-            return _cells.Contains(position);
+            _cells.TryGetValue(position, out var layer);
+            return layer;
         }
     }
 }

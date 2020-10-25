@@ -1,4 +1,5 @@
-﻿using FrozenExpress.Scripts.Game.Dungeon.Data;
+﻿using System.Collections.Generic;
+using FrozenExpress.Scripts.Game.Dungeon.Data;
 using FrozenExpress.Scripts.Game.Dungeon.Interfaces;
 using UnityEngine;
 
@@ -21,7 +22,7 @@ namespace FrozenExpress.Scripts.Game.Dungeon.Controllers
             _dungeonLayoutMap = new DungeonMap();
         }
 
-        public void BuildMesh(DungeonLayout dungeonLayout, Mesh result)
+        public void BuildMesh(IReadOnlyDictionary<Vector3Int, int> dungeonLayout, Mesh result)
         {
             _dungeonLayoutMap.Initialize(dungeonLayout);
             _meshBuilder.Clear();

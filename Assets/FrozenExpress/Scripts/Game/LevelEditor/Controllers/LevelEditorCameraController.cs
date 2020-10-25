@@ -76,14 +76,9 @@ namespace FrozenExpress.Scripts.Game.LevelEditor.Controllers
 
             if (Input.GetKeyDown(KeyCode.E))
             {
-                if (_dungeonModel.CheckCellExists(_dungeonModel.CursorPosition))
-                {
-                    _dungeonModel.RemoveCell(_dungeonModel.CursorPosition);
-                }
-                else
-                {
-                    _dungeonModel.AddCell(_dungeonModel.CursorPosition);
-                }
+                var position = _dungeonModel.CursorPosition;
+                var layer = _dungeonModel.GetCellLayer(position) ^ 1;
+                _dungeonModel.SetCellLayer(position, layer);
             }
         }
 

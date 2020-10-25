@@ -20,11 +20,10 @@ namespace FrozenExpress.Scripts.Game.LevelEditor.Controllers
         
         private Mesh _mesh;
         private bool _isViewDirty;
-        private EditorDungeonLayout _layout;
 
         public LevelDrawingController(ILevelEditorModel dungeonModel,
-                                                         IDungeonMeshBuilder dungeonBuilder,
-                                                         LevelDrawingConfig config)
+                                      IDungeonMeshBuilder dungeonBuilder,
+                                      LevelDrawingConfig config)
         {
             _dungeonModel = dungeonModel;
             _meshBuilder = dungeonBuilder;
@@ -36,7 +35,6 @@ namespace FrozenExpress.Scripts.Game.LevelEditor.Controllers
         public void Initialize()
         {
             _mesh = new Mesh();
-            _layout = new EditorDungeonLayout();
         }
 
         public void Update(FrameUpdateData frameData)
@@ -44,8 +42,7 @@ namespace FrozenExpress.Scripts.Game.LevelEditor.Controllers
             if (_isViewDirty)
             {
                 _isViewDirty = false;
-                _layout.Initialize(_dungeonModel);
-                _meshBuilder.BuildMesh(_layout, _mesh);
+                _meshBuilder.BuildMesh(_dungeonModel.Layout, _mesh);
             }
 
             var material = _config.DrawDiffuse ? _config.DiffuseMaterial : _config.DebugMaterial;

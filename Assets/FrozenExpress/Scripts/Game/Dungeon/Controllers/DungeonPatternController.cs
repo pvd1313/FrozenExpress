@@ -77,8 +77,9 @@ namespace FrozenExpress.Scripts.Game.Dungeon.Controllers
                                 direction = _transformer.TransformDirection(direction, matrixSequence[q]);
                             }
 
-                            var cellExists = map.CheckCellExists(cell + direction);
-                            variables[condition.Variable].Set(cellExists);
+                            var directionLayer = map.GetCellLayer(cell + direction);
+                            var conditionResult = (directionLayer & condition.Layer) == condition.Layer;
+                            variables[condition.Variable].Set(conditionResult);
                         }
 
                         if (!expression.GetResult())

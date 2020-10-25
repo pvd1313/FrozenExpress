@@ -9,12 +9,10 @@ namespace FrozenExpress.Scripts.Game.LevelEditor.Interfaces
         event Action OnLayoutChanged;
 
         Vector3Int CursorPosition { get; set; }
-        IEnumerable<Vector3Int> Cells { get; }
+        
+        IReadOnlyDictionary<Vector3Int, int> Layout { get; }
 
-        void AddCell(Vector3Int cellIndex);
-
-        void RemoveCell(Vector3Int cellIndex);
-
-        bool CheckCellExists(Vector3Int cellIndex);
+        int GetCellLayer(Vector3Int cell);
+        void SetCellLayer(Vector3Int cell, int layer);
     }
 }

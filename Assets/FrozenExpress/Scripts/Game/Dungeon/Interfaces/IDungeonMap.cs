@@ -7,6 +7,6 @@ namespace FrozenExpress.Scripts.Game.Dungeon.Interfaces
     {
         IEnumerable<Vector3Int> Cells { get; }
 
-        bool CheckCellExists(Vector3Int position);
+        int GetCellLayer(Vector3Int position);
     }
 }
