@@ -31,8 +31,9 @@ namespace FrozenExpress.Scripts.Game.LevelEditor.Models
                 if (_cells.Remove(cell))
                 {
                     OnLayoutChanged?.Invoke();
-                    return;
                 }
+                
+                return;
             }
 
             _cells[cell] = layer;
