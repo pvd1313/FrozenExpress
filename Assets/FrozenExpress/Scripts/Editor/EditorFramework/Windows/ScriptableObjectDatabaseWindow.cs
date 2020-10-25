@@ -84,7 +84,8 @@ namespace FrozenExpress.Scripts.Editor.EditorFramework.Windows
 
             EditorGUILayout.BeginHorizontal();
             {
-                _database = AssetField("Database", _database);
+                EditorGUILayout.LabelField("Database", GUILayout.Width(60));
+                _database = AssetField("", _database);
                 result |= OnHeaderButton("D", 8, "Duplicate selected item");
                 result |= OnHeaderButton("▲", 4, "Move up selected item");
                 result |= OnHeaderButton("▼", 2, "Move down selected item");
