@@ -1,4 +1,5 @@
-﻿using FrozenExpress.Scripts.Game.Dungeon.Interfaces;
+﻿using FrozenExpress.Scripts.Game.Debugging.Abstractions;
+using FrozenExpress.Scripts.Game.Dungeon.Interfaces;
 using FrozenExpress.Scripts.Game.GameCycle.Data;
 using FrozenExpress.Scripts.Game.GameCycle.Enums;
 using FrozenExpress.Scripts.Game.GameCycle.Interfaces;
@@ -16,18 +17,24 @@ namespace FrozenExpress.Scripts.Game.LevelEditor.Controllers
 
         private readonly IDungeonMeshBuilder _meshBuilder;
         private readonly LevelDrawingConfig _config;
+        private readonly IDungeonTransform _dungeonTransform;
         private readonly ILevelEditorModel _dungeonModel;
+        private readonly ADebugDrawer _debugDraw;
         
         private Mesh _mesh;
         private bool _isViewDirty;
 
         public LevelDrawingController(ILevelEditorModel dungeonModel,
                                       IDungeonMeshBuilder dungeonBuilder,
-                                      LevelDrawingConfig config)
+                                      LevelDrawingConfig config,
+                                      ADebugFactory debugFactory,
+                                      IDungeonTransform dungeonTransform)
         {
             _dungeonModel = dungeonModel;
             _meshBuilder = dungeonBuilder;
             _config = config;
+            _dungeonTransform = dungeonTransform;
+            _debugDraw = debugFactory.CreateDrawer(this);
 
             _dungeonModel.OnLayoutChanged += SetMeshDirty;
         }
@@ -39,6 +46,20 @@ namespace FrozenExpress.Scripts.Game.LevelEditor.Controllers
 
         public void Update(FrameUpdateData frameData)
         {
+            var cubeColor = new Color32(0, 255, 0, 255);
+            var cubeSize = new Vector3(0.5f, 0.5f, 0.5f);
+            
+            foreach (var kvp in _dungeonModel.Layout)
+            {
+                var cell = kvp.Key;
+                var layer = kvp.Value;
+                if ((layer & 2) > 0)
+                {
+                    var position = _dungeonTransform.TransformPosition(cell);
+                    _debugDraw.DrawCube(position, cubeSize, cubeColor);
+                }
+            }
+            
             if (_isViewDirty)
             {
                 _isViewDirty = false;

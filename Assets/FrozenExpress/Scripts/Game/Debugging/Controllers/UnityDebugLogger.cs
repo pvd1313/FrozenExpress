@@ -1,13 +1,14 @@
 ﻿using System;
+using FrozenExpress.Scripts.Game.Debugging.Abstractions;
 using Debug = UnityEngine.Debug;
 
-namespace FrozenExpress.Scripts.Game.Logging.Controllers
+namespace FrozenExpress.Scripts.Game.Debugging.Controllers
 {
-    public class UnityLogger : ALogger
+    public class UnityDebugLogger : ADebugLogger
     {
         private string _ownerName;
 
-        public UnityLogger(object owner)
+        public UnityDebugLogger(object owner)
         {
             _ownerName = owner.GetType().Name;
         }

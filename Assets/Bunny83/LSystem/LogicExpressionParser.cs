@@ -42,10 +42,11 @@
 * 
 *****/
 #endregion License and Information
+
 using System;
 using System.Collections.Generic;
 
-namespace B83.LogicExpressionParser
+namespace Bunny83.LSystem
 {
     public interface ILogicResult
     {

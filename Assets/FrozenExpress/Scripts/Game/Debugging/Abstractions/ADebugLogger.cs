@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace FrozenExpress.Scripts.Game.Logging.Controllers
+namespace FrozenExpress.Scripts.Game.Debugging.Abstractions
 {
-    public abstract class ALogger
+    public abstract class ADebugLogger
     {
         [Conditional("DEBUG")]
         public abstract void Info(string message);

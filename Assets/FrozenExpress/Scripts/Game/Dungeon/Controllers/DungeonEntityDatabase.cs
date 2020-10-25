@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
+using FrozenExpress.Scripts.Game.Debugging.Abstractions;
 using FrozenExpress.Scripts.Game.Dungeon.Assets;
 using FrozenExpress.Scripts.Game.Dungeon.Data;
 using FrozenExpress.Scripts.Game.Dungeon.Interfaces;
 using FrozenExpress.Scripts.Game.GameCycle.Enums;
 using FrozenExpress.Scripts.Game.GameCycle.Interfaces;
-using FrozenExpress.Scripts.Game.Logging.Controllers;
 
 namespace FrozenExpress.Scripts.Game.Dungeon.Controllers
 {
@@ -14,14 +14,14 @@ namespace FrozenExpress.Scripts.Game.Dungeon.Controllers
 
         private readonly DungeonEntityDatabaseAsset _asset;
         private readonly Dictionary<string, DungeonEntityConfig> _cash;
-        private readonly ALogger _log;
+        private readonly ADebugLogger _debugLog;
 
         public DungeonEntityDatabase(DungeonEntityDatabaseAsset asset,
-                                     ALogFactory logFactory)
+                                     ADebugFactory debugFactory)
         {
             _cash = new Dictionary<string, DungeonEntityConfig>();
             _asset = asset;
-            _log = logFactory.Create(this);
+            _debugLog = debugFactory.CreateLogger(this);
 
             _asset.OnModified += CashDatabase;
         }
@@ -35,7 +35,7 @@ namespace FrozenExpress.Scripts.Game.Dungeon.Controllers
         {
             if (!_cash.TryGetValue(id, out var item))
             {
-                _log?.Error($"'{id}' was not found");
+                _debugLog?.Error($"'{id}' was not found");
                 return null;
             }
 
@@ -52,7 +52,7 @@ namespace FrozenExpress.Scripts.Game.Dungeon.Controllers
                 var item = items[i];
                 if (_cash.ContainsKey(item.Id))
                 {
-                    _log?.Error($"Duplicated item id '{item.Id}' at index {i}");
+                    _debugLog?.Error($"Duplicated item id '{item.Id}' at index {i}");
                     continue;
                 }
 

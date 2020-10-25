@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Linq;
-using B83.LogicExpressionParser;
+using Bunny83.LSystem;
+using FrozenExpress.Scripts.Game.Debugging.Abstractions;
 using FrozenExpress.Scripts.Game.Dungeon.Data;
 using FrozenExpress.Scripts.Game.Dungeon.Interfaces;
-using FrozenExpress.Scripts.Game.Logging.Controllers;
 
 namespace FrozenExpress.Scripts.Game.Dungeon.Controllers
 {
     public class DungeonPatternExpressionParser : IDungeonPatternExpressionParser
     {
         private readonly Parser _parser;
-        private readonly ALogger _log;
+        private readonly ADebugLogger _debugLog;
 
-        public DungeonPatternExpressionParser(ALogFactory logFactory)
+        public DungeonPatternExpressionParser(ADebugFactory debugFactory)
         {
             _parser = new Parser();
-            _log = logFactory.Create(this);
+            _debugLog = debugFactory.CreateLogger(this);
         }
 
         public LogicExpression CompileExpression(Pattern pattern)
@@ -29,7 +29,7 @@ namespace FrozenExpress.Scripts.Game.Dungeon.Controllers
             }
             catch (Exception e)
             {
-                _log?.Exception(e, $"Failed to parse '{pattern.Condition.Expression}' in '{pattern.Name}'");
+                _debugLog?.Exception(e, $"Failed to parse '{pattern.Condition.Expression}' in '{pattern.Name}'");
                 return null;
             }
 
@@ -41,7 +41,7 @@ namespace FrozenExpress.Scripts.Game.Dungeon.Controllers
                 .Where(v => v.Count() > 1);
             foreach (var name in duplicatedConditionNames)
             {
-                _log?.Error($"Duplicated variable '{name.Key}' in '{pattern.Name}'");
+                _debugLog?.Error($"Duplicated variable '{name.Key}' in '{pattern.Name}'");
                 expression = null;
             }
 
@@ -49,7 +49,7 @@ namespace FrozenExpress.Scripts.Game.Dungeon.Controllers
             var missingNames = variables.Keys.Except(conditions.Select(c => c.Variable));
             foreach (var name in missingNames)
             {
-                _log?.Error($"Missing condition '{name}' in '{pattern.Name}'");
+                _debugLog?.Error($"Missing condition '{name}' in '{pattern.Name}'");
                 expression = null;
             }
 
