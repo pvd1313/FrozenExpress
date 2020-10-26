@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using FrozenExpress.Scripts.Editor.EditorFramework.Tools;
 using FrozenExpress.Scripts.Editor.EditorFramework.Views;
 using UnityEditor;
@@ -14,13 +15,16 @@ namespace FrozenExpress.Scripts.Editor.EditorFramework.Windows
         private readonly HorizontalSeparatorView _horizontalSeparatorView;
         private readonly SerializedPropertyView _propertyView;
         private readonly DatabaseWindowHeaderView _headerView;
+        private readonly TabsView _tabsView;
 
         private ScriptableObject _database;
         private SerializedObject _databaseSerialized;
+        private Vector2 _itemPreviewScrollPos;
         private int _selectedItemIndex;
 
         public ScriptableObjectDatabaseWindow()
         {
+            _tabsView = new TabsView();
             _headerView = new DatabaseWindowHeaderView(this);
             _propertyView = new SerializedPropertyView();
             _horizontalSeparatorView = new HorizontalSeparatorView();
@@ -68,10 +72,18 @@ namespace FrozenExpress.Scripts.Editor.EditorFramework.Windows
             }
             
             _horizontalSeparatorView.OnGUI();
-            
-            var selectedItem = databaseList.GetArrayElementAtIndex(_selectedItemIndex);
-            _propertyView.OnGUI(selectedItem);
-            
+
+            _itemPreviewScrollPos = EditorGUILayout.BeginScrollView(_itemPreviewScrollPos);
+            {
+                var selectedItem = databaseList.GetArrayElementAtIndex(_selectedItemIndex);
+                _propertyView.OnGUI(selectedItem);
+                
+                var item = ((IList) databaseInfo.ListField.GetValue(_database))[_selectedItemIndex];
+                _tabsView.OnGUI(item);
+            }
+
+            EditorGUILayout.EndScrollView();
+
             _headerView.HandleAction(headerAction);
         }
 

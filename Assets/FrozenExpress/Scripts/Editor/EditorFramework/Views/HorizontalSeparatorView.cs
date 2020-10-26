@@ -10,6 +10,8 @@ namespace FrozenExpress.Scripts.Editor.EditorFramework.Views
 
         public void OnGUI()
         {
+            GUILayout.Space(20);
+            
             if (_style == null)
             {
                 _style = new GUIStyle(GUIStylesConfig.HorizontalSeparator);

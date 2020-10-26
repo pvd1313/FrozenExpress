@@ -48,6 +48,7 @@ namespace FrozenExpress.Scripts.Editor.EditorFramework.Tools
             DatabaseTypeInfo result;
             result.IsDatabase = false;
             result.ListName = null;
+            result.ListField = null;
 
             var databaseSerialized = new SerializedObject(database);
 
@@ -86,6 +87,7 @@ namespace FrozenExpress.Scripts.Editor.EditorFramework.Tools
             
             result.IsDatabase = true;
             result.ListName = property.name;
+            result.ListField = serializableFields[0].field;
 
             return result;
         }

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Reflection;
-using UnityEditor;
+﻿using System.Reflection;
 
 namespace FrozenExpress.Scripts.Editor.EditorFramework.Data
 {
@@ -8,5 +6,6 @@ namespace FrozenExpress.Scripts.Editor.EditorFramework.Data
     {
         public bool IsDatabase;
         public string ListName;
+        public FieldInfo ListField;
     }
 }
