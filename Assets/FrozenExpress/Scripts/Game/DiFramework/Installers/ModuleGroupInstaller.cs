@@ -1,12 +1,11 @@
-﻿using Boo.Lang;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
 
 namespace FrozenExpress.Scripts.Game.DiFramework.Installers
 {
     public class ModuleGroupInstaller : Zenject.ScriptableObjectInstaller
     {
-        [SerializeField] List<ScriptableObjectInstaller> _installers;
+        [SerializeField] List<AModuleInstaller> _installers;
 
         public override void InstallBindings()
         {
