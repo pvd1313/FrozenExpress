@@ -4,12 +4,15 @@ namespace FrozenExpress.Scripts.Editor.EditorFramework.Views
 {
     public class SerializedPropertyView
     {
+        private bool _isExpanded = true;
+        
         public void OnGUI(SerializedProperty property)
         {
             property.serializedObject.Update();
             
             var wasExpanded = property.isExpanded;
-            property.isExpanded = true;
+            
+            property.isExpanded = _isExpanded;
             
             EditorGUI.BeginChangeCheck();
 
@@ -19,6 +22,8 @@ namespace FrozenExpress.Scripts.Editor.EditorFramework.Views
             {
                 property.serializedObject.ApplyModifiedProperties();
             }
+
+            _isExpanded = property.isExpanded;
 
             property.isExpanded = wasExpanded;
         }
