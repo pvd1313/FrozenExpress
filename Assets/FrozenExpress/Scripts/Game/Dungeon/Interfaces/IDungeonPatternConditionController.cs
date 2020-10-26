@@ -5,6 +5,6 @@ namespace FrozenExpress.Scripts.Game.Dungeon.Interfaces
 {
     public interface IDungeonPatternExpressionParser
     {
-        LogicExpression CompileExpression(Pattern pattern);
+        LogicExpression CompileExpression(EntityPattern entityPattern);
     }
 }

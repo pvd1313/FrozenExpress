@@ -6,7 +6,7 @@ using UnityEngine;
 namespace FrozenExpress.Scripts.Game.Dungeon.Data
 {
     [System.Serializable]
-    public class Pattern
+    public class EntityPattern
     {
         public string Name => _name;
         public string EntityId => _entityId;

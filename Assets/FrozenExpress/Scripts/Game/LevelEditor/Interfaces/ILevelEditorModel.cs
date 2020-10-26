@@ -14,5 +14,7 @@ namespace FrozenExpress.Scripts.Game.LevelEditor.Interfaces
 
         int GetCellLayer(Vector3Int cell);
         void SetCellLayer(Vector3Int cell, int layer);
+
+        void Clear();
     }
 }

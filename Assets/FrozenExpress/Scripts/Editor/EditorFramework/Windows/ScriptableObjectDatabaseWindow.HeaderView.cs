@@ -47,6 +47,7 @@ namespace FrozenExpress.Scripts.Editor.EditorFramework.Windows
                 var databaseInfo = DatabaseScanner.GetInfo(_owner._database);
                 var databaseList = _owner._databaseSerialized.FindProperty(databaseInfo.ListName);
                 var selectedItem = databaseList.GetArrayElementAtIndex(_owner._selectedItemIndex);
+                
                 switch (action)
                 {
                     case 1:

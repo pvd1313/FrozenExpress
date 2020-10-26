@@ -78,6 +78,7 @@ namespace FrozenExpress.Scripts.Editor.EditorFramework.Windows
                 var selectedItem = databaseList.GetArrayElementAtIndex(_selectedItemIndex);
                 _propertyView.OnGUI(selectedItem);
                 
+                Undo.RecordObject(_database, "Tab view");
                 var item = ((IList) databaseInfo.ListField.GetValue(_database))[_selectedItemIndex];
                 _tabsView.OnGUI(item);
             }

@@ -6,8 +6,8 @@ namespace FrozenExpress.Scripts.Game.Dungeon.Assets
 {
     public class DungeonPatternDatabaseAsset : ScriptableObject
     {
-        public IReadOnlyList<Pattern> Patterns => _patterns;
+        public IReadOnlyList<EntityPattern> Patterns => _patterns;
 
-        [SerializeField] private List<Pattern> _patterns;
+        [SerializeField] private List<EntityPattern> _patterns;
     }
 }

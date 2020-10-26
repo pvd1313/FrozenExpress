@@ -12,16 +12,16 @@ namespace FrozenExpress.Scripts.Game.Dungeon.Controllers
         private readonly Vector3 _scaleOne = new Vector3(1, 1, 1);
         private readonly Quaternion _rotationIdentity = Quaternion.identity;
 
-        private readonly IReadOnlyList<Pattern> _patterns;
+        private readonly IReadOnlyList<EntityPattern> _patterns;
         private readonly IDungeonPatternTransformController _transformer;
         private readonly IDungeonPatternExpressionParser _expressionParser;
         private readonly IDungeonEntityDatabase _entityDatabase;
 
-        private readonly List<Pattern> _patternBuffer;
+        private readonly List<EntityPattern> _patternBuffer;
         private readonly List<Vector3Int> _cellBuffer;
         private readonly List<PatternCondition> _conditionBuffer;
 
-        public DungeonPatternController(IReadOnlyList<Pattern> patterns,
+        public DungeonPatternController(IReadOnlyList<EntityPattern> patterns,
                                         IDungeonPatternTransformController transformer,
                                         IDungeonPatternExpressionParser expressionParser,
                                         IDungeonEntityDatabase entityDatabase)
@@ -30,7 +30,7 @@ namespace FrozenExpress.Scripts.Game.Dungeon.Controllers
             _patterns = patterns;
             _transformer = transformer;
             _expressionParser = expressionParser;
-            _patternBuffer = new List<Pattern>();
+            _patternBuffer = new List<EntityPattern>();
             _cellBuffer = new List<Vector3Int>();
             _conditionBuffer = new List<PatternCondition>();
         }

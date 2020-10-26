@@ -6,7 +6,8 @@ namespace FrozenExpress.Scripts.Game.LevelEditor.Editor
     {
         public override void InstallBindings()
         {
-            Container.BindInterfacesTo<PatternTab>().AsSingle();
+            Container.BindInterfacesTo<EntityPatternTab>().AsSingle();
+            Container.BindInterfacesTo<RoomPatternTab>().AsSingle();
         }
     }
 }

@@ -39,5 +39,17 @@ namespace FrozenExpress.Scripts.Game.LevelEditor.Models
             _cells[cell] = layer;
             OnLayoutChanged?.Invoke();
         }
+
+        public void Clear()
+        {
+            var count = _cells.Count;
+            
+            _cells.Clear();
+            
+            if (count > 0)
+            {
+                OnLayoutChanged?.Invoke();
+            }
+        }
     }
 }

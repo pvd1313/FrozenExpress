@@ -18,22 +18,22 @@ namespace FrozenExpress.Scripts.Game.Dungeon.Controllers
             _debugLog = debugFactory.CreateLogger(this);
         }
 
-        public LogicExpression CompileExpression(Pattern pattern)
+        public LogicExpression CompileExpression(EntityPattern entityPattern)
         {
             LogicExpression expression;
             var context = new ExpressionContext(false);
 
             try
             {
-                expression = _parser.Parse(pattern.Condition.Expression, context);
+                expression = _parser.Parse(entityPattern.Condition.Expression, context);
             }
             catch (Exception e)
             {
-                _debugLog?.Exception(e, $"Failed to parse '{pattern.Condition.Expression}' in '{pattern.Name}'");
+                _debugLog?.Exception(e, $"Failed to parse '{entityPattern.Condition.Expression}' in '{entityPattern.Name}'");
                 return null;
             }
 
-            var conditions = pattern.Condition.Conditions;
+            var conditions = entityPattern.Condition.Conditions;
             var variables = expression.Context.variables;
 
             var duplicatedConditionNames = conditions.Select(c => c.Variable)
@@ -41,7 +41,7 @@ namespace FrozenExpress.Scripts.Game.Dungeon.Controllers
                 .Where(v => v.Count() > 1);
             foreach (var name in duplicatedConditionNames)
             {
-                _debugLog?.Error($"Duplicated variable '{name.Key}' in '{pattern.Name}'");
+                _debugLog?.Error($"Duplicated variable '{name.Key}' in '{entityPattern.Name}'");
                 expression = null;
             }
 
@@ -49,7 +49,7 @@ namespace FrozenExpress.Scripts.Game.Dungeon.Controllers
             var missingNames = variables.Keys.Except(conditions.Select(c => c.Variable));
             foreach (var name in missingNames)
             {
-                _debugLog?.Error($"Missing condition '{name}' in '{pattern.Name}'");
+                _debugLog?.Error($"Missing condition '{name}' in '{entityPattern.Name}'");
                 expression = null;
             }
 
