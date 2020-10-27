@@ -1,4 +1,5 @@
 ﻿using FrozenExpress.Scripts.Game.Debugging.Abstractions;
+using FrozenExpress.Scripts.Game.Debugging.Enums;
 using FrozenExpress.Scripts.Game.Dungeon.Interfaces;
 using FrozenExpress.Scripts.Game.GameCycle.Data;
 using FrozenExpress.Scripts.Game.GameCycle.Enums;
@@ -19,7 +20,7 @@ namespace FrozenExpress.Scripts.Game.LevelEditor.Controllers
         private readonly LevelDrawingConfig _config;
         private readonly IDungeonTransform _dungeonTransform;
         private readonly ILevelEditorModel _dungeonModel;
-        private readonly ADebugDrawer _debugDraw;
+        private readonly ADebugDrawer _navigationDrawer;
         
         private Mesh _mesh;
         private bool _isViewDirty;
@@ -34,7 +35,11 @@ namespace FrozenExpress.Scripts.Game.LevelEditor.Controllers
             _meshBuilder = dungeonBuilder;
             _config = config;
             _dungeonTransform = dungeonTransform;
-            _debugDraw = debugFactory.CreateDrawer(this);
+            
+            _navigationDrawer = debugFactory.CreateDrawer(this);
+            _navigationDrawer?.SetColor(EDebugColor.Green);
+            _navigationDrawer?.SetShape(EDebugShape.Sphere3D);
+            _navigationDrawer?.SetScale(Vector3.one * 0.5f);
 
             _dungeonModel.OnLayoutChanged += SetMeshDirty;
         }
@@ -46,9 +51,6 @@ namespace FrozenExpress.Scripts.Game.LevelEditor.Controllers
 
         public void Update(FrameUpdateData frameData)
         {
-            var cubeColor = new Color32(0, 255, 0, 255);
-            var cubeSize = new Vector3(0.5f, 0.5f, 0.5f);
-            
             foreach (var kvp in _dungeonModel.Layout)
             {
                 var cell = kvp.Key;
@@ -56,7 +58,7 @@ namespace FrozenExpress.Scripts.Game.LevelEditor.Controllers
                 if ((layer & 2) > 0)
                 {
                     var position = _dungeonTransform.TransformPosition(cell);
-                    _debugDraw.Cube(position, cubeSize, cubeColor, 0);
+                    _navigationDrawer?.Draw(position);
                 }
             }
             

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using FrozenExpress.Scripts.Editor.EditorFramework.Interfaces;
 using FrozenExpress.Scripts.Game.Debugging.Abstractions;
+using FrozenExpress.Scripts.Game.Debugging.Enums;
 using FrozenExpress.Scripts.Game.Dungeon.Data;
 using FrozenExpress.Scripts.Game.Dungeon.Interfaces;
 using FrozenExpress.Scripts.Game.LevelEditor.Interfaces;
@@ -17,7 +18,7 @@ namespace FrozenExpress.Scripts.Game.LevelEditor.Editor
         private readonly ILevelEditorModel _levelModel;
         private readonly IDungeonRoomPatternProcessor _roomPatternProcessor;
         private readonly IDungeonTransform _dungeonTransform;
-        private readonly ADebugDrawer _drawer;
+        private readonly ADebugDrawer _connectionsDrawer;
         private readonly ADebugLogger _logger;
 
         private readonly List<PointDirection> _connectionPoints;
@@ -31,7 +32,11 @@ namespace FrozenExpress.Scripts.Game.LevelEditor.Editor
             _roomPatternProcessor = roomPatternProcessor;
             _dungeonTransform = dungeonTransform;
             _connectionPoints = new List<PointDirection>();
-            _drawer = debugFactory.CreateDrawer(this);
+            
+            _connectionsDrawer = debugFactory.CreateDrawer(this);
+            _connectionsDrawer?.SetColor(EDebugColor.Yellow);
+            _connectionsDrawer?.SetDuration(2);
+
             _logger = debugFactory.CreateLogger(this);
         }
         public void OnGUI(object data)
@@ -66,9 +71,8 @@ namespace FrozenExpress.Scripts.Game.LevelEditor.Editor
                     foreach (var connection in _connectionPoints)
                     {
                         var pos = connection.Point;
-                        var color = new Color32(255, 128, 0, 255);
                         var viewPos = _dungeonTransform.TransformPosition(pos);
-                        _drawer.Cube(viewPos, Vector3.one, color, 2f);
+                        _connectionsDrawer.Draw(viewPos);
                     }
                     
                     _logger.Info($"Found {_connectionPoints.Count} points");

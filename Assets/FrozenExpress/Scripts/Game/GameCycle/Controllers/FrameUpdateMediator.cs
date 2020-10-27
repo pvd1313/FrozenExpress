@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using FrozenExpress.Scripts.Game.GameCycle.Data;
 using FrozenExpress.Scripts.Game.GameCycle.Enums;
 using FrozenExpress.Scripts.Game.GameCycle.Interfaces;
 using FrozenExpress.Scripts.Game.GameCycle.Views;
 using UnityEngine;
+using UnityEngine.Playables;
 
 namespace FrozenExpress.Scripts.Game.GameCycle.Controllers
 {
@@ -32,21 +34,19 @@ namespace FrozenExpress.Scripts.Game.GameCycle.Controllers
 
         private void OnEarlyUpdate()
         {
-            var data = new FrameUpdateData()
-            {
-                DeltaTime = Time.deltaTime
-            };
-
+            FrameUpdateData data;
+            data.DeltaTime = Time.deltaTime;
+            data.UnscaledTime = Time.unscaledTime;
+            
             foreach (var item in _earlyUpdatables)
                 item.Update(data);
         }
 
         private void OnLateUpdate()
         {
-            var data = new FrameUpdateData()
-            {
-                DeltaTime = Time.deltaTime
-            };
+            FrameUpdateData data;
+            data.DeltaTime = Time.deltaTime;
+            data.UnscaledTime = Time.unscaledTime;
 
             foreach (var item in _lateUpdatables)
                 item.Update(data);

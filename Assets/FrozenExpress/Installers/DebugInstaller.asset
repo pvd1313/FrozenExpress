@@ -12,3 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c45ff647bd1edd458c2b36c9c8389ca, type: 3}
   m_Name: DebugInstaller
   m_EditorClassIdentifier: 
+  _drawingConfig:
+    _colors:
+    - _color: 1
+      _value: {r: 1, g: 0, b: 0, a: 1}
+    - _color: 2
+      _value: {r: 0.035300493, g: 1, b: 0, a: 1}
+    - _color: 3
+      _value: {r: 0, g: 0.023826122, b: 1, a: 1}
+    - _color: 4
+      _value: {r: 1, g: 1, b: 1, a: 1}
+    - _color: 5
+      _value: {r: 0, g: 0, b: 0, a: 1}
+    - _color: 6
+      _value: {r: 0, g: 1, b: 1, a: 1}
+    - _color: 7
+      _value: {r: 1, g: 0.98463297, b: 0, a: 1}
+    _meshes:
+    - _shape: 1
+      _mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+    - _shape: 2
+      _mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+    _shaders:
+    - _shader: 1
+      _instance: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
