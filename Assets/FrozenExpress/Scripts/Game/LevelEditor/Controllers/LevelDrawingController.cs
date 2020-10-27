@@ -56,7 +56,7 @@ namespace FrozenExpress.Scripts.Game.LevelEditor.Controllers
                 if ((layer & 2) > 0)
                 {
                     var position = _dungeonTransform.TransformPosition(cell);
-                    _debugDraw.DrawCube(position, cubeSize, cubeColor);
+                    _debugDraw.Cube(position, cubeSize, cubeColor, 0);
                 }
             }
             

@@ -15,9 +15,9 @@ namespace FrozenExpress.Scripts.Game.Debugging.Controllers
             _debugDrawingController = debugDrawingController;
         }
         
-        public override void DrawCube(Vector3 position, Vector3 size, Color32 color)
+        public override void Cube(Vector3 position, Vector3 size, Color32 color, float duration)
         {
-            _debugDrawingController.DrawCube(position, size, color);
+            _debugDrawingController.DrawCube(position, size, color, duration);
         }
     }
 }

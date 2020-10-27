@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using FrozenExpress.Scripts.Editor.EditorFramework.Interfaces;
+using FrozenExpress.Scripts.Game.Debugging.Abstractions;
 using FrozenExpress.Scripts.Game.Dungeon.Data;
+using FrozenExpress.Scripts.Game.Dungeon.Interfaces;
 using FrozenExpress.Scripts.Game.LevelEditor.Interfaces;
 using UnityEditor;
 using UnityEngine;
@@ -12,10 +15,24 @@ namespace FrozenExpress.Scripts.Game.LevelEditor.Editor
         public Type TargetType => typeof(RoomPattern);
         
         private readonly ILevelEditorModel _levelModel;
+        private readonly IDungeonRoomPatternProcessor _roomPatternProcessor;
+        private readonly IDungeonTransform _dungeonTransform;
+        private readonly ADebugDrawer _drawer;
+        private readonly ADebugLogger _logger;
 
-        public RoomPatternTab(ILevelEditorModel levelModel)
+        private readonly List<PointDirection> _connectionPoints;
+
+        public RoomPatternTab(ILevelEditorModel levelModel,
+                              IDungeonRoomPatternProcessor roomPatternProcessor,
+                              ADebugFactory debugFactory,
+                              IDungeonTransform dungeonTransform)
         {
             _levelModel = levelModel;
+            _roomPatternProcessor = roomPatternProcessor;
+            _dungeonTransform = dungeonTransform;
+            _connectionPoints = new List<PointDirection>();
+            _drawer = debugFactory.CreateDrawer(this);
+            _logger = debugFactory.CreateLogger(this);
         }
         public void OnGUI(object data)
         {
@@ -41,6 +58,20 @@ namespace FrozenExpress.Scripts.Game.LevelEditor.Editor
                 if (GUILayout.Button("Import from game"))
                 {
                     RoomPattern.EditorOnly.OverrideCells(pattern, _levelModel.Layout);
+                }
+
+                if (GUILayout.Button("Detect connections"))
+                {
+                    _roomPatternProcessor.FindConnectionPoints(_levelModel.Layout, _connectionPoints);
+                    foreach (var connection in _connectionPoints)
+                    {
+                        var pos = connection.Point;
+                        var color = new Color32(255, 128, 0, 255);
+                        var viewPos = _dungeonTransform.TransformPosition(pos);
+                        _drawer.Cube(viewPos, Vector3.one, color, 2f);
+                    }
+                    
+                    _logger.Info($"Found {_connectionPoints.Count} points");
                 }
             }
             EditorGUILayout.EndHorizontal();

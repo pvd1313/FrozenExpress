@@ -20,6 +20,7 @@ namespace FrozenExpress.Scripts.Game.Dungeon.Installers
             Install<DungeonMeshBuilder>();
             Install<DungeonTransform>(_cellSize);
             Install<DungeonPatternExpressionParser>();
+            Install<DungeonRoomPatternProcessor>();
         }
     }
 }
