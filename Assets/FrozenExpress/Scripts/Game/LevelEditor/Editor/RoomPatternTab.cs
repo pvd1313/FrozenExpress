@@ -15,20 +15,27 @@ namespace FrozenExpress.Game.LevelEditor.Editor
         private readonly ILevelEditorModel _levelModel;
         private readonly IDungeonRoomPatternProcessor _roomPatternProcessor;
         private readonly IDungeonTransform _dungeonTransform;
+        private readonly IDungeonLayoutGenerator _dungeonLayoutGenerator;
         private readonly ADebugDrawer _connectionsDrawer;
         private readonly ADebugLogger _logger;
 
         private readonly List<PointDirection> _connectionPoints;
+        private readonly Dictionary<Vector3Int, int> _dungeonLayout;
+
+        private int _dungeonSize;
 
         public RoomPatternTab(ILevelEditorModel levelModel,
                               IDungeonRoomPatternProcessor roomPatternProcessor,
                               ADebugFactory debugFactory,
-                              IDungeonTransform dungeonTransform)
+                              IDungeonTransform dungeonTransform,
+                              IDungeonLayoutGenerator dungeonLayoutGenerator)
         {
             _levelModel = levelModel;
             _roomPatternProcessor = roomPatternProcessor;
             _dungeonTransform = dungeonTransform;
+            _dungeonLayoutGenerator = dungeonLayoutGenerator;
             _connectionPoints = new List<PointDirection>();
+            _dungeonLayout = new Dictionary<Vector3Int, int>();
             
             _connectionsDrawer = debugFactory.CreateDrawer(this);
             _connectionsDrawer?.SetShape(EDebugShape.Arrow3D);
@@ -88,6 +95,21 @@ namespace FrozenExpress.Game.LevelEditor.Editor
                     else
                     {
                         _logger?.Error("Some cells are not connected");
+                    }
+                }
+            }
+            EditorGUILayout.EndHorizontal();
+            
+            EditorGUILayout.BeginHorizontal();
+            {
+                _dungeonSize = EditorGUILayout.IntField("Dungeon size", _dungeonSize);
+                if (GUILayout.Button("Generate!"))
+                {
+                    _dungeonLayoutGenerator.GenerateDungeon(_dungeonSize, _dungeonLayout);
+                    _levelModel.Clear();
+                    foreach (var cell in _dungeonLayout)
+                    {
+                        _levelModel.SetCellLayer(cell.Key, cell.Value);
                     }
                 }
             }

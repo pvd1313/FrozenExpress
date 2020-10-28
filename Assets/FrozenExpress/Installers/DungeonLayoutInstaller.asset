@@ -19,3 +19,4 @@ MonoBehaviour:
     type: 2}
   _layoutGeneratorConfig:
     _requiredCellCount: 5
+    _requiredExitPointCount: 2

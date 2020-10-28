@@ -1,4 +1,5 @@
-﻿using FrozenExpress.Game.Dungeon;
+﻿using System.Collections.Generic;
+using FrozenExpress.Game.Dungeon;
 using FrozenExpress.Game.GameCycle;
 using UnityEngine;
 
@@ -16,9 +17,9 @@ namespace FrozenExpress.Game.LevelEditor
         private Vector2 _cameraRotation;
 
         public LevelEditorCameraController(ILevelEditorCameraView cameraView,
-                                                   LevelEditorCameraConfig config,
-                                                   ILevelEditorModel dungeonModel,
-                                                   IDungeonTransform dungeonLayoutTransform)
+                                           LevelEditorCameraConfig config,
+                                           ILevelEditorModel dungeonModel,
+                                           IDungeonTransform dungeonLayoutTransform)
         {
             _cameraView = cameraView;
             _config = config;
@@ -66,6 +67,10 @@ namespace FrozenExpress.Game.LevelEditor
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
                 MoveCursor(Vector3Int.down);
+            }
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                _dungeonModel.Clear();
             }
 
             _cameraView.Position = _dungeonLayoutTransform.TransformPosition(_dungeonModel.CursorPosition);
