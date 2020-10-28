@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace FrozenExpress.Scripts.Game.Player.Data
+namespace FrozenExpress.Game.Player
 {
     [System.Serializable]
     public class PlayerConfig

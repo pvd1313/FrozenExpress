@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace FrozenExpress.Scripts.Game.Dungeon.Interfaces
+namespace FrozenExpress.Game.Dungeon
 {
     public interface IDungeonTransform
     {

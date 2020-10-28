@@ -1,8 +1,6 @@
-﻿using FrozenExpress.Scripts.Editor.EditorFramework.Tools;
-using FrozenExpress.Scripts.Editor.EditorFramework.Views;
-using UnityEditor;
+﻿using UnityEditor;
 
-namespace FrozenExpress.Scripts.Editor.EditorFramework.Windows
+namespace FrozenExpress.Editor.EditorFramework
 {
     public class EditorWindowFactoryWindow : EditorWindow
     {

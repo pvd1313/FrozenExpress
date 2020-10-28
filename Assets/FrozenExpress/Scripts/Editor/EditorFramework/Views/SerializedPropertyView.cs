@@ -1,6 +1,6 @@
 ﻿using UnityEditor;
 
-namespace FrozenExpress.Scripts.Editor.EditorFramework.Views
+namespace FrozenExpress.Editor.EditorFramework
 {
     public class SerializedPropertyView
     {

@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using FrozenExpress.Scripts.Editor.EditorFramework.Data;
-using FrozenExpress.Scripts.Editor.EditorFramework.Tools;
 using UnityEditor;
 using UnityEngine;
 
-namespace FrozenExpress.Scripts.Editor.EditorFramework.Views
+namespace FrozenExpress.Editor.EditorFramework
 {
     public class TypeScannerWindow
     {

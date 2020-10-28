@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FrozenExpress.Scripts.Editor.EditorFramework.Interfaces
+namespace FrozenExpress.Editor.EditorFramework
 {
     public interface IDatabaseWindowTab
     {

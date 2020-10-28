@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using FrozenExpress.Scripts.Game.Dungeon.Data;
 using UnityEngine;
 
-namespace FrozenExpress.Scripts.Game.Dungeon.Interfaces
+namespace FrozenExpress.Game.Dungeon
 {
     public interface IDungeonRoomPatternProcessor
     {

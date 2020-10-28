@@ -1,14 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Data.Common;
 using System.Linq;
-using FrozenExpress.Scripts.Game.GameCycle.Data;
-using FrozenExpress.Scripts.Game.GameCycle.Enums;
-using FrozenExpress.Scripts.Game.GameCycle.Interfaces;
-using FrozenExpress.Scripts.Game.GameCycle.Views;
 using UnityEngine;
-using UnityEngine.Playables;
 
-namespace FrozenExpress.Scripts.Game.GameCycle.Controllers
+namespace FrozenExpress.Game.GameCycle
 {
     public class FrameUpdateMediator : ITerminatable
     {

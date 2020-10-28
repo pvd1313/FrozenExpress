@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace FrozenExpress.Scripts.Editor.EditorFramework.Windows
+namespace FrozenExpress.Editor.EditorFramework
 {
     public class RepaintEventsView
     {

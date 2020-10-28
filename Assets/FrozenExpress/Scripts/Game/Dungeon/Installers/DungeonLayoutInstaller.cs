@@ -1,10 +1,7 @@
-﻿using FrozenExpress.Scripts.Game.DiFramework.Installers;
-using FrozenExpress.Scripts.Game.Dungeon.Assets;
-using FrozenExpress.Scripts.Game.Dungeon.Controllers;
-using FrozenExpress.Scripts.Game.Dungeon.Data;
+﻿using FrozenExpress.Game.DiFramework.Installers;
 using UnityEngine;
 
-namespace FrozenExpress.Scripts.Game.Dungeon.Installers
+namespace FrozenExpress.Game.Dungeon.Installers
 {
     public class DungeonLayoutInstaller : AModuleInstaller
     {

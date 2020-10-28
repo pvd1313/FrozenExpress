@@ -1,7 +1,6 @@
-﻿using FrozenExpress.Scripts.Game.Debugging.Enums;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace FrozenExpress.Scripts.Game.Debugging.Abstractions
+namespace FrozenExpress.Game.Debugging
 {
     public abstract class ADebugDrawer
     {

@@ -1,9 +1,7 @@
-﻿using FrozenExpress.Scripts.Game.Debugging.Abstractions;
-using FrozenExpress.Scripts.Game.Debugging.Controllers;
-using FrozenExpress.Scripts.Game.Debugging.Data;
+﻿using FrozenExpress.Game.Debugging;
 using UnityEngine;
 
-namespace FrozenExpress.Scripts.Game.Debugging.Installers
+namespace FrozenExpress.Game.Debugging.Installers
 {
     public class DebugInstaller : Zenject.ScriptableObjectInstaller
     {

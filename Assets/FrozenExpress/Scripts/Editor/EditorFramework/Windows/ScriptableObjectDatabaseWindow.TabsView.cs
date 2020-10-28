@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using FrozenExpress.Scripts.Editor.EditorFramework.Interfaces;
-using FrozenExpress.Scripts.Editor.EditorFramework.Views;
-using FrozenExpress.Scripts.Game.LevelEditor.Editor;
+using FrozenExpress.Game.LevelEditor.Editor;
 using UnityEditor;
 using UnityEngine;
 using Zenject;
 
-namespace FrozenExpress.Scripts.Editor.EditorFramework.Windows
+namespace FrozenExpress.Editor.EditorFramework
 {
     partial class ScriptableObjectDatabaseWindow
     {

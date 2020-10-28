@@ -1,7 +1,6 @@
-﻿using FrozenExpress.Scripts.Game.Debugging.Enums;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace FrozenExpress.Scripts.Game.Debugging.Data
+namespace FrozenExpress.Game.Debugging
 {
     [System.Serializable]
     public class DebugColorValue

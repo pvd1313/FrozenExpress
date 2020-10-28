@@ -1,8 +1,6 @@
-﻿using FrozenExpress.Scripts.Game.Player.Interfaces;
-using FrozenExpress.Scripts.Game.Player.Views;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace FrozenExpress.Scripts.Game.Player.Controllers
+namespace FrozenExpress.Game.Player
 {
     public class PlayerViewFactory : IPlayerViewFactory
     {

@@ -1,12 +1,8 @@
 ﻿using System.Collections.Generic;
-using FrozenExpress.Scripts.Game.Debugging.Abstractions;
-using FrozenExpress.Scripts.Game.Dungeon.Assets;
-using FrozenExpress.Scripts.Game.Dungeon.Data;
-using FrozenExpress.Scripts.Game.Dungeon.Interfaces;
-using FrozenExpress.Scripts.Game.GameCycle.Enums;
-using FrozenExpress.Scripts.Game.GameCycle.Interfaces;
+using FrozenExpress.Game.Debugging;
+using FrozenExpress.Game.GameCycle;
 
-namespace FrozenExpress.Scripts.Game.Dungeon.Controllers
+namespace FrozenExpress.Game.Dungeon
 {
     public class DungeonRoomPatternDatabase : IDungeonRoomPatternDatabase, ITerminatable, IInitializable
     {

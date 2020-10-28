@@ -1,6 +1,4 @@
-﻿using FrozenExpress.Scripts.Game.Dungeon.Data;
-
-namespace FrozenExpress.Scripts.Game.Dungeon.Interfaces
+﻿namespace FrozenExpress.Game.Dungeon
 {
     public interface IDungeonEntityDatabase
     {

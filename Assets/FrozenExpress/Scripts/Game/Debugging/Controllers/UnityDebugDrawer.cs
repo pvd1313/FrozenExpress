@@ -1,10 +1,7 @@
-﻿using FrozenExpress.Scripts.Game.Debugging.Abstractions;
-using FrozenExpress.Scripts.Game.Debugging.Data;
-using FrozenExpress.Scripts.Game.Debugging.Enums;
-using FrozenExpress.Scripts.Game.Debugging.Interfaces;
+﻿using FrozenExpress.Game.Debugging;
 using UnityEngine;
 
-namespace FrozenExpress.Scripts.Game.Debugging.Controllers
+namespace FrozenExpress.Game.Debugging
 {
     public class UnityDebugDrawer : ADebugDrawer
     {

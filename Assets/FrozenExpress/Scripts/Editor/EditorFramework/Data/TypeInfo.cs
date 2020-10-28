@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FrozenExpress.Scripts.Editor.EditorFramework.Data
+namespace FrozenExpress.Editor.EditorFramework
 {
     public struct TypeInfo
     {

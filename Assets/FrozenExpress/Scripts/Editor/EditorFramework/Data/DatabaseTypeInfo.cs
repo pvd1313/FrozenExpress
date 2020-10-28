@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace FrozenExpress.Scripts.Editor.EditorFramework.Data
+namespace FrozenExpress.Editor.EditorFramework
 {
     public struct DatabaseTypeInfo
     {

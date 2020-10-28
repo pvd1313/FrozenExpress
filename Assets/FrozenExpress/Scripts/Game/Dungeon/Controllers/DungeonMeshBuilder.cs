@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
-using FrozenExpress.Scripts.Game.Dungeon.Data;
-using FrozenExpress.Scripts.Game.Dungeon.Interfaces;
 using UnityEngine;
 
-namespace FrozenExpress.Scripts.Game.Dungeon.Controllers
+namespace FrozenExpress.Game.Dungeon
 {
     public class DungeonMeshBuilder : IDungeonMeshBuilder
     {

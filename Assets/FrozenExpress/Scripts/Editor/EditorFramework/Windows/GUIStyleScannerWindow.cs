@@ -1,12 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using FrozenExpress.Scripts.Editor.EditorFramework.Tools;
-using FrozenExpress.Scripts.Editor.EditorFramework.Views;
-using ICSharpCode.NRefactory.Ast;
 using UnityEditor;
 using UnityEngine;
 
-namespace FrozenExpress.Scripts.Editor.EditorFramework.Windows
+namespace FrozenExpress.Editor.EditorFramework
 {
     public class GUIStyleScannerWindow : EditorWindow
     {

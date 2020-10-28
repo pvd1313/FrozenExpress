@@ -1,8 +1,7 @@
-﻿using FrozenExpress.Scripts.Editor.EditorFramework.Tools;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
-namespace FrozenExpress.Scripts.Editor.EditorFramework.Windows
+namespace FrozenExpress.Editor.EditorFramework
 {
     partial class ScriptableObjectDatabaseWindow
     {

@@ -1,6 +1,4 @@
-﻿using FrozenExpress.Scripts.Game.GameCycle.Enums;
-
-namespace FrozenExpress.Scripts.Game.GameCycle.Interfaces
+﻿namespace FrozenExpress.Game.GameCycle
 {
     public interface IInitializable
     {

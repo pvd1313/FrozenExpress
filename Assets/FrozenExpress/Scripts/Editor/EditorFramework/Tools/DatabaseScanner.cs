@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using FrozenExpress.Scripts.Editor.EditorFramework.Data;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace FrozenExpress.Scripts.Editor.EditorFramework.Tools
+namespace FrozenExpress.Editor.EditorFramework
 {
     public static class DatabaseScanner
     {

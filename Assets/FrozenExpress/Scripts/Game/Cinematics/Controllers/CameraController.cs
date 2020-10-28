@@ -1,10 +1,7 @@
-﻿using FrozenExpress.Scripts.Game.Cinematics.Interfaces;
-using FrozenExpress.Scripts.Game.GameCycle.Data;
-using FrozenExpress.Scripts.Game.GameCycle.Enums;
-using FrozenExpress.Scripts.Game.GameCycle.Interfaces;
-using FrozenExpress.Scripts.Game.Player.Interfaces;
+﻿using FrozenExpress.Game.GameCycle;
+using FrozenExpress.Game.Player;
 
-namespace FrozenExpress.Scripts.Game.Cinematics.Controllers
+namespace FrozenExpress.Game.Cinematics
 {
     public class CameraController : IFrameUpdatable
     {

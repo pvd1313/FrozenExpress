@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace FrozenExpress.Scripts.Game.DiFramework.Installers
+namespace FrozenExpress.Game.DiFramework.Installers
 {
     public class ModuleGroupInstaller : Zenject.ScriptableObjectInstaller
     {

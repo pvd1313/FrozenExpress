@@ -1,11 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using FrozenExpress.Scripts.Editor.EditorFramework.Tools;
-using FrozenExpress.Scripts.Editor.EditorFramework.Views;
 using UnityEditor;
 using UnityEngine;
 
-namespace FrozenExpress.Scripts.Editor.EditorFramework.Windows
+namespace FrozenExpress.Editor.EditorFramework
 {
     public partial class ScriptableObjectDatabaseWindow : EditorWindow
     {

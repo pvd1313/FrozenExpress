@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace FrozenExpress.Scripts.Game.LevelEditor.Data
+namespace FrozenExpress.Game.LevelEditor
 {
     [System.Serializable]
     public class LevelEditorCameraConfig

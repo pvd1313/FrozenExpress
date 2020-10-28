@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using FrozenExpress.Scripts.Game.Dungeon.Enums;
 using OneLine;
 using UnityEngine;
 
-namespace FrozenExpress.Scripts.Game.Dungeon.Data
+namespace FrozenExpress.Game.Dungeon
 {
     [System.Serializable]
     public class EntityPattern

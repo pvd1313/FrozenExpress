@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using FrozenExpress.Scripts.Game.LevelEditor.Interfaces;
 using UnityEngine;
 
-namespace FrozenExpress.Scripts.Game.LevelEditor.Models
+namespace FrozenExpress.Game.LevelEditor.Models
 {
     public class LevelEditorModel : ILevelEditorModel
     {

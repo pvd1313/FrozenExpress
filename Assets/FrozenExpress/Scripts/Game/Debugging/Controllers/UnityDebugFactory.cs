@@ -1,7 +1,6 @@
-﻿using FrozenExpress.Scripts.Game.Debugging.Abstractions;
-using FrozenExpress.Scripts.Game.Debugging.Interfaces;
+﻿using FrozenExpress.Game.Debugging;
 
-namespace FrozenExpress.Scripts.Game.Debugging.Controllers
+namespace FrozenExpress.Game.Debugging
 {
     public class UnityDebugFactory : ADebugFactory
     {

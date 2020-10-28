@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Linq;
 using Bunny83.LSystem;
-using FrozenExpress.Scripts.Game.Debugging.Abstractions;
-using FrozenExpress.Scripts.Game.Dungeon.Data;
-using FrozenExpress.Scripts.Game.Dungeon.Interfaces;
+using FrozenExpress.Game.Debugging;
 
-namespace FrozenExpress.Scripts.Game.Dungeon.Controllers
+namespace FrozenExpress.Game.Dungeon
 {
     public class DungeonPatternExpressionParser : IDungeonPatternExpressionParser
     {

@@ -1,12 +1,8 @@
-﻿using FrozenExpress.Scripts.Game.Dungeon.Interfaces;
-using FrozenExpress.Scripts.Game.GameCycle.Data;
-using FrozenExpress.Scripts.Game.GameCycle.Enums;
-using FrozenExpress.Scripts.Game.GameCycle.Interfaces;
-using FrozenExpress.Scripts.Game.LevelEditor.Data;
-using FrozenExpress.Scripts.Game.LevelEditor.Interfaces;
+﻿using FrozenExpress.Game.Dungeon;
+using FrozenExpress.Game.GameCycle;
 using UnityEngine;
 
-namespace FrozenExpress.Scripts.Game.LevelEditor.Controllers
+namespace FrozenExpress.Game.LevelEditor
 {
     public class LevelEditorCameraController : IFrameUpdatable
     {

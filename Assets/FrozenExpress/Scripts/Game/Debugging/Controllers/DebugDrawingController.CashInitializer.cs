@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Linq;
-using FrozenExpress.Scripts.Game.Debugging.Data;
-using FrozenExpress.Scripts.Game.Debugging.Enums;
 using UnityEngine;
 
-namespace FrozenExpress.Scripts.Game.Debugging.Controllers
+namespace FrozenExpress.Game.Debugging
 {
     partial class DebugDrawingController
     {

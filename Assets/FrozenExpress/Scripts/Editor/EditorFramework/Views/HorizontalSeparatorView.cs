@@ -1,8 +1,7 @@
-﻿using FrozenExpress.Scripts.Editor.EditorFramework.Data;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
-namespace FrozenExpress.Scripts.Editor.EditorFramework.Views
+namespace FrozenExpress.Editor.EditorFramework
 {
     public class HorizontalSeparatorView
     {

@@ -1,8 +1,6 @@
-﻿using FrozenExpress.Scripts.Game.Dungeon.Enums;
-using FrozenExpress.Scripts.Game.Dungeon.Interfaces;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace FrozenExpress.Scripts.Game.Dungeon.Controllers
+namespace FrozenExpress.Game.Dungeon
 {
     public class DungeonPatternTransformController : IDungeonPatternTransformController
     {

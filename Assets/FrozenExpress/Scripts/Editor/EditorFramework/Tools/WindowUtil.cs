@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace FrozenExpress.Scripts.Editor.EditorFramework.Tools
+namespace FrozenExpress.Editor.EditorFramework
 {
     public static class WindowUtil
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace FrozenExpress.Scripts.Editor.EditorFramework.Tools
+namespace FrozenExpress.Editor.EditorFramework
 {
     public static class StaticFieldValueScanner
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace FrozenExpress.Scripts.Game.GameCycle.Views
+namespace FrozenExpress.Game.GameCycle
 {
     public class GameCycleMediatorView : MonoBehaviour
     {

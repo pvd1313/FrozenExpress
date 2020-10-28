@@ -1,4 +1,4 @@
-﻿namespace FrozenExpress.Scripts.Game.Debugging.Abstractions
+﻿namespace FrozenExpress.Game.Debugging
 {
     public abstract class ADebugFactory
     {

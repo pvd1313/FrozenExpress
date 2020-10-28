@@ -1,13 +1,8 @@
 ﻿using System.Collections.Generic;
-using FrozenExpress.Scripts.Game.Debugging.Data;
-using FrozenExpress.Scripts.Game.Debugging.Enums;
-using FrozenExpress.Scripts.Game.Debugging.Interfaces;
-using FrozenExpress.Scripts.Game.GameCycle.Data;
-using FrozenExpress.Scripts.Game.GameCycle.Enums;
-using FrozenExpress.Scripts.Game.GameCycle.Interfaces;
+using FrozenExpress.Game.GameCycle;
 using UnityEngine;
 
-namespace FrozenExpress.Scripts.Game.Debugging.Controllers
+namespace FrozenExpress.Game.Debugging
 {
     public partial class DebugDrawingController : IDebugDrawingController, IFrameUpdatable
     {

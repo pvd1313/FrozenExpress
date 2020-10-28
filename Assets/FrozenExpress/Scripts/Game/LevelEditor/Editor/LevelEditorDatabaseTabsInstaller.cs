@@ -1,6 +1,6 @@
 ﻿using Zenject;
 
-namespace FrozenExpress.Scripts.Game.LevelEditor.Editor
+namespace FrozenExpress.Game.LevelEditor.Editor
 {
     public class LevelEditorDatabaseTabsInstaller : Installer
     {

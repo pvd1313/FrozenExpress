@@ -1,8 +1,8 @@
 ﻿using System;
-using FrozenExpress.Scripts.Game.Debugging.Abstractions;
+using FrozenExpress.Game.Debugging;
 using Debug = UnityEngine.Debug;
 
-namespace FrozenExpress.Scripts.Game.Debugging.Controllers
+namespace FrozenExpress.Game.Debugging
 {
     public class UnityDebugLogger : ADebugLogger
     {

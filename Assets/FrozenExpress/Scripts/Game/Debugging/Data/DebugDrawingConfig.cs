@@ -2,7 +2,7 @@
 using OneLine;
 using UnityEngine;
 
-namespace FrozenExpress.Scripts.Game.Debugging.Data
+namespace FrozenExpress.Game.Debugging
 {
     [System.Serializable]
     public class DebugDrawingConfig

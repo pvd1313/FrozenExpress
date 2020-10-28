@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace FrozenExpress.Scripts.Game.Dungeon.Data
+namespace FrozenExpress.Game.Dungeon
 {
     public struct MeshTransform
     {

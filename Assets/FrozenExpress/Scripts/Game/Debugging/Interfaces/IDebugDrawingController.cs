@@ -1,6 +1,4 @@
-﻿using FrozenExpress.Scripts.Game.Debugging.Data;
-
-namespace FrozenExpress.Scripts.Game.Debugging.Interfaces
+﻿namespace FrozenExpress.Game.Debugging
 {
     public interface IDebugDrawingController
     {

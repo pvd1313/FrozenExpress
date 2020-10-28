@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using FrozenExpress.Scripts.Editor.EditorFramework.Interfaces;
-using FrozenExpress.Scripts.Game.Debugging.Abstractions;
-using FrozenExpress.Scripts.Game.Debugging.Enums;
-using FrozenExpress.Scripts.Game.Dungeon.Data;
-using FrozenExpress.Scripts.Game.Dungeon.Interfaces;
-using FrozenExpress.Scripts.Game.LevelEditor.Interfaces;
+using FrozenExpress.Editor.EditorFramework;
+using FrozenExpress.Game.Debugging;
+using FrozenExpress.Game.Dungeon;
 using UnityEditor;
 using UnityEngine;
 
-namespace FrozenExpress.Scripts.Game.LevelEditor.Editor
+namespace FrozenExpress.Game.LevelEditor.Editor
 {
     public class RoomPatternTab : IDatabaseWindowTab
     {

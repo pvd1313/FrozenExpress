@@ -1,7 +1,6 @@
-﻿using FrozenExpress.Scripts.Game.Player.Interfaces;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace FrozenExpress.Scripts.Game.Player.Views
+namespace FrozenExpress.Game.Player
 {
     public class PlayerView : MonoBehaviour, IPlayerView
     {

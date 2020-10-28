@@ -1,4 +1,4 @@
-﻿namespace FrozenExpress.Scripts.Editor.EditorFramework.Data
+﻿namespace FrozenExpress.Editor.EditorFramework
 {
     public static class GUIStylesConfig
     {

@@ -1,4 +1,4 @@
-﻿namespace FrozenExpress.Scripts.Game.Debugging.Enums
+﻿namespace FrozenExpress.Game.Debugging
 {
     public enum EDebugShape
     {
