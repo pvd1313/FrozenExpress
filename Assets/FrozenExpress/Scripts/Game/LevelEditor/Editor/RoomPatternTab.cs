@@ -34,7 +34,9 @@ namespace FrozenExpress.Scripts.Game.LevelEditor.Editor
             _connectionPoints = new List<PointDirection>();
             
             _connectionsDrawer = debugFactory.CreateDrawer(this);
+            _connectionsDrawer?.SetShape(EDebugShape.Arrow3D);
             _connectionsDrawer?.SetColor(EDebugColor.Yellow);
+            _connectionsDrawer?.SetScale(Vector3.one * 2);
             _connectionsDrawer?.SetDuration(2);
 
             _logger = debugFactory.CreateLogger(this);
@@ -72,7 +74,8 @@ namespace FrozenExpress.Scripts.Game.LevelEditor.Editor
                     {
                         var pos = connection.Point;
                         var viewPos = _dungeonTransform.TransformPosition(pos);
-                        _connectionsDrawer.Draw(viewPos);
+                        var viewRot = Quaternion.LookRotation(connection.Direction);
+                        _connectionsDrawer.Draw(viewPos, viewRot);
                     }
                     
                     _logger.Info($"Found {_connectionPoints.Count} points");
