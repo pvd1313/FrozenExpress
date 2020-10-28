@@ -30,9 +30,13 @@ MonoBehaviour:
       _value: {r: 1, g: 0.98463297, b: 0, a: 1}
     _meshes:
     - _shape: 1
-      _mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+      _mesh: {fileID: -141440725972904150, guid: f4733ea1e45b87c4f8ba46d0b1921fd3,
+        type: 3}
     - _shape: 2
       _mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+    - _shape: 3
+      _mesh: {fileID: -236007797189776682, guid: 4725e9a0d78c2c0408f8f3130bff98e5,
+        type: 3}
     _shaders:
     - _shader: 1
       _instance: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}

@@ -4,5 +4,6 @@
     {
         Cube3D = 1,
         Sphere3D = 2,
+        Arrow3D = 3,
     }
 }
