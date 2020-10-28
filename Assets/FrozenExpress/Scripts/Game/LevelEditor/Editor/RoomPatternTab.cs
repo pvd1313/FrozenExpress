@@ -80,6 +80,19 @@ namespace FrozenExpress.Scripts.Game.LevelEditor.Editor
                     
                     _logger.Info($"Found {_connectionPoints.Count} points");
                 }
+
+                if (GUILayout.Button("Check shape"))
+                {
+                    var cellsConnected = _roomPatternProcessor.CheckAllCellsConnected(_levelModel.Layout);
+                    if (cellsConnected)
+                    {
+                        _logger?.Info("All cells connected");
+                    }
+                    else
+                    {
+                        _logger?.Error("Some cells are not connected");
+                    }
+                }
             }
             EditorGUILayout.EndHorizontal();
         }
