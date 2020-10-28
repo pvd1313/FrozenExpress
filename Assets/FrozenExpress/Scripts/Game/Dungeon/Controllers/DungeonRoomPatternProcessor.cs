@@ -44,22 +44,20 @@ namespace FrozenExpress.Scripts.Game.Dungeon.Controllers
             direction = default;
             
             var siblingCount = 0;
+            
             for (var i = 0; i < _siblingDirections.Length && siblingCount < 2; i++)
             {
-                direction = _siblingDirections[i];
-                if (room.ContainsKey(point + direction))
+                var siblingDirection = _siblingDirections[i];
+                
+                if (room.ContainsKey(point + siblingDirection))
                 {
+                    direction = -siblingDirection;
+                    
                     siblingCount++;
                 }
             }
 
-            if (siblingCount == 1)
-            {
-                direction = -direction;
-                return true;
-            };
-
-            return false;
+            return siblingCount == 1;
         }
     }
 }
