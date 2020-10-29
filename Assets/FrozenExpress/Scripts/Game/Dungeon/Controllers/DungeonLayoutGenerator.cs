@@ -8,64 +8,82 @@ namespace FrozenExpress.Game.Dungeon
 {
     public partial class DungeonLayoutGenerator : IDungeonLayoutGenerator
     {
-        private struct RoomPreset
+        private class BakedRoom
         {
-            public RoomPattern Pattern;
-            public List<PointDirection> ExitPoints;
+            public RoomPattern Source { get; set; }
+            public List<RoomLayout>[] Layouts { get; }
+
+            public BakedRoom()
+            {
+                Layouts = new List<RoomLayout>[27];
+            }
         }
         
         private readonly IDungeonRoomPatternProcessor _roomPatternProcessor;
         private readonly IDungeonRoomPatternDatabase _patternDatabase;
         private readonly DungeonLayoutGeneratorConfig _config;
+        private readonly IDungeonPatternTransformController _patternTransformController;
         private readonly ADebugLogger _debugLog;
-        private readonly PresetGenerator _presetGenerator;
-        private readonly LayoutModifier _layoutModifier;
+        private readonly RoomBaker _baker;
+        private readonly RoomPlacer _placer;
+        
+        private readonly List<BakedRoom> _roomsFresh;
+        private readonly List<BakedRoom> _roomsUsed;
+        private readonly List<PointDirection> _worldExits;
 
-        private readonly List<RoomPreset> _roomsFresh;
-        private readonly List<RoomPreset> _roomsUsed;
-        private readonly List<PointDirection> _connections;
-
-        private IDictionary<Vector3Int, int> _layout;
+        private IDictionary<Vector3Int, int> _worldMap;
 
         public DungeonLayoutGenerator(IDungeonRoomPatternProcessor roomPatternProcessor,
                                       IDungeonRoomPatternDatabase patternDatabase,
                                       DungeonLayoutGeneratorConfig config,
-                                      ADebugFactory debugFactory)
+                                      ADebugFactory debugFactory,
+                                      IDungeonPatternTransformController patternTransformController)
         {
             _roomPatternProcessor = roomPatternProcessor;
             _patternDatabase = patternDatabase;
             _config = config;
-            _layoutModifier = new LayoutModifier(this);
-            _presetGenerator = new PresetGenerator(this);
+            _patternTransformController = patternTransformController;
             _debugLog = debugFactory?.CreateLogger(this);
+            _baker = new RoomBaker(this);
+            _placer = new RoomPlacer(this);
             
-            _roomsFresh = new List<RoomPreset>();
-            _roomsUsed = new List<RoomPreset>();
-            _connections = new List<PointDirection>();
+            _roomsFresh = new List<BakedRoom>();
+            _roomsUsed = new List<BakedRoom>();
+            _worldExits = new List<PointDirection>();
         }
 
         public void GenerateDungeon(int cellCount, IDictionary<Vector3Int, int> result)
         {
-            _layout = result;
-            _layout.Clear();
+            _worldMap = result;
+            _worldMap.Clear();
             
-            _presetGenerator.Prepare(_patternDatabase.All, _roomsFresh);
+            _roomsFresh.Clear();
+            _roomsUsed.Clear();
+            foreach (var roomPattern in _patternDatabase.All)
+            {
+                var bakedRoom = _baker.TryBake(roomPattern);
+                if (bakedRoom != null)
+                {
+                    _roomsFresh.Add(bakedRoom);
+                }
+            }
+            
             if (_roomsFresh.Count == 0)
             {
-                _debugLog?.Error("No room presets to generate dungeon");
+                _debugLog?.Error("No rooms to generate dungeon");
                 return;
             }
-
-            _connections.Clear();
-
-            var firstRoomIndex = GreatRandom.Range(0, _roomsFresh.Count);
-            _layoutModifier.SpawnFirstRoom(_roomsFresh[firstRoomIndex]);
             
-            while (_layout.Count < cellCount && _connections.Count > 0)
+            _worldExits.Clear();
+            
+            var firstRoomIndex = GreatRandom.Range(0, _roomsFresh.Count);
+            _placer.PlaceFirstRoom(_roomsFresh[firstRoomIndex]);
+
+            while (_worldMap.Count < cellCount && _worldExits.Count > 0)
             {
-                var pointIndex = GreatRandom.Range(0, _connections.Count);
-                var worldConnection = _connections[pointIndex];
-                _connections.RemoveAt(pointIndex);
+                var exitIndex = GreatRandom.Range(0, _worldExits.Count);
+                var worldExit = _worldExits[exitIndex];
+                _worldExits.RemoveAt(exitIndex);
 
                 while (_roomsFresh.Count > 0)
                 {
@@ -74,7 +92,7 @@ namespace FrozenExpress.Game.Dungeon
                     _roomsUsed.Add(room);
                     _roomsFresh.RemoveAt(roomIndex);
 
-                    if (_layoutModifier.TrySpawnRoom(worldConnection, room))
+                    if (_placer.TryPlaceRoom(room, worldExit))
                     {
                         break;
                     }
@@ -83,11 +101,22 @@ namespace FrozenExpress.Game.Dungeon
                 _roomsFresh.AddRange(_roomsUsed);
                 _roomsUsed.Clear();
             }
+            
+            _roomsFresh.AddRange(_roomsUsed);
+            foreach (var room in _roomsFresh)
+            {
+                _baker.Dispose(room);
+            }
 
-            if (_layout.Count < cellCount)
+            if (_worldMap.Count < cellCount)
             {
                 _debugLog?.Error("Failed to create full size dungeon");
             }
+        }
+        
+        private static int DirectionToIndex(Vector3Int direction)
+        {
+            return 9 * (direction.x + 1) + 3 * (direction.y + 1) + direction.z + 1;
         }
     }
 }
