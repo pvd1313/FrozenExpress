@@ -2,6 +2,6 @@
 {
     public interface IDungeonEntityDatabase
     {
-        DungeonEntityConfig GetEntity(string id);
+        DungeonEntity GetEntity(string id);
     }
 }

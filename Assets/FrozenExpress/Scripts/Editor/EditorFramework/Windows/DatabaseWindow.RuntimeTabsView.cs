@@ -46,7 +46,7 @@ namespace FrozenExpress.Editor.EditorFramework
                 }
             }
 
-            public void OnSceneGUI(object data)
+            public void OnSceneGUI(SceneView sceneView, object data)
             {
                 if (!_isInitialized)
                 {
@@ -60,7 +60,7 @@ namespace FrozenExpress.Editor.EditorFramework
                 
                 foreach (var tab in tabList)
                 {
-                    tab.OnSceneGUI(data);
+                    tab.OnSceneGUI(sceneView, data);
                 }
             }
 

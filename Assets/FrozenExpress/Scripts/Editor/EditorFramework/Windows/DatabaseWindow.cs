@@ -45,7 +45,7 @@ namespace FrozenExpress.Editor.EditorFramework
             SceneView.duringSceneGui -= OnSceneGUI;
         }
 
-        private void OnSceneGUI(SceneView sceneVIew)
+        private void OnSceneGUI(SceneView sceneView)
         {
             if (_database == null)
             {
@@ -70,8 +70,8 @@ namespace FrozenExpress.Editor.EditorFramework
             
             var item = ((IList) databaseInfo.ListField.GetValue(_database))[_selectedItemIndex];
             Undo.RecordObject(_database, "Tab view");
-            _staticTabsView.OnSceneGUI(item);
-            _runtimeTabsView.OnSceneGUI(item);
+            _staticTabsView.OnSceneGUI(sceneView, item);
+            _runtimeTabsView.OnSceneGUI(sceneView, item);
         }
 
         private void OnGUI()

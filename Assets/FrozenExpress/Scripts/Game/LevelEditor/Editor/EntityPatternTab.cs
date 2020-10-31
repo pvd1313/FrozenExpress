@@ -2,6 +2,7 @@
 using FrozenExpress.Editor.EditorFramework;
 using FrozenExpress.Game.Dungeon;
 using UnityEditor;
+using UnityEngine;
 
 namespace FrozenExpress.Game.LevelEditor.Editor
 {
@@ -24,7 +25,7 @@ namespace FrozenExpress.Game.LevelEditor.Editor
             }
         }
 
-        public void OnSceneGUI(object data)
+        public void OnSceneGUI(SceneView sceneView, object data)
         {
             
         }

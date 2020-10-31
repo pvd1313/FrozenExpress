@@ -18,39 +18,53 @@ MonoBehaviour:
     _debugVertexColor:
       serializedVersion: 2
       rgba: 4287203721
+    _colliders:
+    - Position: {x: 0, y: -2.25, z: 0}
+      Rotation: {x: 0, y: 0, z: 0}
+      Size: {x: 5, y: 0.5, z: 5}
   - _id: wall
     _mesh: {fileID: 8733429697405204941, guid: 2d7e9527365af38499c3126c890f0d50, type: 3}
     _debugVertexColor:
       serializedVersion: 2
       rgba: 4291875024
+    _colliders:
+    - Position: {x: 0, y: 0, z: 2.75}
+      Rotation: {x: 0, y: 0, z: 0}
+      Size: {x: 5, y: 4, z: 0.5}
   - _id: pillar_line
     _mesh: {fileID: 1129247566542154258, guid: 587c050c9398de842bec4717ad862926, type: 3}
     _debugVertexColor:
       serializedVersion: 2
       rgba: 4288587370
+    _colliders: []
   - _id: pillar_inner
     _mesh: {fileID: 527982050842733842, guid: cd5934e408d8b684dbf6a9a31c9d393e, type: 3}
     _debugVertexColor:
       serializedVersion: 2
       rgba: 4286185466
+    _colliders: []
   - _id: pillar_outer
     _mesh: {fileID: 7758205013865117209, guid: 62fdd0814fde1ac4fbe3d8e318dbd8a4, type: 3}
     _debugVertexColor:
       serializedVersion: 2
       rgba: 4285111295
+    _colliders: []
   - _id: floor_corner_0
     _mesh: {fileID: 4843411271666187279, guid: 42632ca733b21904ba8ea94b3b8d3143, type: 3}
     _debugVertexColor:
       serializedVersion: 2
       rgba: 4280955903
+    _colliders: []
   - _id: floor_corner_1
     _mesh: {fileID: 4823244162802488805, guid: b1d9017a0524eac4496610e87e2f2e0d, type: 3}
     _debugVertexColor:
       serializedVersion: 2
       rgba: 4294923050
+    _colliders: []
   - _id: floor_corner_2
     _mesh: {fileID: -4427705355738009909, guid: 81108660b154d934c875178abb72642a,
       type: 3}
     _debugVertexColor:
       serializedVersion: 2
       rgba: 4281007930
+    _colliders: []

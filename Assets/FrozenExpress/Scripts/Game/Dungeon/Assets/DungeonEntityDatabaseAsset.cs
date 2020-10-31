@@ -8,9 +8,9 @@ namespace FrozenExpress.Game.Dungeon
     {
         public event Action OnModified;
 
-        public IReadOnlyList<DungeonEntityConfig> Entities => _entities;
+        public IReadOnlyList<DungeonEntity> Entities => _entities;
 
-        [SerializeField] private List<DungeonEntityConfig> _entities;
+        [SerializeField] private List<DungeonEntity> _entities;
 
         private void OnValidate()
         {

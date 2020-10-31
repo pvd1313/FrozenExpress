@@ -25,7 +25,7 @@ namespace FrozenExpress.Editor.EditorFramework
                 EditorGUILayout.BeginHorizontal();
                 {
                     EditorGUILayout.LabelField("Database", GUILayout.Width(60));
-                    _owner._database = AssetField("", _owner._database);
+                    _owner._database = FrozenEditorGUILayout.AssetField("", _owner._database);
                     result |= HeaderButton("D", 8, "Duplicate selected item");
                     result |= HeaderButton("▲", 4, "Move up selected item");
                     result |= HeaderButton("▼", 2, "Move down selected item");
@@ -78,11 +78,6 @@ namespace FrozenExpress.Editor.EditorFramework
                 HeaderButtonContent.tooltip = tooltip;
             
                 return GUILayout.Button(HeaderButtonContent, HeaderButtonWidth) ? flag : 0;
-            }
-            
-            private static T AssetField<T>(string label, T asset) where T : Object
-            {
-                return EditorGUILayout.ObjectField(label, asset, typeof(T), false) as T;
             }
         }
     }

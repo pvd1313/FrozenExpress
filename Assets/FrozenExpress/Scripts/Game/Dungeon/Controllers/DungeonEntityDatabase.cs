@@ -9,13 +9,13 @@ namespace FrozenExpress.Game.Dungeon
         public EInitializationOrder InitializationOrder => EInitializationOrder.Database;
 
         private readonly DungeonEntityDatabaseAsset _asset;
-        private readonly Dictionary<string, DungeonEntityConfig> _cash;
+        private readonly Dictionary<string, DungeonEntity> _cash;
         private readonly ADebugLogger _debugLog;
 
         public DungeonEntityDatabase(DungeonEntityDatabaseAsset asset,
                                      ADebugFactory debugFactory)
         {
-            _cash = new Dictionary<string, DungeonEntityConfig>();
+            _cash = new Dictionary<string, DungeonEntity>();
             _asset = asset;
             _debugLog = debugFactory.CreateLogger(this);
 
@@ -27,7 +27,7 @@ namespace FrozenExpress.Game.Dungeon
             CashDatabase();
         }
 
-        public DungeonEntityConfig GetEntity(string id)
+        public DungeonEntity GetEntity(string id)
         {
             if (!_cash.TryGetValue(id, out var item))
             {
