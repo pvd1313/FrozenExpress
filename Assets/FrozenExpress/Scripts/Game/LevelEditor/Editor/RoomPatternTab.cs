@@ -116,5 +116,10 @@ namespace FrozenExpress.Game.LevelEditor.Editor
             }
             EditorGUILayout.EndHorizontal();
         }
+
+        public void OnSceneGUI(object data)
+        {
+            
+        }
     }
 }

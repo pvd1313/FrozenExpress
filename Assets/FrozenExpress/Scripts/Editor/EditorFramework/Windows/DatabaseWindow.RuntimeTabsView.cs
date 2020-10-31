@@ -46,6 +46,24 @@ namespace FrozenExpress.Editor.EditorFramework
                 }
             }
 
+            public void OnSceneGUI(object data)
+            {
+                if (!_isInitialized)
+                {
+                    return;
+                }
+                
+                if (!_tabs.TryGetValue(data.GetType(), out var tabList))
+                {
+                    return;
+                }
+                
+                foreach (var tab in tabList)
+                {
+                    tab.OnSceneGUI(data);
+                }
+            }
+
             private bool Initialize()
             {
                 if (!Application.isPlaying)

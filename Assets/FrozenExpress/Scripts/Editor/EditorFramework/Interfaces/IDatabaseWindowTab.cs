@@ -7,5 +7,7 @@ namespace FrozenExpress.Editor.EditorFramework
         Type TargetType { get; } 
         
         void OnGUI(object data);
+
+        void OnSceneGUI(object data);
     }
 }

@@ -22,8 +22,6 @@ namespace FrozenExpress.Editor.EditorFramework
         private Vector2 _itemPreviewScrollPos;
         private int _selectedItemIndex;
 
-        private Vector3 _somePosition;
-
         public DatabaseWindow()
         {
             _staticTabsView = new StaticTabsView();
@@ -34,6 +32,46 @@ namespace FrozenExpress.Editor.EditorFramework
             _items = new List<SerializedProperty>();
             _itemListView = new SelectableListView<SerializedProperty>(GetPropertyName, GUILayout.Height(200));
             _repaintEvents = new RepaintEventsView(this);
+        }
+        
+        private void OnEnable()
+        {
+            SceneView.duringSceneGui -= OnSceneGUI;
+            SceneView.duringSceneGui += OnSceneGUI;
+        }
+
+        private void OnDisable()
+        {
+            SceneView.duringSceneGui -= OnSceneGUI;
+        }
+
+        private void OnSceneGUI(SceneView sceneVIew)
+        {
+            if (_database == null)
+            {
+                return;
+            }
+            
+            var databaseInfo = DatabaseScanner.GetInfo(_database);
+            if (!databaseInfo.IsDatabase)
+            {
+                return;
+            }
+
+            if (_databaseSerialized == null || _databaseSerialized.targetObject != _database)
+            {
+                return;
+            }
+
+            if (_selectedItemIndex < 0)
+            {
+                return;
+            }
+            
+            var item = ((IList) databaseInfo.ListField.GetValue(_database))[_selectedItemIndex];
+            Undo.RecordObject(_database, "Tab view");
+            _staticTabsView.OnSceneGUI(item);
+            _runtimeTabsView.OnSceneGUI(item);
         }
 
         private void OnGUI()

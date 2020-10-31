@@ -43,6 +43,18 @@ namespace FrozenExpress.Editor.EditorFramework
                 }
             }
 
+            public void OnSceneGUI(object data)
+            {
+                var tabs = GetOrCreateTabs(data.GetType());
+                foreach (var tab in tabs)
+                {
+                    if (_foldoutStates[tab])
+                    {
+                        tab.OnSceneGUI(data);
+                    }
+                }
+            }
+
             private IEnumerable<IDatabaseWindowTab> GetOrCreateTabs(Type dataType)
             {
                 if (_tabs.TryGetValue(dataType, out var tabList))

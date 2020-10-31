@@ -23,5 +23,10 @@ namespace FrozenExpress.Game.LevelEditor.Editor
                 EditorGUILayout.LabelField("Hello, from tab!");
             }
         }
+
+        public void OnSceneGUI(object data)
+        {
+            
+        }
     }
 }
