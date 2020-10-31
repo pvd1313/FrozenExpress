@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using FrozenExpress.Editor.EditorFramework;
 using FrozenExpress.Game.Debugging;
 using FrozenExpress.Game.Dungeon;
+using FrozenExpress.Game.DungeonGenerator;
 using UnityEditor;
 using UnityEngine;
 

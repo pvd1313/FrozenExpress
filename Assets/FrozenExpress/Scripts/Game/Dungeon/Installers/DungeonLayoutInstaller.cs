@@ -8,8 +8,6 @@ namespace FrozenExpress.Game.Dungeon.Installers
         [SerializeField] private DungeonPatternDatabaseAsset _patternDatabase;
         [SerializeField] private Vector3 _cellSize;
         [SerializeField] private DungeonEntityDatabaseAsset _entityDatabase;
-        [SerializeField] private DungeonRoomPatternDatabaseAsset _roomPatternDatabase;
-        [SerializeField] private DungeonLayoutGeneratorConfig _layoutGeneratorConfig;
 
         public override void InstallBindings()
         {
@@ -20,9 +18,6 @@ namespace FrozenExpress.Game.Dungeon.Installers
             Install<DungeonMeshBuilder>();
             Install<DungeonTransform>(_cellSize);
             Install<DungeonPatternExpressionParser>();
-            Install<DungeonRoomPatternProcessor>();
-            Install<DungeonRoomPatternDatabase>(_roomPatternDatabase);
-            Install<DungeonLayoutGenerator>(_layoutGeneratorConfig);
         }
     }
 }

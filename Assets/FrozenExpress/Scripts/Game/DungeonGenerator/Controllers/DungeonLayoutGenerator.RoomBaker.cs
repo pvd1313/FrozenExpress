@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using FrozenExpress.Game.Dungeon;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
-namespace FrozenExpress.Game.Dungeon
+namespace FrozenExpress.Game.DungeonGenerator
 {
     partial class DungeonLayoutGenerator
     {

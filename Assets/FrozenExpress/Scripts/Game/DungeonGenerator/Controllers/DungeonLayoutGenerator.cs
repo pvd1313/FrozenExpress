@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using FrozenExpress.Game.Debugging;
+using FrozenExpress.Game.Dungeon;
 using UnityEngine;
 
 using GreatRandom = UnityEngine.Random;
 
-namespace FrozenExpress.Game.Dungeon
+namespace FrozenExpress.Game.DungeonGenerator
 {
     public partial class DungeonLayoutGenerator : IDungeonLayoutGenerator
     {

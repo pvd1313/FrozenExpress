@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace FrozenExpress.Game.Dungeon
+namespace FrozenExpress.Game.DungeonGenerator
 {
     public class DungeonRoomPatternProcessor : IDungeonRoomPatternProcessor
     {

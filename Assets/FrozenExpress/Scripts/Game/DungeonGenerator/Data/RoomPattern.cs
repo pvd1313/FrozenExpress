@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using FrozenExpress.Game.Dungeon;
 using OneLine;
 using UnityEngine;
 
-namespace FrozenExpress.Game.Dungeon
+namespace FrozenExpress.Game.DungeonGenerator
 {
     [System.Serializable]
     public class RoomPattern

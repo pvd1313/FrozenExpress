@@ -2,7 +2,7 @@
 using FrozenExpress.Game.Debugging;
 using FrozenExpress.Game.GameCycle;
 
-namespace FrozenExpress.Game.Dungeon
+namespace FrozenExpress.Game.DungeonGenerator
 {
     public class DungeonRoomPatternDatabase : IDungeonRoomPatternDatabase, ITerminatable, IInitializable
     {

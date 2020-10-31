@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace FrozenExpress.Game.Dungeon
+namespace FrozenExpress.Game.DungeonGenerator
 {
     partial class DungeonLayoutGenerator
     {
