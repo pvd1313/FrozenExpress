@@ -8,9 +8,9 @@ using Zenject;
 
 namespace FrozenExpress.Editor.EditorFramework
 {
-    partial class ScriptableObjectDatabaseWindow
+    partial class DatabaseWindow
     {
-        public class TabsView
+        private class RuntimeTabsView
         {
             private readonly Dictionary<Type, List<IDatabaseWindowTab>> _tabs;
             private readonly HorizontalSeparatorView _separatorView;
@@ -19,7 +19,7 @@ namespace FrozenExpress.Editor.EditorFramework
             private bool _initializationException;
             private DiContainer _tabsContainer;
 
-            public TabsView()
+            public RuntimeTabsView()
             {
                 _separatorView = new HorizontalSeparatorView();
                 _tabs = new Dictionary<Type, List<IDatabaseWindowTab>>();

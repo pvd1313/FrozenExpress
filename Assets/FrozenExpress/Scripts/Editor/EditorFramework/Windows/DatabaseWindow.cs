@@ -1,11 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
 namespace FrozenExpress.Editor.EditorFramework
 {
-    public partial class ScriptableObjectDatabaseWindow : EditorWindow
+    public partial class DatabaseWindow : EditorWindow
     {
         private readonly List<SerializedProperty> _items;
         private readonly SelectableListView<SerializedProperty> _itemListView;
@@ -13,16 +14,20 @@ namespace FrozenExpress.Editor.EditorFramework
         private readonly HorizontalSeparatorView _horizontalSeparatorView;
         private readonly SerializedPropertyView _propertyView;
         private readonly DatabaseWindowHeaderView _headerView;
-        private readonly TabsView _tabsView;
+        private readonly RuntimeTabsView _runtimeTabsView;
+        private readonly StaticTabsView _staticTabsView;
 
         private ScriptableObject _database;
         private SerializedObject _databaseSerialized;
         private Vector2 _itemPreviewScrollPos;
         private int _selectedItemIndex;
 
-        public ScriptableObjectDatabaseWindow()
+        private Vector3 _somePosition;
+
+        public DatabaseWindow()
         {
-            _tabsView = new TabsView();
+            _staticTabsView = new StaticTabsView();
+            _runtimeTabsView = new RuntimeTabsView();
             _headerView = new DatabaseWindowHeaderView(this);
             _propertyView = new SerializedPropertyView();
             _horizontalSeparatorView = new HorizontalSeparatorView();
@@ -78,7 +83,8 @@ namespace FrozenExpress.Editor.EditorFramework
                 
                 Undo.RecordObject(_database, "Tab view");
                 var item = ((IList) databaseInfo.ListField.GetValue(_database))[_selectedItemIndex];
-                _tabsView.OnGUI(item);
+                _staticTabsView.OnGUI(item);
+                _runtimeTabsView.OnGUI(item);
             }
 
             EditorGUILayout.EndScrollView();

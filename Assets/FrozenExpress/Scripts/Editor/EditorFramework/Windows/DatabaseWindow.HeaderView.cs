@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace FrozenExpress.Editor.EditorFramework
 {
-    partial class ScriptableObjectDatabaseWindow
+    partial class DatabaseWindow
     {
         [System.Serializable]
         private class DatabaseWindowHeaderView
@@ -11,9 +11,9 @@ namespace FrozenExpress.Editor.EditorFramework
             private static readonly GUIContent HeaderButtonContent = new GUIContent();
             private static readonly GUILayoutOption HeaderButtonWidth = GUILayout.Width(24);
             
-            private readonly ScriptableObjectDatabaseWindow _owner;
+            private readonly DatabaseWindow _owner;
             
-            public DatabaseWindowHeaderView(ScriptableObjectDatabaseWindow owner)
+            public DatabaseWindowHeaderView(DatabaseWindow owner)
             {
                 _owner = owner;
             }

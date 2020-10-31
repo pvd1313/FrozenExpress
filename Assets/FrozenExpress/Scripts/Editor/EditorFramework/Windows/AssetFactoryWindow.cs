@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace FrozenExpress.Editor.EditorFramework
 {
-    public class ScriptableObjectFactoryWindow : EditorWindow
+    public class AssetFactoryWindow : EditorWindow
     {
         private readonly TypeScannerWindow _scannerWindow;
         private readonly RepaintEventsView _repaintEvents;
@@ -13,10 +13,10 @@ namespace FrozenExpress.Editor.EditorFramework
         [MenuItem("Assets/Create asset...")]
         private static void InvokeWindow()
         {
-            WindowUtil.OpenToolWindow<ScriptableObjectFactoryWindow>();
+            WindowUtil.OpenToolWindow<AssetFactoryWindow>();
         }
 
-        public ScriptableObjectFactoryWindow()
+        public AssetFactoryWindow()
         {
             _scannerWindow = new TypeScannerWindow(typeof(ScriptableObject));
             _repaintEvents = new RepaintEventsView(this);
