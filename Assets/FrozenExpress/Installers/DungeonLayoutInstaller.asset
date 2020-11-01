@@ -12,11 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c67a1741617429b4fadd3c8c47f143c5, type: 3}
   m_Name: DungeonLayoutInstaller
   m_EditorClassIdentifier: 
-  _patternDatabase: {fileID: 11400000, guid: 3ee39ed67b923e74f80f477774161cda, type: 2}
+  _entityPatternDatabase: {fileID: 11400000, guid: 3ee39ed67b923e74f80f477774161cda,
+    type: 2}
   _cellSize: {x: 5, y: 4, z: 5}
   _entityDatabase: {fileID: 11400000, guid: 6f00deb8c07d6884fbe356649bfed3ab, type: 2}
-  _roomPatternDatabase: {fileID: 11400000, guid: 971c4076c224bc643b6e03b6b108335c,
-    type: 2}
-  _layoutGeneratorConfig:
-    _requiredCellCount: 5
-    _requiredExitPointCount: 2

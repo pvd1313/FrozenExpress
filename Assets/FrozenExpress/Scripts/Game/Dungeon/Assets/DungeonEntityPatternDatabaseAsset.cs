@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace FrozenExpress.Game.Dungeon
 {
-    public class DungeonPatternDatabaseAsset : AScriptableObjectDatabase
+    public class DungeonEntityPatternDatabaseAsset : AScriptableObjectDatabase
     {
         public IReadOnlyList<EntityPattern> Patterns => _patterns;
 

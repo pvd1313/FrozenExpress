@@ -5,7 +5,7 @@ namespace FrozenExpress.Game.Dungeon.Installers
 {
     public class DungeonLayoutInstaller : AModuleInstaller
     {
-        [SerializeField] private DungeonPatternDatabaseAsset _patternDatabase;
+        [SerializeField] private DungeonEntityPatternDatabaseAsset _entityPatternDatabase;
         [SerializeField] private Vector3 _cellSize;
         [SerializeField] private DungeonEntityDatabaseAsset _entityDatabase;
 
@@ -13,11 +13,12 @@ namespace FrozenExpress.Game.Dungeon.Installers
         {
             Install<DungeonEntityDatabase>(_entityDatabase);
             Install<MeshBuilder>();
-            Install<DungeonPatternController>(_patternDatabase.Patterns);
+            Install<DungeonPatternController>();
             Install<DungeonPatternTransformController>();
             Install<DungeonMeshBuilder>();
             Install<DungeonTransform>(_cellSize);
             Install<DungeonPatternExpressionParser>();
+            Install<DungeonEntityPatternDatabase>(_entityPatternDatabase);
         }
     }
 }
