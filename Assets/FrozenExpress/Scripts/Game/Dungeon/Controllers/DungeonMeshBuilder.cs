@@ -11,7 +11,8 @@ namespace FrozenExpress.Game.Dungeon
         private readonly IDungeonPatternTransformController _patternTransformer;
         private readonly IDungeonEntityDatabase _entityDatabase;
         
-        private readonly Dictionary<DungeonEntity, Mesh> _meshCash;
+        private readonly Dictionary<string, Mesh> _meshCash;
+        private readonly Dictionary<string, Color32> _colorCash;
         private readonly Vector3 _scaleOne;
         private readonly Quaternion _rotationIdentity;
 
@@ -27,7 +28,8 @@ namespace FrozenExpress.Game.Dungeon
             
             _scaleOne = new Vector3(1, 1, 1);
             _rotationIdentity = Quaternion.identity;
-            _meshCash = new Dictionary<DungeonEntity, Mesh>();
+            _meshCash = new Dictionary<string, Mesh>();
+            _colorCash = new Dictionary<string, Color32>();
 
             _entityDatabase.OnCashUpdate += UpdateMeshCash;
         }
@@ -40,7 +42,8 @@ namespace FrozenExpress.Game.Dungeon
                 var mesh = entity.Mesh;
                 if (mesh != null)
                 {
-                    _meshCash.Add(entity, mesh);
+                    _meshCash.Add(entity.Id, mesh);
+                    _colorCash.Add(entity.Id, entity.DebugVertexColor);
                 }
             }
         }
@@ -51,8 +54,7 @@ namespace FrozenExpress.Game.Dungeon
 
             foreach (var entityTransform in entityTransforms)
             {
-                var entity = entityTransform.Entity;
-                if (!_meshCash.TryGetValue(entity, out var entityMesh))
+                if (!_meshCash.TryGetValue(entityTransform.EntityId, out var entityMesh))
                 {
                     return;
                 }
@@ -69,9 +71,10 @@ namespace FrozenExpress.Game.Dungeon
                     rotation = _patternTransformer.TransformRotation(rotation, operation);
                 }
 
+                _colorCash.TryGetValue(entityTransform.EntityId, out var color);
                 var matrix = Matrix4x4.TRS(position, rotation, scale);
                 
-                _meshBuilder.AddMesh(entityMesh, matrix, entity.DebugVertexColor);
+                _meshBuilder.AddMesh(entityMesh, matrix, color);
             }
             
             _meshBuilder.Apply(result);

@@ -10,7 +10,6 @@ namespace FrozenExpress.Game.Dungeon
     {
         private readonly IDungeonPatternTransformController _transformer;
         private readonly IDungeonPatternExpressionParser _expressionParser;
-        private readonly IDungeonEntityDatabase _entityDatabase;
         private readonly IDungeonEntityPatternDatabase _entityPatternDatabase;
 
         private readonly List<EntityPattern> _patternBuffer;
@@ -20,10 +19,8 @@ namespace FrozenExpress.Game.Dungeon
 
         public DungeonPatternController(IDungeonPatternTransformController transformer,
                                         IDungeonPatternExpressionParser expressionParser,
-                                        IDungeonEntityDatabase entityDatabase,
                                         IDungeonEntityPatternDatabase entityPatternDatabase)
         {
-            _entityDatabase = entityDatabase;
             _entityPatternDatabase = entityPatternDatabase;
             _transformer = transformer;
             _expressionParser = expressionParser;
@@ -62,9 +59,8 @@ namespace FrozenExpress.Game.Dungeon
             {
                 var pattern = _patternBuffer[i];
                 _expressionCash.TryGetValue(pattern, out var expression);
-                var entity = _entityDatabase.GetEntity(pattern.EntityId);
 
-                if (expression == null || entity == null)
+                if (expression == null)
                 {
                     continue;
                 }
@@ -103,7 +99,7 @@ namespace FrozenExpress.Game.Dungeon
                         }
 
                         EntityPatternTransform transform;
-                        transform.Entity = entity;
+                        transform.EntityId = pattern.EntityId;
                         transform.Position = cell;
                         transform.Transform = matrixSequence;
                         

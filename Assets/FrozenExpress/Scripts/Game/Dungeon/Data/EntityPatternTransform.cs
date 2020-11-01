@@ -5,7 +5,7 @@ namespace FrozenExpress.Game.Dungeon
 {
     public struct EntityPatternTransform
     {
-        public DungeonEntity Entity;
+        public string EntityId;
         public IReadOnlyList<EPatternTransform> Transform;
         public Vector3Int Position;
     }
