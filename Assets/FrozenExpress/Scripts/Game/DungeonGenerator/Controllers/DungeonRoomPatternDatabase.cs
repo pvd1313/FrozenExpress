@@ -21,7 +21,7 @@ namespace FrozenExpress.Game.DungeonGenerator
             _debugLog = debugFactory.CreateLogger(this);
             _cash = new Dictionary<string, RoomPattern>();
 
-            asset.OnModified += CashDatabase;
+            asset.OnModify += CashDatabase;
         }
         
         public void Initialize()
@@ -49,7 +49,7 @@ namespace FrozenExpress.Game.DungeonGenerator
 
         public void Terminate()
         {
-            _asset.OnModified -= CashDatabase;
+            _asset.OnModify -= CashDatabase;
         }
     }
 }

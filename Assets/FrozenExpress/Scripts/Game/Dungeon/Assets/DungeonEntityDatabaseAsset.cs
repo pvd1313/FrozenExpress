@@ -1,20 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using FrozenExpress.Game.Serialization;
 using UnityEngine;
 
 namespace FrozenExpress.Game.Dungeon
 {
-    public class DungeonEntityDatabaseAsset : ScriptableObject
+    public class DungeonEntityDatabaseAsset : AScriptableObjectDatabase
     {
-        public event Action OnModified;
-
         public IReadOnlyList<DungeonEntity> Entities => _entities;
 
         [SerializeField] private List<DungeonEntity> _entities;
-
-        private void OnValidate()
-        {
-            OnModified?.Invoke();
-        }
     }
 }

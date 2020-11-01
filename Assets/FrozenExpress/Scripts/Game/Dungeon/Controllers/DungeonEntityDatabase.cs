@@ -19,7 +19,7 @@ namespace FrozenExpress.Game.Dungeon
             _asset = asset;
             _debugLog = debugFactory.CreateLogger(this);
 
-            _asset.OnModified += CashDatabase;
+            _asset.OnModify += CashDatabase;
         }
         
         public void Initialize()
@@ -58,7 +58,7 @@ namespace FrozenExpress.Game.Dungeon
 
         public void Terminate()
         {
-            _asset.OnModified -= CashDatabase;
+            _asset.OnModify -= CashDatabase;
         }
     }
 }
