@@ -8,7 +8,6 @@ namespace FrozenExpress.Game.Dungeon
         private readonly IDungeonPatternController _patternMaster;
         private readonly IDungeonTransform _layoutTransform;
         private readonly IMeshBuilder _meshBuilder;
-        private readonly DungeonMap _dungeonLayoutMap;
 
         public DungeonMeshBuilder(IDungeonPatternController patternMaster,
                                   IDungeonTransform layoutTransform,
@@ -17,15 +16,13 @@ namespace FrozenExpress.Game.Dungeon
             _patternMaster = patternMaster;
             _layoutTransform = layoutTransform;
             _meshBuilder = meshBuilder;
-            _dungeonLayoutMap = new DungeonMap();
         }
 
         public void BuildMesh(IReadOnlyDictionary<Vector3Int, int> dungeonLayout, Mesh result)
         {
-            _dungeonLayoutMap.Initialize(dungeonLayout);
             _meshBuilder.Clear();
 
-            foreach (var entity in _patternMaster.IterateEntities(_dungeonLayoutMap))
+            foreach (var entity in _patternMaster.IterateEntities(dungeonLayout))
             {
                 var position = _layoutTransform.TransformPosition(entity.Position);
                 var transform = Matrix4x4.TRS(position, entity.Rotation, entity.Scale);

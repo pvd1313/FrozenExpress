@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 
 namespace FrozenExpress.Game.Dungeon
 {
@@ -32,13 +33,13 @@ namespace FrozenExpress.Game.Dungeon
             _conditionBuffer = new List<PatternCondition>();
         }
 
-        public IEnumerable<MeshTransform> IterateEntities(IDungeonMap map)
+        public IEnumerable<MeshTransform> IterateEntities(IReadOnlyDictionary<Vector3Int, int> layoutMap)
         {
             _patternBuffer.Clear();
             _patternBuffer.AddRange(_patterns.Where(p => p.Trigger == EPatternTrigger.Cell));
             
             _cellBuffer.Clear();
-            _cellBuffer.AddRange(map.Cells);
+            _cellBuffer.AddRange(layoutMap.Keys);
 
             for (var i = 0; i < _patternBuffer.Count; i++)
             {
@@ -74,7 +75,7 @@ namespace FrozenExpress.Game.Dungeon
                                 direction = _transformer.TransformDirection(direction, matrixSequence[q]);
                             }
 
-                            var directionLayer = map.GetCellLayer(cell + direction);
+                            layoutMap.TryGetValue(cell + direction, out var directionLayer);
                             var conditionResult = (directionLayer & condition.Layer) == condition.Layer;
                             variables[condition.Variable].Set(conditionResult);
                         }
