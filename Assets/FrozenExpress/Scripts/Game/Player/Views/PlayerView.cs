@@ -39,7 +39,9 @@ namespace FrozenExpress.Game.Player
 
         public void Warp(Vector3 position)
         {
+            _characterController.enabled = false;
             transform.position = position;
+            _characterController.enabled = true;
         }
     }
 }
