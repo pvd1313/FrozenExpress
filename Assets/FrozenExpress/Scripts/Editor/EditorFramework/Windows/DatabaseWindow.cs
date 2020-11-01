@@ -70,8 +70,9 @@ namespace FrozenExpress.Editor.EditorFramework
             
             var item = ((IList) databaseInfo.ListField.GetValue(_database))[_selectedItemIndex];
             Undo.RecordObject(_database, "Tab view");
-            _staticTabsView.OnSceneGUI(sceneView, item);
-            _runtimeTabsView.OnSceneGUI(sceneView, item);
+            var camera = sceneView.camera;
+            _staticTabsView.OnSceneGUI(camera, item);
+            _runtimeTabsView.OnSceneGUI(camera, item);
         }
 
         private void OnGUI()

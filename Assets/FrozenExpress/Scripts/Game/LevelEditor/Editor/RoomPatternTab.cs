@@ -117,7 +117,7 @@ namespace FrozenExpress.Game.LevelEditor.Editor
             EditorGUILayout.EndHorizontal();
         }
 
-        public void OnSceneGUI(SceneView sceneView, object data)
+        public void OnSceneGUI(Camera camera, object data)
         {
             
         }

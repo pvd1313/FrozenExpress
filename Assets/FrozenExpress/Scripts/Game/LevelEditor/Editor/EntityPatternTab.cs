@@ -25,7 +25,7 @@ namespace FrozenExpress.Game.LevelEditor.Editor
             }
         }
 
-        public void OnSceneGUI(SceneView sceneView, object data)
+        public void OnSceneGUI(Camera camera, object data)
         {
             
         }

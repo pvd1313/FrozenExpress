@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEditor;
+using UnityEngine;
 
 namespace FrozenExpress.Editor.EditorFramework
 {
@@ -9,6 +10,6 @@ namespace FrozenExpress.Editor.EditorFramework
         
         void OnGUI(object data);
 
-        void OnSceneGUI(SceneView sceneView, object data);
+        void OnSceneGUI(Camera camera, object data);
     }
 }

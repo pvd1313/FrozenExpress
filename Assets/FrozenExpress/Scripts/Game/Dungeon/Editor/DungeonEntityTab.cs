@@ -32,7 +32,7 @@ namespace FrozenExpress.Scripts.Game.Dungeon.Editor
             }
         }
 
-        public void OnSceneGUI(SceneView sceneView, object data)
+        public void OnSceneGUI(Camera camera, object data)
         {
             if (Event.current.type != EventType.Repaint)
             {
@@ -44,8 +44,6 @@ namespace FrozenExpress.Scripts.Game.Dungeon.Editor
                 return;
             }
             
-            var camera = sceneView.camera;
-
             Handles.color = _config.RoomBoundsColor;
             Handles.DrawWireCube(Vector3.zero, _config.RoomSize);
             Handles.PositionHandle(Vector3.zero, Quaternion.identity);
