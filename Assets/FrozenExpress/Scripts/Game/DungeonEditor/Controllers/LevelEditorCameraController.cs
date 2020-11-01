@@ -1,49 +1,89 @@
-﻿using System.Collections.Generic;
+﻿using FrozenExpress.Game.Cinematics;
+using FrozenExpress.Game.Debugging;
 using FrozenExpress.Game.Dungeon;
 using FrozenExpress.Game.GameCycle;
+using TMPro.EditorUtilities;
 using UnityEngine;
 
 namespace FrozenExpress.Game.DungeonEditor
 {
-    public class LevelEditorCameraController : IFrameUpdatable
+    public class LevelEditorCameraController : IFrameUpdatable, IInitializable
     {
         public EFrameUpdateOrder UpdateOrder => EFrameUpdateOrder.Early;
-
-        private readonly ILevelEditorCameraView _cameraView;
+        public EInitializationOrder InitializationOrder => EInitializationOrder.Common;
+        
+        private readonly ICameraViewFactory _cameraViewFactory;
         private readonly LevelEditorCameraConfig _config;
         private readonly ILevelEditorModel _dungeonModel;
         private readonly IDungeonTransform _dungeonLayoutTransform;
+        private readonly ADebugDrawer _pivotDrawer;
 
-        private Vector2 _cameraRotation;
+        private ICameraView _camera;
+        private Vector2 _rotation;
+        private float _offset;
 
-        public LevelEditorCameraController(ILevelEditorCameraView cameraView,
+        public LevelEditorCameraController(ICameraViewFactory cameraViewFactory,
                                            LevelEditorCameraConfig config,
                                            ILevelEditorModel dungeonModel,
-                                           IDungeonTransform dungeonLayoutTransform)
+                                           IDungeonTransform dungeonLayoutTransform,
+                                           ADebugFactory debugFactory)
         {
-            _cameraView = cameraView;
+            _cameraViewFactory = cameraViewFactory;
             _config = config;
             _dungeonModel = dungeonModel;
             _dungeonLayoutTransform = dungeonLayoutTransform;
+            _offset = 10;
+            
+            _pivotDrawer = debugFactory.CreateDrawer(this);
+            _pivotDrawer?.SetShape(EDebugShape.Sphere3D);
+            _pivotDrawer?.SetColor(EDebugColor.Yellow);
+        }
+        
+        public void Initialize()
+        {
+            _camera = _cameraViewFactory.CreateCamera();
         }
 
         public void Update(FrameUpdateData frameData)
         {
+            HandleInputActions();
+            
+            var pivotPosition = _dungeonLayoutTransform.TransformPosition(_dungeonModel.CursorPosition);
+            var pivotRotation = Quaternion.Euler(_rotation.x, _rotation.y, 0);
+            
+            _camera.Position = pivotPosition - pivotRotation * (Vector3.forward * _offset);
+            _camera.Rotation = pivotRotation;
+            _pivotDrawer?.Draw(pivotPosition);
+
+            if (CheckNumpadKeyDown(out var keyValue))
+            {
+                var position = _dungeonModel.CursorPosition;
+                if (keyValue == 0)
+                {
+                    _dungeonModel.SetCellLayer(position, 0);
+                    return;
+                }
+                
+                var mapLayer = _dungeonModel.GetCellLayer(position);
+                _dungeonModel.SetCellLayer(position, mapLayer ^ (1 << (keyValue - 1)));
+            }
+        }
+
+        private void HandleInputActions()
+        {
             if (Input.GetMouseButton(1))
             {
-                _cameraRotation.x -= Input.GetAxis("Mouse Y") * _config.Sensitivity;
-                _cameraRotation.x = Mathf.Clamp(_cameraRotation.x, 0, 90);
+                _rotation.x -= Input.GetAxis("Mouse Y") * _config.Sensitivity;
+                _rotation.x = Mathf.Clamp(_rotation.x, 0, 90);
 
-                _cameraRotation.y += Input.GetAxis("Mouse X") * _config.Sensitivity;
-                _cameraRotation.y = Mathf.Repeat(_cameraRotation.y, 360);
+                _rotation.y += Input.GetAxis("Mouse X") * _config.Sensitivity;
+                _rotation.y = Mathf.Repeat(_rotation.y, 360);
             }
-
-            var cameraRotation = Quaternion.Euler(_cameraRotation.x, _cameraRotation.y, 0);
-            _cameraView.Rotation = cameraRotation;
-
+            
+            var cameraRotation = Quaternion.Euler(_rotation.x, _rotation.y, 0);
             var viewForward = ComputeForwardDirection(cameraRotation);
             var viewRight = ComputeRightDirection(cameraRotation);
-
+            
             if (Input.GetKeyDown(KeyCode.W))
             {
                 MoveCursor(viewForward);
@@ -71,21 +111,6 @@ namespace FrozenExpress.Game.DungeonEditor
             if (Input.GetKeyDown(KeyCode.R))
             {
                 _dungeonModel.Clear();
-            }
-
-            _cameraView.Position = _dungeonLayoutTransform.TransformPosition(_dungeonModel.CursorPosition);
-
-            if (CheckNumpadKeyDown(out var keyValue))
-            {
-                var position = _dungeonModel.CursorPosition;
-                if (keyValue == 0)
-                {
-                    _dungeonModel.SetCellLayer(position, 0);
-                    return;
-                }
-                
-                var mapLayer = _dungeonModel.GetCellLayer(position);
-                _dungeonModel.SetCellLayer(position, mapLayer ^ (1 << (keyValue - 1)));
             }
         }
 

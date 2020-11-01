@@ -9,9 +9,7 @@ namespace FrozenExpress.Game.Cinematics.Installers
 
         public override void InstallBindings()
         {
-            Spawn(_cameraViewPrefab);
-
-            Install<CameraController>();
+            Install<CameraViewFactory>(_cameraViewPrefab);
         }
     }
 }
