@@ -1,8 +1,8 @@
 ﻿using FrozenExpress.Game.DiFramework.Installers;
-using FrozenExpress.Game.LevelEditor.Models;
+using FrozenExpress.Game.DungeonEditor.Models;
 using UnityEngine;
 
-namespace FrozenExpress.Game.LevelEditor.Installers
+namespace FrozenExpress.Game.DungeonEditor.Installers
 {
     public class LevelEditorInstaller : AModuleInstaller
     {

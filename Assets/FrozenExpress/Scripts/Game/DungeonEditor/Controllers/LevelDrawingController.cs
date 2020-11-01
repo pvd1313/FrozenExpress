@@ -5,7 +5,7 @@ using FrozenExpress.Game.DungeonCollision;
 using FrozenExpress.Game.GameCycle;
 using UnityEngine;
 
-namespace FrozenExpress.Game.LevelEditor
+namespace FrozenExpress.Game.DungeonEditor
 {
     public class LevelDrawingController : IInitializable, ITerminatable, IFrameUpdatable
     {

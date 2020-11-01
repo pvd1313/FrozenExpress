@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace FrozenExpress.Game.LevelEditor.Models
+namespace FrozenExpress.Game.DungeonEditor.Models
 {
     public class LevelEditorModel : ILevelEditorModel
     {

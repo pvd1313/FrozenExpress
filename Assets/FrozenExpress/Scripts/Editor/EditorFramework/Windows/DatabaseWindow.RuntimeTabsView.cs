@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using FrozenExpress.Game.LevelEditor.Editor;
+using FrozenExpress.Game.DungeonEditor.Editor;
 using UnityEditor;
 using UnityEngine;
 using Zenject;

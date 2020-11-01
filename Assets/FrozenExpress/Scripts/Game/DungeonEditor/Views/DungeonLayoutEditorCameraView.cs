@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace FrozenExpress.Game.LevelEditor
+namespace FrozenExpress.Game.DungeonEditor
 {
     public class DungeonLayoutEditorCameraView : MonoBehaviour, ILevelEditorCameraView
     {

@@ -4,7 +4,7 @@ using FrozenExpress.Game.Dungeon;
 using UnityEditor;
 using UnityEngine;
 
-namespace FrozenExpress.Game.LevelEditor.Editor
+namespace FrozenExpress.Game.DungeonEditor.Editor
 {
     public class EntityPatternTab : IDatabaseWindowTab
     {

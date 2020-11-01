@@ -3,7 +3,7 @@ using FrozenExpress.Game.Dungeon;
 using FrozenExpress.Game.GameCycle;
 using UnityEngine;
 
-namespace FrozenExpress.Game.LevelEditor
+namespace FrozenExpress.Game.DungeonEditor
 {
     public class LevelEditorCameraController : IFrameUpdatable
     {
