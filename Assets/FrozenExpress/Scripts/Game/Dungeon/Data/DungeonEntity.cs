@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using FrozenExpress.Game.DungeonCollision;
 using UnityEngine;
 
 namespace FrozenExpress.Game.Dungeon
@@ -9,7 +10,7 @@ namespace FrozenExpress.Game.Dungeon
         public string Id => _id;
         public Mesh Mesh => _mesh;
         public Color32 DebugVertexColor => _debugVertexColor;
-        public IReadOnlyList<ColliderBounds> Colliders => _colliders;
+        public IReadOnlyList<BoxColliderBounds> Colliders => _colliders;
 
         public override string ToString()
         {
@@ -19,6 +20,6 @@ namespace FrozenExpress.Game.Dungeon
         [SerializeField] private string _id;
         [SerializeField] private Mesh _mesh;
         [SerializeField] private Color32 _debugVertexColor;
-        [SerializeField] private List<ColliderBounds> _colliders;
+        [SerializeField] private List<BoxColliderBounds> _colliders;
     }
 }

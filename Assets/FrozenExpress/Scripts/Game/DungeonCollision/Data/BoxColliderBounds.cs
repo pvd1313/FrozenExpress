@@ -1,10 +1,10 @@
 ﻿
 using UnityEngine;
 
-namespace FrozenExpress.Game.Dungeon
+namespace FrozenExpress.Game.DungeonCollision
 {
     [System.Serializable]
-    public struct ColliderBounds
+    public struct BoxColliderBounds
     {
         public Vector3 Position;
         public Vector3 Rotation;
