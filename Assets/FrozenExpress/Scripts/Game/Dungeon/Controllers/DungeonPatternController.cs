@@ -8,9 +8,6 @@ namespace FrozenExpress.Game.Dungeon
 {
     public class DungeonPatternController : IDungeonPatternController, ITerminatable
     {
-        private readonly Vector3 _scaleOne = new Vector3(1, 1, 1);
-        private readonly Quaternion _rotationIdentity = Quaternion.identity;
-        
         private readonly IDungeonPatternTransformController _transformer;
         private readonly IDungeonPatternExpressionParser _expressionParser;
         private readonly IDungeonEntityDatabase _entityDatabase;
@@ -51,13 +48,15 @@ namespace FrozenExpress.Game.Dungeon
             }
         }
 
-        public IEnumerable<MeshTransform> IterateEntities(IReadOnlyDictionary<Vector3Int, int> layoutMap)
+        public void ProcessMap(IReadOnlyDictionary<Vector3Int, int> map, ICollection<EntityPatternTransform> result)
         {
+            result.Clear();
+            
             _patternBuffer.Clear();
             _patternBuffer.AddRange(_entityPatternDatabase.All.Where(p => p.Trigger == EPatternTrigger.Cell));
             
             _cellBuffer.Clear();
-            _cellBuffer.AddRange(layoutMap.Keys);
+            _cellBuffer.AddRange(map.Keys);
 
             for (var i = 0; i < _patternBuffer.Count; i++)
             {
@@ -93,7 +92,7 @@ namespace FrozenExpress.Game.Dungeon
                                 direction = _transformer.TransformDirection(direction, matrixSequence[q]);
                             }
 
-                            layoutMap.TryGetValue(cell + direction, out var directionLayer);
+                            map.TryGetValue(cell + direction, out var directionLayer);
                             var conditionResult = (directionLayer & condition.Layer) == condition.Layer;
                             variables[condition.Variable].Set(conditionResult);
                         }
@@ -103,22 +102,12 @@ namespace FrozenExpress.Game.Dungeon
                             continue;
                         }
 
-                        var scale = _scaleOne;
-                        var rotation = _rotationIdentity;
-                        for (var q = 0; q < matrixSequence.Count; q++)
-                        {
-                            scale = _transformer.TransformScale(scale, matrixSequence[q]);
-                            rotation = _transformer.TransformRotation(rotation, matrixSequence[q]);
-                        }
-
-                        MeshTransform result;
-                        result.Mesh = entity.Mesh;
-                        result.Position = cell;
-                        result.Rotation = rotation;
-                        result.Scale = scale;
-                        result.VertexColor = entity.DebugVertexColor;
-
-                        yield return result;
+                        EntityPatternTransform transform;
+                        transform.Entity = entity;
+                        transform.Position = cell;
+                        transform.Transform = matrixSequence;
+                        
+                        result.Add(transform);
                     }
                 }
             }
@@ -126,7 +115,7 @@ namespace FrozenExpress.Game.Dungeon
 
         public void Terminate()
         {
-            _entityPatternDatabase.OnCashUpdate += UpdateExpressionCash;
+            _entityPatternDatabase.OnCashUpdate -= UpdateExpressionCash;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using FrozenExpress.Game.Debugging;
 using FrozenExpress.Game.GameCycle;
 
@@ -6,7 +7,11 @@ namespace FrozenExpress.Game.Dungeon
 {
     public class DungeonEntityDatabase : IDungeonEntityDatabase, IInitializable, ITerminatable
     {
+        public event Action OnCashUpdate;
+        
         public EInitializationOrder InitializationOrder => EInitializationOrder.Database;
+
+        public IEnumerable<DungeonEntity> All => _cash.Values;
 
         private readonly DungeonEntityDatabaseAsset _asset;
         private readonly Dictionary<string, DungeonEntity> _cash;
@@ -54,6 +59,8 @@ namespace FrozenExpress.Game.Dungeon
 
                 _cash[item.Id] = item;
             }
+            
+            OnCashUpdate?.Invoke();
         }
 
         public void Terminate()

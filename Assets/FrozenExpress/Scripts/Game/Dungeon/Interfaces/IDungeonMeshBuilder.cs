@@ -5,6 +5,6 @@ namespace FrozenExpress.Game.Dungeon
 {
     public interface IDungeonMeshBuilder
     {
-        void BuildMesh(IReadOnlyDictionary<Vector3Int, int> dungeonLayout, Mesh result);
+        void BuildMesh(IEnumerable<EntityPatternTransform> entityTransforms, Mesh result);
     }
 }

@@ -1,4 +1,5 @@
-﻿using FrozenExpress.Game.Debugging;
+﻿using System.Collections.Generic;
+using FrozenExpress.Game.Debugging;
 using FrozenExpress.Game.Dungeon;
 using FrozenExpress.Game.GameCycle;
 using UnityEngine;
@@ -14,8 +15,10 @@ namespace FrozenExpress.Game.LevelEditor
         private readonly IDungeonMeshBuilder _meshBuilder;
         private readonly LevelDrawingConfig _config;
         private readonly IDungeonTransform _dungeonTransform;
+        private readonly IDungeonPatternController _patternController;
         private readonly ILevelEditorModel _dungeonModel;
         private readonly ADebugDrawer _navigationDrawer;
+        private readonly List<EntityPatternTransform> _entitiesBuffer;
         
         private Mesh _mesh;
         private bool _isViewDirty;
@@ -24,12 +27,15 @@ namespace FrozenExpress.Game.LevelEditor
                                       IDungeonMeshBuilder dungeonBuilder,
                                       LevelDrawingConfig config,
                                       ADebugFactory debugFactory,
-                                      IDungeonTransform dungeonTransform)
+                                      IDungeonTransform dungeonTransform,
+                                      IDungeonPatternController patternController)
         {
             _dungeonModel = dungeonModel;
             _meshBuilder = dungeonBuilder;
             _config = config;
             _dungeonTransform = dungeonTransform;
+            _patternController = patternController;
+            _entitiesBuffer = new List<EntityPatternTransform>();
             
             _navigationDrawer = debugFactory.CreateDrawer(this);
             _navigationDrawer?.SetColor(EDebugColor.Green);
@@ -60,7 +66,9 @@ namespace FrozenExpress.Game.LevelEditor
             if (_isViewDirty)
             {
                 _isViewDirty = false;
-                _meshBuilder.BuildMesh(_dungeonModel.Layout, _mesh);
+                
+                _patternController.ProcessMap(_dungeonModel.Layout, _entitiesBuffer);
+                _meshBuilder.BuildMesh(_entitiesBuffer, _mesh);
             }
 
             var material = _config.DrawDiffuse ? _config.DiffuseMaterial : _config.DebugMaterial;
