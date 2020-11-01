@@ -1,11 +1,11 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using FrozenExpress.Game.Dungeon;
+using UnityEngine;
 
 namespace FrozenExpress.Game.DungeonCollision
 {
     public interface IDungeonCollisionController
     {
-        void SpawnBoxCollider(Matrix4x4 matrix);
-        
-        void ClearColliders();
+        void InitializeColliders(IEnumerable<EntityPatternTransform> entities);
     }
 }

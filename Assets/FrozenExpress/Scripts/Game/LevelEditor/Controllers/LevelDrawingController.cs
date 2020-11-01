@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using FrozenExpress.Game.Debugging;
 using FrozenExpress.Game.Dungeon;
+using FrozenExpress.Game.DungeonCollision;
 using FrozenExpress.Game.GameCycle;
 using UnityEngine;
 
@@ -16,8 +17,10 @@ namespace FrozenExpress.Game.LevelEditor
         private readonly LevelDrawingConfig _config;
         private readonly IDungeonTransform _dungeonTransform;
         private readonly IDungeonPatternController _patternController;
+        private readonly IDungeonCollisionController _dungeonCollisionController;
         private readonly ILevelEditorModel _dungeonModel;
         private readonly ADebugDrawer _navigationDrawer;
+        
         private readonly List<EntityPatternTransform> _entitiesBuffer;
         
         private Mesh _mesh;
@@ -28,13 +31,15 @@ namespace FrozenExpress.Game.LevelEditor
                                       LevelDrawingConfig config,
                                       ADebugFactory debugFactory,
                                       IDungeonTransform dungeonTransform,
-                                      IDungeonPatternController patternController)
+                                      IDungeonPatternController patternController,
+                                      IDungeonCollisionController dungeonCollisionController)
         {
             _dungeonModel = dungeonModel;
             _meshBuilder = dungeonBuilder;
             _config = config;
             _dungeonTransform = dungeonTransform;
             _patternController = patternController;
+            _dungeonCollisionController = dungeonCollisionController;
             _entitiesBuffer = new List<EntityPatternTransform>();
             
             _navigationDrawer = debugFactory.CreateDrawer(this);
@@ -69,6 +74,7 @@ namespace FrozenExpress.Game.LevelEditor
                 
                 _patternController.ProcessMap(_dungeonModel.Layout, _entitiesBuffer);
                 _meshBuilder.BuildMesh(_entitiesBuffer, _mesh);
+                _dungeonCollisionController.InitializeColliders(_entitiesBuffer);
             }
 
             var material = _config.DrawDiffuse ? _config.DiffuseMaterial : _config.DebugMaterial;
@@ -82,6 +88,7 @@ namespace FrozenExpress.Game.LevelEditor
 
         public void Terminate()
         {
+            _mesh.Clear();
             _dungeonModel.OnLayoutChanged -= SetMeshDirty;
         }
     }

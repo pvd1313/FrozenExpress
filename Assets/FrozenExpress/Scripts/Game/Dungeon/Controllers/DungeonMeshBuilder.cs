@@ -37,6 +37,7 @@ namespace FrozenExpress.Game.Dungeon
         private void UpdateMeshCash()
         {
             _meshCash.Clear();
+            _colorCash.Clear();
             foreach (var entity in _entityDatabase.All)
             {
                 var mesh = entity.Mesh;
