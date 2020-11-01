@@ -1,5 +1,6 @@
 ﻿using FrozenExpress.Game.Cinematics;
 using FrozenExpress.Game.GameCycle;
+using UnityEngine;
 
 namespace FrozenExpress.Game.Player
 {
@@ -43,6 +44,8 @@ namespace FrozenExpress.Game.Player
         {
             _enabled = isEnabled;
             _camera.IsEnabled = isEnabled;
+            Cursor.visible = !isEnabled;
+            Cursor.lockState = isEnabled ? CursorLockMode.Locked : CursorLockMode.None;
         }
     }
 }
