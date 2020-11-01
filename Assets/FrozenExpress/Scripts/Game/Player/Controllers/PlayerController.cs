@@ -20,6 +20,7 @@ namespace FrozenExpress.Game.Player
         private Vector2 _rotation;
         private IPlayerView _playerView;
         private float _velocityY;
+        private bool _isEnabled;
 
         public PlayerController(IPlayerViewFactory playerViewFactory,
                                 PlayerConfig playerConfig)
@@ -32,11 +33,26 @@ namespace FrozenExpress.Game.Player
         public void Initialize()
         {
             _playerView = _playerViewFactory.CreatePlayer();
-            _playerView.Position = Vector3.zero;
+            _isEnabled = true;
+        }
+
+        public void SetEnabled(bool isEnabled)
+        {
+            _isEnabled = isEnabled;
+        }
+
+        public void Warp(Vector3 position)
+        {
+            _playerView.Warp(position);
         }
 
         public void Update(FrameUpdateData frameData)
         {
+            if (!_isEnabled)
+            {
+                return;
+            }
+            
             _rotation.x -= Input.GetAxis("Mouse Y") * _playerConfig.CameraSensitivity;
             _rotation.x = Mathf.Clamp(_rotation.x, -90, 90);
             _rotation.y += Input.GetAxis("Mouse X") * _playerConfig.CameraSensitivity;

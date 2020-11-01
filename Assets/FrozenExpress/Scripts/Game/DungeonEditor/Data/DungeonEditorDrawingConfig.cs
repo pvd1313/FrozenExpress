@@ -3,7 +3,7 @@
 namespace FrozenExpress.Game.DungeonEditor
 {
     [System.Serializable]
-    public class LevelDrawingConfig
+    public class DungeonEditorDrawingConfig
     {
         public Material DiffuseMaterial => _diffuseMaterial;
         public Material DebugMaterial => _debugMaterial;

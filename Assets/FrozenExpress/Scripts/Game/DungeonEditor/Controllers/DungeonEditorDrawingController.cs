@@ -7,18 +7,18 @@ using UnityEngine;
 
 namespace FrozenExpress.Game.DungeonEditor
 {
-    public class LevelDrawingController : IInitializable, ITerminatable, IFrameUpdatable
+    public class DungeonEditorDrawingController : IInitializable, ITerminatable, IFrameUpdatable
     {
         public EInitializationOrder InitializationOrder => EInitializationOrder.Common;
 
         public EFrameUpdateOrder UpdateOrder => EFrameUpdateOrder.Late;
 
         private readonly IDungeonMeshBuilder _meshBuilder;
-        private readonly LevelDrawingConfig _config;
+        private readonly DungeonEditorDrawingConfig _config;
         private readonly IDungeonTransform _dungeonTransform;
         private readonly IDungeonPatternController _patternController;
         private readonly IDungeonCollisionController _dungeonCollisionController;
-        private readonly ILevelEditorModel _dungeonModel;
+        private readonly IDungeonEditorModel _dungeonModel;
         private readonly ADebugDrawer _navigationDrawer;
         
         private readonly List<EntityPatternTransform> _entitiesBuffer;
@@ -26,9 +26,9 @@ namespace FrozenExpress.Game.DungeonEditor
         private Mesh _mesh;
         private bool _isViewDirty;
 
-        public LevelDrawingController(ILevelEditorModel dungeonModel,
+        public DungeonEditorDrawingController(IDungeonEditorModel dungeonModel,
                                       IDungeonMeshBuilder dungeonBuilder,
-                                      LevelDrawingConfig config,
+                                      DungeonEditorDrawingConfig config,
                                       ADebugFactory debugFactory,
                                       IDungeonTransform dungeonTransform,
                                       IDungeonPatternController patternController,

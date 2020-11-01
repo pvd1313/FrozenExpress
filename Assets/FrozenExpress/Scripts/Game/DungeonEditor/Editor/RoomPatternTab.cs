@@ -13,7 +13,7 @@ namespace FrozenExpress.Game.DungeonEditor.Editor
     {
         public Type TargetType => typeof(RoomPattern);
         
-        private readonly ILevelEditorModel _levelModel;
+        private readonly IDungeonEditorModel _dungeonModel;
         private readonly IDungeonRoomPatternProcessor _roomPatternProcessor;
         private readonly IDungeonTransform _dungeonTransform;
         private readonly IDungeonLayoutGenerator _dungeonLayoutGenerator;
@@ -25,13 +25,13 @@ namespace FrozenExpress.Game.DungeonEditor.Editor
 
         private int _dungeonSize;
 
-        public RoomPatternTab(ILevelEditorModel levelModel,
+        public RoomPatternTab(IDungeonEditorModel dungeonModel,
                               IDungeonRoomPatternProcessor roomPatternProcessor,
                               ADebugFactory debugFactory,
                               IDungeonTransform dungeonTransform,
                               IDungeonLayoutGenerator dungeonLayoutGenerator)
         {
-            _levelModel = levelModel;
+            _dungeonModel = dungeonModel;
             _roomPatternProcessor = roomPatternProcessor;
             _dungeonTransform = dungeonTransform;
             _dungeonLayoutGenerator = dungeonLayoutGenerator;
@@ -57,24 +57,24 @@ namespace FrozenExpress.Game.DungeonEditor.Editor
             {
                 if (GUILayout.Button("Export to game"))
                 {
-                    _levelModel.Clear();
+                    _dungeonModel.Clear();
                     
                     var cells = pattern.Cells;
                     for (var i = 0; i < cells.Count; i++)
                     {
                         var cellLayer = cells[i];
-                        _levelModel.SetCellLayer(cellLayer.Cell, cellLayer.Layer);
+                        _dungeonModel.SetCellLayer(cellLayer.Cell, cellLayer.Layer);
                     }
                 }
 
                 if (GUILayout.Button("Import from game"))
                 {
-                    RoomPattern.EditorOnly.OverrideCells(pattern, _levelModel.Layout);
+                    RoomPattern.EditorOnly.OverrideCells(pattern, _dungeonModel.Layout);
                 }
 
                 if (GUILayout.Button("Detect connections"))
                 {
-                    _roomPatternProcessor.FindConnectionPoints(_levelModel.Layout, _connectionPoints);
+                    _roomPatternProcessor.FindConnectionPoints(_dungeonModel.Layout, _connectionPoints);
                     foreach (var connection in _connectionPoints)
                     {
                         var pos = connection.Point;
@@ -88,7 +88,7 @@ namespace FrozenExpress.Game.DungeonEditor.Editor
 
                 if (GUILayout.Button("Check shape"))
                 {
-                    var cellsConnected = _roomPatternProcessor.CheckAllCellsConnected(_levelModel.Layout);
+                    var cellsConnected = _roomPatternProcessor.CheckAllCellsConnected(_dungeonModel.Layout);
                     if (cellsConnected)
                     {
                         _logger?.Info("All cells connected");
@@ -107,10 +107,10 @@ namespace FrozenExpress.Game.DungeonEditor.Editor
                 if (GUILayout.Button("Generate!"))
                 {
                     _dungeonLayoutGenerator.GenerateDungeon(_dungeonSize, _dungeonLayout);
-                    _levelModel.Clear();
+                    _dungeonModel.Clear();
                     foreach (var cell in _dungeonLayout)
                     {
-                        _levelModel.SetCellLayer(cell.Key, cell.Value);
+                        _dungeonModel.SetCellLayer(cell.Key, cell.Value);
                     }
                 }
             }

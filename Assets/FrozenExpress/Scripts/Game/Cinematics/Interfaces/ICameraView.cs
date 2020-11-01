@@ -6,5 +6,6 @@ namespace FrozenExpress.Game.Cinematics
     {
         Vector3 Position { get; set; }
         Quaternion Rotation { get; set; }
+        bool IsEnabled { get; set; }
     }
 }

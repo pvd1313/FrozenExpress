@@ -15,5 +15,11 @@ namespace FrozenExpress.Game.Cinematics
             get => transform.rotation;
             set => transform.rotation = value;
         }
+
+        public bool IsEnabled
+        {
+            get => gameObject.activeSelf;
+            set => gameObject.SetActive(value);
+        }
     }
 }

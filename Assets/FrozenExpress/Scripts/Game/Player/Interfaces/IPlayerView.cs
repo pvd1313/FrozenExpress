@@ -4,7 +4,7 @@ namespace FrozenExpress.Game.Player
 {
     public interface IPlayerView
     {
-        Vector3 Position { get; set; }
+        Vector3 Position { get; }
 
         Quaternion Rotation { get; set; }
 
@@ -15,5 +15,7 @@ namespace FrozenExpress.Game.Player
         float SkinWidth { get; }
 
         void Move(Vector3 motion);
+
+        void Warp(Vector3 position);
     }
 }

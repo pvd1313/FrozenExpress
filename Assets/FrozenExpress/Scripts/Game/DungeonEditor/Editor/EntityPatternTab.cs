@@ -10,11 +10,11 @@ namespace FrozenExpress.Game.DungeonEditor.Editor
     {
         public Type TargetType => typeof(EntityPattern);
         
-        private readonly ILevelEditorModel _levelModel;
+        private readonly IDungeonEditorModel _dungeonModel;
 
-        public EntityPatternTab(ILevelEditorModel levelModel)
+        public EntityPatternTab(IDungeonEditorModel dungeonModel)
         {
-            _levelModel = levelModel;
+            _dungeonModel = dungeonModel;
         }
         
         public void OnGUI(object data)

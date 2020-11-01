@@ -6,11 +6,7 @@ namespace FrozenExpress.Game.Player
     {
         [SerializeField] private CharacterController _characterController;
 
-        public Vector3 Position
-        {
-            get => transform.position;
-            set => transform.position = value;
-        }
+        public Vector3 Position => transform.position;
 
         public Quaternion Rotation
         {
@@ -39,6 +35,11 @@ namespace FrozenExpress.Game.Player
         public void Move(Vector3 motion)
         {
             _characterController.Move(motion);
+        }
+
+        public void Warp(Vector3 position)
+        {
+            transform.position = position;
         }
     }
 }

@@ -12,6 +12,7 @@ namespace FrozenExpress.Game.Player.Installers
         {
             Install<PlayerViewFactory>(_playerViewPrefab);
             Install<PlayerController>(_playerConfig);
+            Install<PlayerCameraController>();
         }
     }
 }

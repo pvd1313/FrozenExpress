@@ -2,7 +2,7 @@
 
 namespace FrozenExpress.Game.DungeonEditor.Editor
 {
-    public class LevelEditorDatabaseTabsInstaller : Installer
+    public class DungeonEditorDatabaseTabsInstaller : Installer
     {
         public override void InstallBindings()
         {

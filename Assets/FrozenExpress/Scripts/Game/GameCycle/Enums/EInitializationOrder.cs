@@ -4,5 +4,6 @@
     {
         Database = 1,
         Common = 2,
+        CameraModeController = 3,
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace FrozenExpress.Game.DungeonEditor.Models
 {
-    public class LevelEditorModel : ILevelEditorModel
+    public class DungeonEditorModel : IDungeonEditorModel
     {
         public event Action OnLayoutChanged;
         public Vector3Int CursorPosition { get; set; }
@@ -12,7 +12,7 @@ namespace FrozenExpress.Game.DungeonEditor.Models
 
         private readonly Dictionary<Vector3Int, int> _cells;
 
-        public LevelEditorModel()
+        public DungeonEditorModel()
         {
             _cells = new Dictionary<Vector3Int, int>();
         }

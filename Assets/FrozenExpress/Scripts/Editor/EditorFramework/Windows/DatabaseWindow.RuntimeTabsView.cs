@@ -94,7 +94,7 @@ namespace FrozenExpress.Editor.EditorFramework
                     var gameContainer = sceneContext.Container;
                     var tabsContainer = new DiContainer(gameContainer);
                     
-                    tabsContainer.Install<LevelEditorDatabaseTabsInstaller>();
+                    tabsContainer.Install<DungeonEditorDatabaseTabsInstaller>();
                     
                     var tabGroups = tabsContainer.Resolve<List<IDatabaseWindowTab>>()
                         .GroupBy(t => t.TargetType);

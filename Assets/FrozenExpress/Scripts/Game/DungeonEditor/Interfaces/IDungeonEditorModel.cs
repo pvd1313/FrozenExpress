@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace FrozenExpress.Game.DungeonEditor
 {
-    public interface ILevelEditorModel
+    public interface IDungeonEditorModel
     {
         event Action OnLayoutChanged;
 

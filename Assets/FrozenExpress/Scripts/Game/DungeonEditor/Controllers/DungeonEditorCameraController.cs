@@ -2,29 +2,29 @@
 using FrozenExpress.Game.Debugging;
 using FrozenExpress.Game.Dungeon;
 using FrozenExpress.Game.GameCycle;
-using TMPro.EditorUtilities;
 using UnityEngine;
 
 namespace FrozenExpress.Game.DungeonEditor
 {
-    public class LevelEditorCameraController : IFrameUpdatable, IInitializable
+    public class DungeonEditorCameraController : IFrameUpdatable, IInitializable, IDungeonEditorCameraController
     {
         public EFrameUpdateOrder UpdateOrder => EFrameUpdateOrder.Early;
         public EInitializationOrder InitializationOrder => EInitializationOrder.Common;
         
         private readonly ICameraViewFactory _cameraViewFactory;
-        private readonly LevelEditorCameraConfig _config;
-        private readonly ILevelEditorModel _dungeonModel;
+        private readonly DungeonEditorCameraConfig _config;
+        private readonly IDungeonEditorModel _dungeonModel;
         private readonly IDungeonTransform _dungeonLayoutTransform;
         private readonly ADebugDrawer _pivotDrawer;
 
         private ICameraView _camera;
         private Vector2 _rotation;
         private float _offset;
+        private bool _isEnabled;
 
-        public LevelEditorCameraController(ICameraViewFactory cameraViewFactory,
-                                           LevelEditorCameraConfig config,
-                                           ILevelEditorModel dungeonModel,
+        public DungeonEditorCameraController(ICameraViewFactory cameraViewFactory,
+                                           DungeonEditorCameraConfig config,
+                                           IDungeonEditorModel dungeonModel,
                                            IDungeonTransform dungeonLayoutTransform,
                                            ADebugFactory debugFactory)
         {
@@ -42,10 +42,22 @@ namespace FrozenExpress.Game.DungeonEditor
         public void Initialize()
         {
             _camera = _cameraViewFactory.CreateCamera();
+            _isEnabled = true;
+        }
+
+        public void SetEnabled(bool isEnabled)
+        {
+            _isEnabled = isEnabled;
+            _camera.IsEnabled = isEnabled;
         }
 
         public void Update(FrameUpdateData frameData)
         {
+            if (!_isEnabled)
+            {
+                return;
+            }
+            
             HandleInputActions();
             
             var pivotPosition = _dungeonLayoutTransform.TransformPosition(_dungeonModel.CursorPosition);
