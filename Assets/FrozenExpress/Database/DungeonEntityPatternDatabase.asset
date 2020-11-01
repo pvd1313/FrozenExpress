@@ -209,3 +209,26 @@ MonoBehaviour:
       - _variable: C
         _direction: {x: 0, y: 0, z: 0}
         _layer: 1
+  - _name: Stairs Straight
+    _entityId: stairs_straight
+    _trigger: 1
+    _matrixSequences:
+    - _sequence: 00000000
+    - _sequence: 04000000
+    - _sequence: 05000000
+    - _sequence: 06000000
+    _condition:
+      _expression: WC && WU && WFU && !CF
+      _conditions:
+      - _variable: WC
+        _direction: {x: 0, y: 0, z: 0}
+        _layer: 2
+      - _variable: WU
+        _direction: {x: 0, y: 1, z: 0}
+        _layer: 2
+      - _variable: WFU
+        _direction: {x: 0, y: 1, z: 1}
+        _layer: 2
+      - _variable: CF
+        _direction: {x: 0, y: 0, z: 1}
+        _layer: 1

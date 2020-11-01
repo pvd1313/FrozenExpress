@@ -68,3 +68,12 @@ MonoBehaviour:
       serializedVersion: 2
       rgba: 4281007930
     _colliders: []
+  - _id: stairs_straight
+    _mesh: {fileID: 1377433643418563347, guid: 497eec2c53b54ad4082df6bd87d0df14, type: 3}
+    _debugVertexColor:
+      serializedVersion: 2
+      rgba: 4294955132
+    _colliders:
+    - Position: {x: 0, y: 0, z: 0.8}
+      Rotation: {x: 37, y: 0, z: 0}
+      Size: {x: 4, y: 5, z: 0.41}
