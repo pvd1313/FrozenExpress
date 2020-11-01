@@ -44,6 +44,11 @@ namespace FrozenExpress.Game.DungeonGenerator
                 var debugLog = _owner._debugLog;
                 var roomPatternProcessor = _owner._roomPatternProcessor;
 
+                if (!room.IsEnabled)
+                {
+                    return null;
+                }
+                
                 if (room.Matrix.Count == 0)
                 {
                     debugLog?.Error($"Room '{room.Id}' has no matrix");
