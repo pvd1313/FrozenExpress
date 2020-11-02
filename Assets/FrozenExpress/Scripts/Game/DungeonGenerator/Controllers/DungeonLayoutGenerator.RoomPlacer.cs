@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using FrozenExpress.Game.Dungeon;
+using UnityEngine;
 using GreatRandom = UnityEngine.Random;
 
 namespace FrozenExpress.Game.DungeonGenerator
@@ -38,6 +39,23 @@ namespace FrozenExpress.Game.DungeonGenerator
                     var layoutIndex = GreatRandom.Range(0, _layoutsBuffer.Count);
                     var layout = _layoutsBuffer[layoutIndex];
                     _layoutsBuffer.RemoveAt(layoutIndex);
+
+                    var boundsConflict = false;
+                    var boundsMap = layout.Bounds;
+                    for (var i = 1; i < boundsMap.Count; i++)
+                    {
+                        var point = boundsMap[i] + worldExit.Point;
+                        if (worldMap.ContainsKey(point))
+                        {
+                            boundsConflict = true;
+                            break;
+                        }
+                    }
+                    if (boundsConflict)
+                    {
+                        continue;
+                    }
+                    
                     _layerBuffer.Clear();
                     var layoutMap = layout.Layout;
                     _layerBuffer.Add(layoutMap[0]);

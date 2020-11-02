@@ -8,7 +8,7 @@ namespace FrozenExpress.Game.DungeonGenerator
     {
         private readonly Vector3Int[] _siblingDirections;
         private readonly HashSet<Vector3Int> _visitBuffer;
-        
+
         public DungeonRoomPatternProcessor()
         {
             _visitBuffer = new HashSet<Vector3Int>();
@@ -75,6 +75,29 @@ namespace FrozenExpress.Game.DungeonGenerator
             return _visitBuffer.Count == room.Count;
         }
 
+        public void FindBoundCells(IReadOnlyDictionary<Vector3Int, int> room, List<Vector3Int> result)
+        {
+            _visitBuffer.Clear();
+            result.Clear();
+
+            foreach (var index in room.Keys)
+            {
+                for (var i = 0; i < _siblingDirections.Length; i++)
+                {
+                    var position = index + _siblingDirections[i];
+                    if (room.ContainsKey(position))
+                    {
+                        continue;
+                    }
+
+                    if (_visitBuffer.Add(position))
+                    {
+                        result.Add(position);
+                    }
+                }
+            }
+        }
+
         private void VisitRecursive(IReadOnlyDictionary<Vector3Int, int> room, Vector3Int point)
         {
             if (_visitBuffer.Contains(point) || !room.ContainsKey(point))
@@ -91,5 +114,7 @@ namespace FrozenExpress.Game.DungeonGenerator
                 VisitRecursive(room, point + siblingDirection);
             }
         }
+        
+        
     }
 }

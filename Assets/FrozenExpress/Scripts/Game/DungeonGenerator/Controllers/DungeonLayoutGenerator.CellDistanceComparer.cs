@@ -1,21 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using FrozenExpress.Game.Dungeon;
+using UnityEngine;
 
 namespace FrozenExpress.Game.DungeonGenerator
 {
     partial class DungeonLayoutGenerator
     {
-        private class CellDistanceComparer : IComparer<CellLayer>
+        private class CellDistanceComparer : IComparer<CellLayer>, IComparer<Vector3Int>
         {
-            public int Compare(CellLayer x, CellLayer y)
+            public int Compare(CellLayer a, CellLayer b)
             {
-                var cellA = x.Cell;
-                var cellB = y.Cell;
-                var valueA = Math.Abs(cellA.x) + Math.Abs(cellA.y) + Math.Abs(cellA.z);
-                var valueB = Math.Abs(cellB.x) + Math.Abs(cellB.y) + Math.Abs(cellB.z);
-                    
-                return valueA - valueB;
+                return Compare(a.Cell, b.Cell);
+            }
+
+            public int Compare(Vector3Int a, Vector3Int b)
+            {
+                var lenA = Math.Abs(a.x) + Math.Abs(a.y) + Math.Abs(a.z);
+                var lenB = Math.Abs(b.x) + Math.Abs(b.y) + Math.Abs(b.z);
+
+                return lenA - lenB;
             }
         }
     }

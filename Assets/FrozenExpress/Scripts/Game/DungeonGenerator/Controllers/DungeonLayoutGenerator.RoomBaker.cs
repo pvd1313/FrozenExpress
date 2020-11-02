@@ -16,12 +16,15 @@ namespace FrozenExpress.Game.DungeonGenerator
             private readonly ItemPool<List<PointDirection>> _directionListPool;
             private readonly ItemPool<RoomLayout> _roomLayoutPool;
             private readonly ItemPool<List<RoomLayout>> _roomLayoutListPool;
+            private readonly ItemPool<List<Vector3Int>> _pointListPool;
             private readonly CellDistanceComparer _cellDistanceComparer;
 
             private readonly Dictionary<Vector3Int, int> _layoutBufferMap;
             private readonly List<PointDirection> _exitPointBuffer;
             private readonly List<CellLayer> _exitLayoutCells;
+            private readonly List<Vector3Int> _exitLayoutBounds;
             private readonly List<PointDirection> _exitLayoutExits;
+            private readonly List<Vector3Int> _roomBounds;
 
             public RoomBaker(DungeonLayoutGenerator owner)
             {
@@ -36,6 +39,9 @@ namespace FrozenExpress.Game.DungeonGenerator
                 _exitLayoutCells = new List<CellLayer>();
                 _exitLayoutExits = new List<PointDirection>();
                 _exitPointBuffer = new List<PointDirection>();
+                _roomBounds = new List<Vector3Int>();
+                _exitLayoutBounds = new List<Vector3Int>();
+                _pointListPool = new ItemPool<List<Vector3Int>>();
             }
 
             public BakedRoom TryBake(RoomPattern room)
@@ -88,14 +94,20 @@ namespace FrozenExpress.Game.DungeonGenerator
                     return null;
                 }
 
+                for (var i = 0; i < _exitPointBuffer.Count; i++)
+                {
+                    _layoutBufferMap.Remove(_exitPointBuffer[i].Point);
+                }
+                roomPatternProcessor.FindBoundCells(_layoutBufferMap, _roomBounds);
+
                 var bakedRoom = _roomPool.GetOrCreate();
                 bakedRoom.Source = room;
                 
                 for (var i = 0; i < _exitPointBuffer.Count; i++)
                 {
                     var exitPoint = _exitPointBuffer[i];
-                    _exitLayoutCells.Clear();
                     
+                    _exitLayoutCells.Clear();
                     for (var j = 0; j < cells.Count; j++)
                     {
                         CellLayer cell;
@@ -103,8 +115,14 @@ namespace FrozenExpress.Game.DungeonGenerator
                         cell.Layer = cells[j].Layer;
                         _exitLayoutCells.Add(cell);
                     }
-                    
                     _exitLayoutCells.Sort(_cellDistanceComparer);
+
+                    _exitLayoutBounds.Clear();
+                    for (var j = 0; j < _roomBounds.Count; j++)
+                    {
+                        _exitLayoutBounds.Add(_roomBounds[j] - exitPoint.Point);
+                    }
+                    _exitLayoutBounds.Sort(_cellDistanceComparer);
                     
                     _exitLayoutExits.Clear();
                     for (var j = 0; j < _exitPointBuffer.Count; j++)
@@ -134,8 +152,10 @@ namespace FrozenExpress.Game.DungeonGenerator
 
                         var currentLayoutMap = _cellListPool.GetOrCreate();
                         var currentLayoutExits = _directionListPool.GetOrCreate();
+                        var currentLayoutBounds = _pointListPool.GetOrCreate();
                         currentLayoutMap.Capacity = _exitLayoutCells.Count;
                         currentLayoutExits.Capacity = _exitLayoutExits.Count;
+                        currentLayoutBounds.Capacity = _exitLayoutBounds.Count;
 
                         for (var q = 0; q < _exitLayoutCells.Count; q++)
                         {
@@ -154,10 +174,18 @@ namespace FrozenExpress.Game.DungeonGenerator
                             rotatedExit.Direction = TransformPoint(sourceExit.Direction, matrix);
                             currentLayoutExits.Add(rotatedExit);
                         }
+
+                        for (var q = 0; q < _exitLayoutBounds.Count; q++)
+                        {
+                            var sourcePoint = _exitLayoutBounds[q];
+                            var rotatedPoint = TransformPoint(sourcePoint, matrix);
+                            currentLayoutBounds.Add(rotatedPoint);
+                        }
                         
                         var currentLayout = _roomLayoutPool.GetOrCreate();
                         currentLayout.Layout = currentLayoutMap;
                         currentLayout.Exits = currentLayoutExits;
+                        currentLayout.Bounds = currentLayoutBounds;
                         
                         layoutsAtThisDirection.Add(currentLayout);
                     }
@@ -202,6 +230,10 @@ namespace FrozenExpress.Game.DungeonGenerator
                         layoutVariant.Exits.Clear();
                         _directionListPool.Return(layoutVariant.Exits);
                         layoutVariant.Exits = null;
+                        
+                        layoutVariant.Bounds.Clear();
+                        _pointListPool.Return(layoutVariant.Bounds);
+                        layoutVariant.Bounds = null;
                         
                         _roomLayoutPool.Return(layoutVariant);
                     }

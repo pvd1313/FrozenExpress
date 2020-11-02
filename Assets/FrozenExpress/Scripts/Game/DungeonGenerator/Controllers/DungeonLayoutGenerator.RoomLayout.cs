@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using FrozenExpress.Game.Dungeon;
+using UnityEngine;
 
 namespace FrozenExpress.Game.DungeonGenerator
 {
@@ -9,6 +10,7 @@ namespace FrozenExpress.Game.DungeonGenerator
         {
             public List<CellLayer> Layout;
             public List<PointDirection> Exits;
+            public List<Vector3Int> Bounds;
         }
     }
 }

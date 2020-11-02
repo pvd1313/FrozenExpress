@@ -17,4 +17,4 @@ MonoBehaviour:
   _drawingConfig:
     _diffuseMaterial: {fileID: 2100000, guid: 6162d14663af25f4cb7ef8d5aaf540d4, type: 2}
     _debugMaterial: {fileID: 2100000, guid: 5a85add839bd044418399de8792ee75c, type: 2}
-    _drawDiffuse: 0
+    _drawDiffuse: 1
