@@ -24,6 +24,7 @@ namespace FrozenExpress.Game.DungeonGenerator
             {
                 var worldMap = _owner._worldMap;
                 var worldExits = _owner._worldExits;
+                var worldExitConnectors = _owner._worldExitConnectors;
                 
                 var directionIndex = DirectionToIndex(worldExit.Direction * -1);
                 var layouts = room.Layouts[directionIndex];
@@ -87,6 +88,7 @@ namespace FrozenExpress.Game.DungeonGenerator
                             var exit = layoutExits[i];
                             exit.Point = worldExit.Point + exit.Point;
                             worldExits.Add(exit);
+                            worldExitConnectors.Add(exit.Point, room.Source.ConnectorType);
                         }
 
                         return true;
@@ -100,6 +102,7 @@ namespace FrozenExpress.Game.DungeonGenerator
             {
                 var worldMap = _owner._worldMap;
                 var worldExits = _owner._worldExits;
+                var worldExitConnectors = _owner._worldExitConnectors;
                 _layoutsBuffer.Clear();
 
                 var roomLayouts = room.Layouts;
@@ -120,7 +123,12 @@ namespace FrozenExpress.Game.DungeonGenerator
                     var cellLayer = layoutMap[i];
                     worldMap[cellLayer.Cell] = cellLayer.Layer;
                 }
-                worldExits.AddRange(layout.Exits);
+
+                foreach (var exit in layout.Exits)
+                {
+                    worldExits.Add(exit);
+                    worldExitConnectors.Add(exit.Point, room.Source.ConnectorType);
+                }
             }
         }
     }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DungeonRoomPatternDatabase
   m_EditorClassIdentifier: 
   _patterns:
-  - _id: corridor_t
+  - _id: join_t
     _cells:
     - Cell: {x: -1, y: 0, z: -2}
       Layer: 1
@@ -37,6 +37,7 @@ MonoBehaviour:
     - _sequence: 05000000
     - _sequence: 06000000
     _isEnabled: 1
+    _connectorType: join
   - _id: room_0
     _cells:
     - Cell: {x: -1, y: 0, z: 0}
@@ -79,8 +80,6 @@ MonoBehaviour:
       Layer: 3
     - Cell: {x: -2, y: 0, z: 1}
       Layer: 3
-    - Cell: {x: -3, y: 1, z: -2}
-      Layer: 1
     - Cell: {x: -3, y: 1, z: 2}
       Layer: 1
     _matrix:
@@ -93,6 +92,7 @@ MonoBehaviour:
     - _sequence: 0100000005000000
     - _sequence: 0100000006000000
     _isEnabled: 1
+    _connectorType: room
   - _id: room_1
     _cells:
     - Cell: {x: 0, y: 1, z: 0}
@@ -111,12 +111,6 @@ MonoBehaviour:
       Layer: 1
     - Cell: {x: 0, y: 1, z: 1}
       Layer: 1
-    - Cell: {x: 0, y: 0, z: 2}
-      Layer: 1
-    - Cell: {x: -1, y: 0, z: 2}
-      Layer: 1
-    - Cell: {x: -2, y: 0, z: 2}
-      Layer: 1
     - Cell: {x: -2, y: 1, z: 1}
       Layer: 3
     - Cell: {x: -2, y: 1, z: 0}
@@ -124,8 +118,6 @@ MonoBehaviour:
     - Cell: {x: -2, y: 1, z: -1}
       Layer: 1
     - Cell: {x: -1, y: 0, z: -3}
-      Layer: 1
-    - Cell: {x: -3, y: 0, z: 2}
       Layer: 1
     - Cell: {x: -3, y: 2, z: 1}
       Layer: 3
@@ -143,13 +135,7 @@ MonoBehaviour:
       Layer: 1
     - Cell: {x: 1, y: 1, z: -1}
       Layer: 1
-    - Cell: {x: 1, y: 0, z: -1}
-      Layer: 1
-    - Cell: {x: 1, y: 0, z: 0}
-      Layer: 1
-    - Cell: {x: 1, y: 0, z: 1}
-      Layer: 1
-    - Cell: {x: 1, y: 0, z: 2}
+    - Cell: {x: 1, y: 1, z: -2}
       Layer: 1
     - Cell: {x: -2, y: 2, z: 1}
       Layer: 3
@@ -161,17 +147,7 @@ MonoBehaviour:
       Layer: 1
     - Cell: {x: -1, y: 0, z: -2}
       Layer: 1
-    - Cell: {x: -1, y: 2, z: 1}
-      Layer: 1
-    - Cell: {x: -1, y: 2, z: 0}
-      Layer: 1
-    - Cell: {x: -2, y: 2, z: 0}
-      Layer: 1
-    - Cell: {x: 0, y: 2, z: 1}
-      Layer: 1
-    - Cell: {x: 0, y: 2, z: 0}
-      Layer: 1
-    - Cell: {x: -2, y: 2, z: -1}
+    - Cell: {x: 2, y: 1, z: 2}
       Layer: 1
     _matrix:
     - _sequence: 00000000
@@ -183,3 +159,4 @@ MonoBehaviour:
     - _sequence: 0100000005000000
     - _sequence: 0100000006000000
     _isEnabled: 1
+    _connectorType: room

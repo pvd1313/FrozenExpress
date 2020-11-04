@@ -16,3 +16,10 @@ MonoBehaviour:
   _generatorConfig:
     _requiredCellCount: 5
     _requiredExitPointCount: 2
+    _connectionRules:
+    - _sourceConnector: join
+      _destinationConnector: join
+    - _sourceConnector: join
+      _destinationConnector: room
+    - _sourceConnector: room
+      _destinationConnector: join

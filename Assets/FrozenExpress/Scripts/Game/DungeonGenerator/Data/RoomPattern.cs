@@ -12,6 +12,8 @@ namespace FrozenExpress.Game.DungeonGenerator
         public IReadOnlyList<PatternMatrixSequence> Matrix => _matrix;
         public IReadOnlyList<CellLayer> Cells => _cells;
 
+        public string ConnectorType => _connectorType;
+
         public bool IsEnabled => _isEnabled;
 
         [SerializeField] private string _id;
@@ -23,6 +25,8 @@ namespace FrozenExpress.Game.DungeonGenerator
         [SerializeField] private List<PatternMatrixSequence> _matrix;
 
         [SerializeField] private bool _isEnabled;
+
+        [SerializeField] private string _connectorType;
         
 #if UNITY_EDITOR
         public static class EditorOnly
