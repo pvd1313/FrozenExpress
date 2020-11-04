@@ -8,10 +8,12 @@ namespace FrozenExpress.Game.DungeonGenerator
     {
         private readonly Vector3Int[] _siblingDirections;
         private readonly HashSet<Vector3Int> _visitBuffer;
+        private readonly List<PointDirection> _deadPointBuffer;
 
         public DungeonRoomPatternProcessor()
         {
             _visitBuffer = new HashSet<Vector3Int>();
+            _deadPointBuffer = new List<PointDirection>();
             _siblingDirections = new[]
             {
                 new Vector3Int(0, 0, 1),
@@ -59,6 +61,62 @@ namespace FrozenExpress.Game.DungeonGenerator
             }
 
             return siblingCount == 1;
+        }
+
+        public void RemoveDeadEnds(IDictionary<Vector3Int, int> map)
+        {
+            var mapReadOnly = (IReadOnlyDictionary<Vector3Int, int>) map;
+
+            FindConnectionPoints(mapReadOnly, _deadPointBuffer);
+            
+            while (_deadPointBuffer.Count > 0)
+            {
+                for (var i = 0; i < _deadPointBuffer.Count; i++)
+                {
+                    RemoveDeadPoint(map, _deadPointBuffer[i].Point);
+                }
+                
+                FindConnectionPoints(mapReadOnly, _deadPointBuffer);
+            }
+        }
+
+        private void RemoveDeadPoint(IDictionary<Vector3Int, int> map, Vector3Int deadPoint)
+        {
+            if (!map.ContainsKey(deadPoint))
+            {
+                return;
+            }
+            
+            while (true)
+            {
+                var siblingCount = 0;
+                Vector3Int siblingPoint = default;
+                for (var i = 0; i < _siblingDirections.Length && siblingCount < 2; i++)
+                {
+                    var testPoint = deadPoint + _siblingDirections[i];
+
+                    if (map.ContainsKey(testPoint))
+                    {
+                        siblingPoint = testPoint;
+                        siblingCount++;
+                    }
+                }
+
+                if (siblingCount > 1)
+                {
+                    return;
+                }
+
+                map.Remove(deadPoint);
+
+                if (siblingCount == 1)
+                {
+                    deadPoint = siblingPoint;
+                    continue;
+                }
+
+                break;
+            }
         }
 
         public bool CheckAllCellsConnected(IReadOnlyDictionary<Vector3Int, int> room)

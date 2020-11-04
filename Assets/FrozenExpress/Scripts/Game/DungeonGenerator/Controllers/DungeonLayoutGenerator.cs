@@ -76,7 +76,7 @@ namespace FrozenExpress.Game.DungeonGenerator
             
             _worldExits.Clear();
             _worldExitConnectors.Clear();
-            
+
             var firstRoomIndex = GreatRandom.Range(0, _roomsAll.Count);
             _placer.PlaceFirstRoom(_roomsAll[firstRoomIndex]);
 
@@ -114,6 +114,11 @@ namespace FrozenExpress.Game.DungeonGenerator
             if (_worldMap.Count < cellCount)
             {
                 _debugLog?.Error("Failed to create full size dungeon");
+            }
+
+            if (_config.RemoveDeadEnds)
+            {
+                _roomPatternProcessor.RemoveDeadEnds(_worldMap);
             }
         }
         

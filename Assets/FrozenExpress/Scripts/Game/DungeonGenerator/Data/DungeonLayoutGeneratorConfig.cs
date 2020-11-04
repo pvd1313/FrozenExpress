@@ -11,6 +11,8 @@ namespace FrozenExpress.Game.DungeonGenerator
         public int RequiredExitPointCount => _requiredExitPointCount;
         public IReadOnlyList<RoomConnectionRule> ConnectionRules => _connectionRules;
 
+        public bool RemoveDeadEnds => _removeDeadEnds;
+
         [SerializeField] 
         private int _requiredCellCount;
         
@@ -19,5 +21,8 @@ namespace FrozenExpress.Game.DungeonGenerator
         
         [SerializeField, OneLine]
         private List<RoomConnectionRule> _connectionRules;
+
+        [SerializeField]
+        private bool _removeDeadEnds;
     }
 }
