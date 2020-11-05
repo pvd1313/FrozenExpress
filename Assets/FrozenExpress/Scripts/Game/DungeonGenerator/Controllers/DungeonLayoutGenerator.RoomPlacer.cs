@@ -23,6 +23,7 @@ namespace FrozenExpress.Game.DungeonGenerator
             public bool TryPlaceRoom(BakedRoom room, PointDirection worldExit)
             {
                 var worldMap = _owner._worldMap;
+                var worldBounds = _owner._worldBounds;
                 var worldExits = _owner._worldExits;
                 var worldExitConnectors = _owner._worldExitConnectors;
                 
@@ -46,7 +47,7 @@ namespace FrozenExpress.Game.DungeonGenerator
                     for (var i = 1; i < boundsMap.Count; i++)
                     {
                         var point = boundsMap[i] + worldExit.Point;
-                        if (worldMap.ContainsKey(point))
+                        if (!worldBounds.Contains(point) || worldMap.ContainsKey(point))
                         {
                             boundsConflict = true;
                             break;
@@ -64,7 +65,7 @@ namespace FrozenExpress.Game.DungeonGenerator
                     {
                         var cellLayer = layoutMap[i];
                         var point = worldExit.Point + cellLayer.Cell;
-                        if (worldMap.ContainsKey(point))
+                        if (!worldBounds.Contains(point) || worldMap.ContainsKey(point))
                         {
                             break;
                         }
@@ -96,39 +97,6 @@ namespace FrozenExpress.Game.DungeonGenerator
                 }
 
                 return false;
-            }
-
-            public void PlaceFirstRoom(BakedRoom room)
-            {
-                var worldMap = _owner._worldMap;
-                var worldExits = _owner._worldExits;
-                var worldExitConnectors = _owner._worldExitConnectors;
-                _layoutsBuffer.Clear();
-
-                var roomLayouts = room.Layouts;
-                for (var i = 0; i < roomLayouts.Length; i++)
-                {
-                    var layouts = roomLayouts[i];
-                    if (layouts != null)
-                    {
-                        _layoutsBuffer.AddRange(layouts);
-                    }
-                }
-
-                var layoutIndex = GreatRandom.Range(0, _layoutsBuffer.Count);
-                var layout = _layoutsBuffer[layoutIndex];
-                var layoutMap = layout.Layout;
-                for (var i = 0; i < layoutMap.Count; i++)
-                {
-                    var cellLayer = layoutMap[i];
-                    worldMap[cellLayer.Cell] = cellLayer.Layer;
-                }
-
-                foreach (var exit in layout.Exits)
-                {
-                    worldExits.Add(exit);
-                    worldExitConnectors.Add(exit.Point, room.Source.ConnectorType);
-                }
             }
         }
     }

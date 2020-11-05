@@ -24,6 +24,7 @@ namespace FrozenExpress.Game.DungeonGenerator
         private readonly Dictionary<Vector3Int, string> _worldExitConnectors;
 
         private IDictionary<Vector3Int, int> _worldMap;
+        private BoundsInt _worldBounds;
 
         public DungeonLayoutGenerator(IDungeonRoomPatternProcessor roomPatternProcessor,
                                       IDungeonRoomPatternDatabase patternDatabase,
@@ -58,6 +59,7 @@ namespace FrozenExpress.Game.DungeonGenerator
             
             _worldMap = result;
             _worldMap.Clear();
+            _worldBounds = dungeonPreset.Bounds;
             
             _roomsAll.Clear();
             foreach (var roomPattern in _patternDatabase.All)
@@ -78,9 +80,14 @@ namespace FrozenExpress.Game.DungeonGenerator
             
             _worldExits.Clear();
             _worldExitConnectors.Clear();
-
-            var firstRoomIndex = GreatRandom.Range(0, _roomsAll.Count);
-            _placer.PlaceFirstRoom(_roomsAll[firstRoomIndex]);
+            
+            _worldExits.Add(dungeonPreset.EntryPoint);
+            _worldExitConnectors.Add(dungeonPreset.EntryPoint.Point, dungeonPreset.EntryPointConnector);
+            _worldMap.Add(dungeonPreset.EntryPoint.Point, -1);
+            foreach (var point in dungeonPreset.InitialPoints)
+            {
+                _worldMap.Add(point.Cell, point.Layer);
+            }
 
             while (_worldMap.Count < dungeonPreset.CellCount && _worldExits.Count > 0)
             {

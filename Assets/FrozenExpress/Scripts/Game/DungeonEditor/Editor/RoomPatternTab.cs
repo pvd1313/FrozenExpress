@@ -22,7 +22,9 @@ namespace FrozenExpress.Game.DungeonEditor.Editor
 
         private readonly List<PointDirection> _connectionPoints;
         private readonly Dictionary<Vector3Int, int> _dungeonLayout;
+        private readonly List<CellLayer> _dungeonInitialPoints;
 
+        private BoundsInt _dungeonBounds;
         private int _dungeonSize;
         private int _dungeonSeed;
         private bool _dungeonSeedRandom;
@@ -41,7 +43,19 @@ namespace FrozenExpress.Game.DungeonEditor.Editor
             _dungeonLayout = new Dictionary<Vector3Int, int>();
             _dungeonSeedRandom = true;
             _dungeonSize = 100;
+            _dungeonBounds.min = new Vector3Int(-100, -100, 0);
+            _dungeonBounds.max = new Vector3Int(100, 100, 100);
             
+            _dungeonInitialPoints = new List<CellLayer>();
+            for (var x = -1; x <= 1; x++)
+            for (var y = -1; y <= 1; y++)
+            {
+                CellLayer cellLayer;
+                cellLayer.Cell = new Vector3Int(x, y, -1);
+                cellLayer.Layer = 1;
+                _dungeonInitialPoints.Add(cellLayer);
+            }
+
             _connectionsDrawer = debugFactory.CreateDrawer(this);
             _connectionsDrawer?.SetShape(EDebugShape.Arrow3D);
             _connectionsDrawer?.SetColor(EDebugColor.Yellow);
@@ -118,7 +132,12 @@ namespace FrozenExpress.Game.DungeonEditor.Editor
                 DungeonPreset dungeonPreset;
                 dungeonPreset.Seed = _dungeonSeed;
                 dungeonPreset.CellCount = _dungeonSize;
-                
+                dungeonPreset.EntryPoint.Point = Vector3Int.zero;
+                dungeonPreset.EntryPoint.Direction = new Vector3Int(0, 0, 1);
+                dungeonPreset.EntryPointConnector = "room";
+                dungeonPreset.InitialPoints = _dungeonInitialPoints;
+                dungeonPreset.Bounds = _dungeonBounds;
+
                 _dungeonLayoutGenerator.GenerateDungeon(dungeonPreset, _dungeonLayout);
                 _dungeonModel.Clear();
                 foreach (var cell in _dungeonLayout)
