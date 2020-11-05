@@ -94,18 +94,17 @@ namespace FrozenExpress.Game.DungeonGenerator
                     return null;
                 }
 
-                for (var i = 0; i < _exitPointBuffer.Count; i++)
-                {
-                    _layoutBufferMap.Remove(_exitPointBuffer[i].Point);
-                }
-                roomPatternProcessor.FindBoundCells(_layoutBufferMap, _roomBounds);
-
                 var bakedRoom = _roomPool.GetOrCreate();
                 bakedRoom.Source = room;
                 
                 for (var i = 0; i < _exitPointBuffer.Count; i++)
                 {
                     var exitPoint = _exitPointBuffer[i];
+                    
+                    var exitPointLayer = _layoutBufferMap[exitPoint.Point];
+                    _layoutBufferMap.Remove(exitPoint.Point);
+                    roomPatternProcessor.FindBoundCells(_layoutBufferMap, _roomBounds);
+                    _layoutBufferMap.Add(exitPoint.Point, exitPointLayer);
                     
                     _exitLayoutCells.Clear();
                     for (var j = 0; j < cells.Count; j++)
