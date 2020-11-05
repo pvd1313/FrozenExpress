@@ -46,8 +46,10 @@ namespace FrozenExpress.Game.DungeonGenerator
             _worldExitConnectors = new Dictionary<Vector3Int, string>();
         }
 
-        public void GenerateDungeon(int cellCount, IDictionary<Vector3Int, int> result)
+        public void GenerateDungeon(DungeonPreset dungeonPreset, IDictionary<Vector3Int, int> result)
         {
+            Random.InitState(dungeonPreset.Seed);
+            
             _roomConnection.Clear();
             foreach (var rule in _config.ConnectionRules)
             {
@@ -80,7 +82,7 @@ namespace FrozenExpress.Game.DungeonGenerator
             var firstRoomIndex = GreatRandom.Range(0, _roomsAll.Count);
             _placer.PlaceFirstRoom(_roomsAll[firstRoomIndex]);
 
-            while (_worldMap.Count < cellCount && _worldExits.Count > 0)
+            while (_worldMap.Count < dungeonPreset.CellCount && _worldExits.Count > 0)
             {
                 var exitIndex = GreatRandom.Range(0, _worldExits.Count);
                 var worldExit = _worldExits[exitIndex];
@@ -111,7 +113,7 @@ namespace FrozenExpress.Game.DungeonGenerator
                 _baker.Dispose(room);
             }
 
-            if (_worldMap.Count < cellCount)
+            if (_worldMap.Count < dungeonPreset.CellCount)
             {
                 _debugLog?.Error("Failed to create full size dungeon");
             }

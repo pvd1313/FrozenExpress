@@ -24,6 +24,8 @@ namespace FrozenExpress.Game.DungeonEditor.Editor
         private readonly Dictionary<Vector3Int, int> _dungeonLayout;
 
         private int _dungeonSize;
+        private int _dungeonSeed;
+        private bool _dungeonSeedRandom;
 
         public RoomPatternTab(IDungeonEditorModel dungeonModel,
                               IDungeonRoomPatternProcessor roomPatternProcessor,
@@ -37,6 +39,8 @@ namespace FrozenExpress.Game.DungeonEditor.Editor
             _dungeonLayoutGenerator = dungeonLayoutGenerator;
             _connectionPoints = new List<PointDirection>();
             _dungeonLayout = new Dictionary<Vector3Int, int>();
+            _dungeonSeedRandom = true;
+            _dungeonSize = 100;
             
             _connectionsDrawer = debugFactory.CreateDrawer(this);
             _connectionsDrawer?.SetShape(EDebugShape.Arrow3D);
@@ -101,20 +105,27 @@ namespace FrozenExpress.Game.DungeonEditor.Editor
             }
             EditorGUILayout.EndHorizontal();
             
-            EditorGUILayout.BeginHorizontal();
+            _dungeonSize = EditorGUILayout.IntField("Dungeon size", _dungeonSize);
+            _dungeonSeed = EditorGUILayout.IntField("Dungeon seed", _dungeonSeed);
+            _dungeonSeedRandom = EditorGUILayout.ToggleLeft("Random seed", _dungeonSeedRandom);
+            if (GUILayout.Button("Generate!"))
             {
-                _dungeonSize = EditorGUILayout.IntField("Dungeon size", _dungeonSize);
-                if (GUILayout.Button("Generate!"))
+                if (_dungeonSeedRandom)
                 {
-                    _dungeonLayoutGenerator.GenerateDungeon(_dungeonSize, _dungeonLayout);
-                    _dungeonModel.Clear();
-                    foreach (var cell in _dungeonLayout)
-                    {
-                        _dungeonModel.SetCellLayer(cell.Key, cell.Value);
-                    }
+                    _dungeonSeed = UnityEngine.Random.Range(int.MinValue, int.MaxValue);
+                }
+
+                DungeonPreset dungeonPreset;
+                dungeonPreset.Seed = _dungeonSeed;
+                dungeonPreset.CellCount = _dungeonSize;
+                
+                _dungeonLayoutGenerator.GenerateDungeon(dungeonPreset, _dungeonLayout);
+                _dungeonModel.Clear();
+                foreach (var cell in _dungeonLayout)
+                {
+                    _dungeonModel.SetCellLayer(cell.Key, cell.Value);
                 }
             }
-            EditorGUILayout.EndHorizontal();
         }
 
         public void OnSceneGUI(Camera camera, object data)

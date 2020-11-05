@@ -5,6 +5,6 @@ namespace FrozenExpress.Game.DungeonGenerator
 {
     public interface IDungeonLayoutGenerator
     {
-        void GenerateDungeon(int cellCount, IDictionary<Vector3Int, int> result);
+        void GenerateDungeon(DungeonPreset dungeonPreset, IDictionary<Vector3Int, int> result);
     }
 }

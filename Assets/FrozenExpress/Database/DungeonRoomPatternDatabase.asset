@@ -144,5 +144,5 @@ MonoBehaviour:
     - _sequence: 0100000004000000
     - _sequence: 0100000005000000
     - _sequence: 0100000006000000
-    _isEnabled: 0
+    _isEnabled: 1
     _connectorType: room
